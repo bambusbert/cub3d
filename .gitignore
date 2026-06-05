@@ -13,4 +13,5 @@
 !*.h
 !*.json
 !*.cub
+!*.xpm
 !Makefile
