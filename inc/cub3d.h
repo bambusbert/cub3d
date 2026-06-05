@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/05 17:42:20 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/05 18:32:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 # define CLOSING_EVENT 17
 
@@ -59,6 +61,9 @@ typedef struct s_god
 	void			*sprite_wall_E;
 	void			*sprite_wall_N;
 	void			*sprite_wall_W;
+	int				player_x;
+	int				player_y;
+	float			player_angle;
 }					t_god;
 
 void				*ft_calloc(size_t nmemb, size_t size);
