@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/05 18:36:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 12:32:03 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,30 @@ void update_player_position(t_god *god, int x, int y)
 	god->player_y += y;
 }
 
-//if i is -1 look a bit to the left
-//if i is 1 look a bit to the right
-void update_player_angle (t_god *god, int i)
+//360 degrees equals 2 pi
+//TODO look into radian. if the angle gets bigger than 2pi, take that into account.
+//modulo! also do this if the angle gets too small (negative)
+//update god.playerangle
+void update_player_angle (t_god *god, int direction)
 {
-	//TODO look into radian. if the angle gets bigger than 2pi, take that into account.
-	//modulo! also do this if the angle gets too small (negative)
-	
-	//update god.playerangle
+	if (direction == LEFT)
+		god->player_angle -= ANGLE_FRACTION;
+	else if (direction == RIGHT)
+		god->player_angle += ANGLE_FRACTION;
+	//we can't use modulo operator for float numbers
+	if (god->player_angle > 2 * PI)
+		god->player_angle -= 2 * PI;
+	else if (god->player_angle < 0)
+		god->player_angle += 2 * PI;
+	printf("Player angle: %.3f\n", god->player_angle);
+
 }
 
-int	key_hook(int keycode, t_god *god)
+int	key_hook(int keycode, void *param)
 {
+	t_god	*god;
+
+	god = (t_god *)param;
 	if (keycode == KEY_W)
 		ft_putstr_fd("W\n", 1);
 		//move_player(god, -1, 0);
@@ -69,11 +81,11 @@ int	key_hook(int keycode, t_god *god)
 	if (keycode == KEY_LEFT)
 	{
 		ft_putstr_fd("Left\n", 1);
-		update_player_angle(god, -1);
+		update_player_angle(god, LEFT);
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		ft_putstr_fd("Right\n", 1);		
+		ft_putstr_fd("Right\n", RIGHT);		
 		update_player_angle(god, 1);
 	}
 	if (keycode == KEY_ESC)
@@ -83,6 +95,7 @@ int	key_hook(int keycode, t_god *god)
 
 //this is the entry for the raycasting logic. will get executed once per frame
 //(do we have fixed fps? or is it just a while(1) loop?)
+//theoretically i don't have to render on a fixed time interval but only on any key press?
 void	render_world(t_god *god)
 {
 	//1. get player position

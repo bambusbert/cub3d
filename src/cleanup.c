@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/05 15:41:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 12:35:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_god_struct(t_god *god)
 	free(god);
 }
 
-int	close_window(t_god *god)
+int	close_window(t_god	*god)
 {
 	destroy_sprites(god);
 	if (god->mlx_win)

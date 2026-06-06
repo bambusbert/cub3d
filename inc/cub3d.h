@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/05 18:32:01 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/06 12:27:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 
 # include <mlx.h>
 # include <stddef.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 # define SPRITE_PLAYER "./sprites/player.xpm"
 # define SPRITE_WALL_N "./sprites/wall_e.xpm"
 # define SPRITE_WALL_S "./sprites/wall_s.xpm"
 # define SPRITE_WALL_W "./sprites/wall_w.xpm"
 # define SPRITE_WALL_E "./sprites/wall_e.xpm"
+
+# define PI 3.14159265
+# define LEFT 1
+# define RIGHT 2
+# define ANGLE_FRACTION 0.05
 
 # define WINDOW_SIZE_X 800
 # define WINDOW_SIZE_Y 600
@@ -61,6 +66,7 @@ typedef struct s_god
 	void			*sprite_wall_E;
 	void			*sprite_wall_N;
 	void			*sprite_wall_W;
+	// these also should be floats??
 	int				player_x;
 	int				player_y;
 	float			player_angle;
@@ -69,7 +75,7 @@ typedef struct s_god
 void				*ft_calloc(size_t nmemb, size_t size);
 void				error_exit(char *msg, t_god *p_god);
 size_t				ft_putstr_fd(char *s, int fd);
-int					close_window(t_god *god);
-void				destroy_sprites(t_god *p_god);
+int					close_window(t_god *god) ;
+void destroy_sprites(t_god *p_god);
 
 #endif
