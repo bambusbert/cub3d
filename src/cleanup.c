@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/06 12:35:50 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 13:47:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ int	close_window(t_god	*god)
 		mlx_destroy_window(god->mlx, god->mlx_win);
 	if (god->mlx)
 	{
+		mlx_do_key_autorepeaton(god->mlx);
 		mlx_destroy_display(god->mlx);
 		free(god->mlx);
 	}
 	// if (god->count_collectible == 0)
 	// 	ft_printf("Moves: %u\n", map->moves + 1);
 	free_god_struct(god);
+	
 	exit(0);
 }
 

@@ -6,11 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/06 12:32:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:11:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 void	initialize_map(t_god *p_god)
 {
@@ -56,8 +56,18 @@ void update_player_angle (t_god *god, int direction)
 		god->player_angle -= 2 * PI;
 	else if (god->player_angle < 0)
 		god->player_angle += 2 * PI;
-	printf("Player angle: %.3f\n", god->player_angle);
+	//printf("Player angle: %.3f\n", god->player_angle);
 
+}
+
+void	angle_handler(t_god *god)
+{
+	if (god->key_left && god->key_right)
+		return ;
+	if (god->key_left)
+		update_player_angle(god, LEFT);
+	if (god->key_right)
+		update_player_angle(god, RIGHT);
 }
 
 int	key_hook(int keycode, void *param)
@@ -85,20 +95,42 @@ int	key_hook(int keycode, void *param)
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		ft_putstr_fd("Right\n", RIGHT);		
-		update_player_angle(god, 1);
+		ft_putstr_fd("Right\n", 1);		
+		update_player_angle(god, RIGHT);
 	}
 	if (keycode == KEY_ESC)
 		close_window(god);
 	return (0);
 }
 
+void	print_keys(t_god *god)
+{
+	static int x = 0;
+	if (x++ % 1000 != 0)
+		return ;
+	printf("Key: W | Status: %d\n", god->key_w);
+	printf("Key: A | Status: %d\n", god->key_a);
+	printf("Key: S | Status: %d\n", god->key_s);
+	printf("Key: D | Status: %d\n", god->key_d);
+	printf("Key: Left | Status: %d\n", god->key_left);
+	printf("Key: Right | Status: %d\n", god->key_right);
+	printf("Player x coordinate: %.2f\n", god->player_x);
+	printf("Player y coordinate: %.2f\n", god->player_y);
+	printf("Player Angle: %.3f\n", god->player_angle);
+}
+
 //this is the entry for the raycasting logic. will get executed once per frame
 //(do we have fixed fps? or is it just a while(1) loop?)
 //theoretically i don't have to render on a fixed time interval but only on any key press?
-void	render_world(t_god *god)
+int	render_world(t_god *god)
 {
-	//1. get player position
+	//debug print key status
+	print_keys(god);
+	//here we have to update everything. what exactly needs to be updated is regarding
+	//which keys are currently pressed (info from the god struct)
+	angle_handler(god);
+	
+	return 1;
 }
 
 void	init_stuff(t_god *god)
@@ -116,6 +148,105 @@ void	init_stuff(t_god *god)
 
 	//player_angle is initially 0 (NORTH)
 	god->player_angle = 0;
+	god->key_a = false;
+	god->key_s = false;
+	god->key_d = false;
+	god->key_w = false;
+	god->key_left = false;
+	god->key_right = false;
+}
+
+//void	key_press (int keycode, t_god *god)
+int	key_press (int keycode, void *param)
+{
+	t_god *god;
+
+	god = (t_god*) param;
+	//static int i = 0;
+	//printf("key pressed\n");
+	if (keycode == KEY_W)
+	{
+		//printf("W pressed %d\n", i++);
+		god->key_w = true;
+	}
+	else if (keycode == KEY_A)
+	{
+		//printf("A pressed\n");
+		god->key_a = true;
+	}
+	else if (keycode == KEY_S)
+	{
+		//printf("S pressed\n");
+		god->key_s = true;
+	}
+	else if (keycode == KEY_D)
+	{
+		//printf("D pressed\n");
+		god->key_d = true;
+	}
+	else if (keycode == KEY_LEFT)
+	{
+		//printf("left pressed\n");
+		god->key_left = true;
+	}
+	else if (keycode == KEY_RIGHT)
+	{
+		//printf("right pressed\n");
+		god->key_right = true;
+	}
+	else if (keycode == KEY_ESC)
+	{
+		//printf("ESC pressed\n");
+		close_window(god);
+	}
+	
+	
+	return 1;
+}
+
+int	key_up (int keycode, void *param)
+{
+	t_god *god;
+
+	god = (t_god*) param;
+	//printf("key up\n");
+	static int i = 0;
+	if (keycode == KEY_W)
+	{
+		//printf("W up %d\n", i++);
+		god->key_w = false;
+	}
+	else if (keycode == KEY_A)
+	{
+		//printf("A up\n");
+		god->key_a = false;
+	}
+	else if (keycode == KEY_S)
+	{
+		//printf("S up\n");
+		god->key_s = false;
+	}
+	else if (keycode == KEY_D)
+	{
+		//printf("D up\n");
+		god->key_d = false;
+	}
+	else if (keycode == KEY_LEFT)
+	{
+		//printf("left up\n");
+		god->key_left = false;
+	}
+	else if (keycode == KEY_RIGHT)
+	{
+		//printf("right up\n");
+		god->key_right = false;
+	}
+	else if (keycode == KEY_ESC)
+	{
+		//brauch ma nima
+		//printf("ESC up\n");
+	}
+	return 1;
 }
 
 void	game_function(t_god *god)
@@ -128,10 +259,18 @@ void	game_function(t_god *god)
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
 	mlx_hook(god->mlx_win, CLOSING_EVENT, 0, close_window, god);
-	mlx_key_hook(god->mlx_win, key_hook, god);
+
+	//mlx_hook(god->mlx_win, 3, 0, key_hook, god);
+	//mlx_key_hook(god->mlx_win, key_hook, god);
+	mlx_hook(god->mlx_win, KEYDOWN_EVENT, 1L<<0, key_press, god);
+	mlx_hook(god->mlx_win, KEYUP_EVENT, 1L<<1, key_up, god);
+	
 	init_stuff(god);
-	render_world(god);
+	//render_world(god);
+	mlx_do_key_autorepeatoff(god->mlx);
+	mlx_loop_hook(god->mlx, render_world, god);
 	mlx_loop(god->mlx);
+	
 }
 
 int **create_sample_map(t_god *p_god)
