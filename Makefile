@@ -28,7 +28,10 @@ OBJ_DIR = obj
 
 # Source files
 SRC =	src/cub3d.c \
-		src/cleanup.c
+		src/cleanup.c \
+		src/input_handling.c \
+		src/debug.c \
+		src/init.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 HEAD = inc/cub3d.h

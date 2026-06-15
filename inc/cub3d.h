@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 14:10:31 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:26:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define CUB3D_H
 
 # include <mlx.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdbool.h>
-#include <unistd.h>
+# include <unistd.h>
 
 # define SPRITE_PLAYER "./sprites/player.xpm"
 # define SPRITE_WALL_N "./sprites/wall_e.xpm"
@@ -76,16 +76,28 @@ typedef struct s_god
 	void			*sprite_wall_E;
 	void			*sprite_wall_N;
 	void			*sprite_wall_W;
-	// these also should be floats??
 	float			player_x;
 	float			player_y;
 	float			player_angle;
 }					t_god;
 
+// debug.c
+void				print_keys(t_god *god);
+int					**create_sample_map(t_god *p_god);
+
+// init.c
+void				init_stuff(t_god *god);
+void				initialize_map(t_god *p_god);
+
+// input_handling.c
+int					key_press(int keycode, void *param);
+int					key_up(int keycode, void *param);
+
+// unsorted
 void				*ft_calloc(size_t nmemb, size_t size);
 void				error_exit(char *msg, t_god *p_god);
 size_t				ft_putstr_fd(char *s, int fd);
-int					close_window(t_god *god) ;
-void destroy_sprites(t_god *p_god);
+int					close_window(t_god *god);
+void				destroy_sprites(t_god *p_god);
 
 #endif
