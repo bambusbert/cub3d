@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 14:22:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:40:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	print_keys(t_god *god)
 	printf("Player x coordinate: %.2f\n", god->player_x);
 	printf("Player y coordinate: %.2f\n", god->player_y);
 	printf("Player Angle: %.3f\n", god->player_angle);
+    printf("Player Angle min: %.3f\n", god->player_angle_min);
+    printf("Player Angle max: %.3f\n", god->player_angle_max);
 }
 
 int **create_sample_map(t_god *p_god)

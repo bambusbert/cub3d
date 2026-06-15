@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 14:26:35 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:46:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ void update_player_position(t_god *god, int x, int y)
 {
 	god->player_x += x;
 	god->player_y += y;
+}
+
+void normalize_angle (float *angle)
+{
+	if (*angle > 2 * PI)
+		*angle -= 2 * PI;
+	else if (*angle < 0)
+		*angle += 2 * PI;
 }
 
 //360 degrees equals 2 pi
@@ -29,12 +37,13 @@ void update_player_angle (t_god *god, int direction)
 	else if (direction == RIGHT)
 		god->player_angle += ANGLE_FRACTION;
 	//we can't use modulo operator for float numbers
-	if (god->player_angle > 2 * PI)
-		god->player_angle -= 2 * PI;
-	else if (god->player_angle < 0)
-		god->player_angle += 2 * PI;
+	normalize_angle(&god->player_angle);
 	//printf("Player angle: %.3f\n", god->player_angle);
-
+	//update player_angle_min and player_angle_max
+	god->player_angle_min = god->player_angle - god->angle_offset;
+	normalize_angle(&god->player_angle_min);
+	god->player_angle_max = god->player_angle + god->angle_offset;
+	normalize_angle(&god->player_angle_max);
 }
 
 void	angle_handler(t_god *god)
@@ -47,6 +56,9 @@ void	angle_handler(t_god *god)
 		update_player_angle(god, RIGHT);
 }
 
+//we can't change the players position each time bc the game would be way
+//too fast like that. should we implement some kind of tick? static var?
+//or is there some mlx magic we can use
 int	position_handler (t_god *god)
 {
 	//check for WASD keys

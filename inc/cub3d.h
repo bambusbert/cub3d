@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 14:26:12 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:47:55 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ typedef struct s_god
 	float			player_x;
 	float			player_y;
 	float			player_angle;
+	// defines the funnel where casts are sent out
+	float			angle_offset;
+	float			player_angle_min;
+	float			player_angle_max;
 }					t_god;
 
 // debug.c
@@ -99,5 +103,6 @@ void				error_exit(char *msg, t_god *p_god);
 size_t				ft_putstr_fd(char *s, int fd);
 int					close_window(t_god *god);
 void				destroy_sprites(t_god *p_god);
+void				normalize_angle(float *angle);
 
 #endif

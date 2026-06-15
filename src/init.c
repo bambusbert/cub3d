@@ -6,11 +6,23 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:22:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 14:24:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 14:48:27 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void    init_angles(t_god *god)
+{
+    //player_angle is initially 0 (NORTH)
+	god->player_angle = 0;
+    //initially 0.5f so the funnel is 2*0.5=1rad wide
+    god->angle_offset = 0.5f;
+    god->player_angle_min = 0 - god->angle_offset;
+    normalize_angle(&god->player_angle_min);
+    god->player_angle_max = 0 + god->angle_offset;
+    normalize_angle(&god->player_angle_max);
+}
 
 void	init_stuff(t_god *god)
 {
@@ -24,9 +36,7 @@ void	init_stuff(t_god *god)
 	//3/4 is a placeholder, that's the position of the player in the sample map
 	god->player_x = 3;
 	god->player_y = 4;
-
-	//player_angle is initially 0 (NORTH)
-	god->player_angle = 0;
+    init_angles(god);
 	god->key_a = false;
 	god->key_s = false;
 	god->key_d = false;
