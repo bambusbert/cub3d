@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 14:46:04 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 17:07:15 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void update_player_position(t_god *god, int x, int y)
 	god->player_y += y;
 }
 
+//possible TODO change into normalize_angles function that handles
+//all 3 angle variables at once so we do not have 3 calls in update_player_angle
 void normalize_angle (float *angle)
 {
 	if (*angle > 2 * PI)
@@ -26,16 +28,13 @@ void normalize_angle (float *angle)
 		*angle += 2 * PI;
 }
 
-//360 degrees equals 2 pi
-//TODO look into radian. if the angle gets bigger than 2pi, take that into account.
-//modulo! also do this if the angle gets too small (negative)
-//update god.playerangle
+//360 degrees equals 2 pi (6.283)
 void update_player_angle (t_god *god, int direction)
 {
 	if (direction == LEFT)
-		god->player_angle -= ANGLE_FRACTION;
+		god->player_angle -= SENSITIVITY;
 	else if (direction == RIGHT)
-		god->player_angle += ANGLE_FRACTION;
+		god->player_angle += SENSITIVITY;
 	//we can't use modulo operator for float numbers
 	normalize_angle(&god->player_angle);
 	//printf("Player angle: %.3f\n", god->player_angle);
@@ -72,9 +71,33 @@ int	position_handler (t_god *god)
 	return 0;
 }
 
+int get_no_beams(t_god *god)
+{
+	return (god->angle_offset * 2) * (1 / ANGLE_FRACTION);
+}
+void draw_funnel_beams(t_god *god)
+{
+	float angle_to_draw;
+	int count;
+	int no_beams;
+
+	count = -1;
+	no_beams = get_no_beams(god);
+	angle_to_draw = god->player_angle_min;
+	while (++count < no_beams)
+	{
+		normalize_angle(&angle_to_draw);
+		draw_beam_from_center(god, angle_to_draw);
+		angle_to_draw += god->angle_tick;
+	}
+}
+
 void render(t_god *god)
 {
 	//this is where the raycasting magic happens
+	
+	//for testing we draw the beams in the funnel
+	draw_funnel_beams(god);
 }
 
 //this is the entry for the raycasting logic. will get executed once per frame
@@ -93,7 +116,7 @@ int	game_loop(t_god *god)
 	//then we have to re-render
 	if (position_handler(god))
 		render(god);
-	
+	render(god);
 	return 1;
 }
 

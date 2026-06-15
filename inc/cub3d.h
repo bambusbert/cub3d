@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 14:47:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/15 17:06:30 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 # define SPRITE_PLAYER "./sprites/player.xpm"
 # define SPRITE_WALL_N "./sprites/wall_e.xpm"
@@ -29,10 +30,14 @@
 # define PI 3.14159265
 # define LEFT 1
 # define RIGHT 2
-# define ANGLE_FRACTION 0.0001
+# define ANGLE_FRACTION 0.0175	//equals 1 degree
+# define ANGLE_OFFSET 0.5
+# define SENSITIVITY 0.0005
 
 # define WINDOW_SIZE_X 800
 # define WINDOW_SIZE_Y 600
+# define XCOORD 1
+# define YCOORD 2
 # define TILE_SIZE_X 32
 # define TILE_SIZE_Y 32
 
@@ -81,6 +86,7 @@ typedef struct s_god
 	float			player_angle;
 	// defines the funnel where casts are sent out
 	float			angle_offset;
+	float			angle_tick;
 	float			player_angle_min;
 	float			player_angle_max;
 }					t_god;
@@ -96,6 +102,9 @@ void				initialize_map(t_god *p_god);
 // input_handling.c
 int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
+
+// laser.c
+void				draw_beam_from_center(t_god *god, float beam_angle);
 
 // unsorted
 void				*ft_calloc(size_t nmemb, size_t size);
