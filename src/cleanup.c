@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 13:47:44 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 16:01:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,17 @@ void	free_god_struct(t_god *god)
 	free(god);
 }
 
+void	destroy_images (t_god *god)
+{
+	if (god->img)
+		mlx_destroy_image(god->mlx, god->img);
+}
+
+//TODO synchronize close_window and error_exit
 int	close_window(t_god	*god)
 {
 	destroy_sprites(god);
+	destroy_images(god);
 	if (god->mlx_win)
 		mlx_destroy_window(god->mlx, god->mlx_win);
 	if (god->mlx)
@@ -77,6 +85,7 @@ void	error_exit(char *msg, t_god *p_god)
 	if (p_god->mlx)
 	{
 		destroy_sprites(p_god);
+		destroy_images(p_god);
 		if (p_god->mlx_win)
 			mlx_destroy_window(p_god->mlx, p_god->mlx_win);
 		mlx_destroy_display(p_god->mlx);

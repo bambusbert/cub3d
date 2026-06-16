@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 15:50:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 16:40:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ void draw_funnel_beams(t_god *god)
 	while (++count < no_beams)
 	{
 		normalize_angle(&angle_to_draw);
-		draw_beam_from_center(god, angle_to_draw);
-		//angle_to_draw += god->angle_tick;
+		draw_beam_from_player(god, angle_to_draw);
         angle_to_draw += ANGLE_FRACTION;
 	}
 }
@@ -72,11 +71,7 @@ void draw_2d_map(t_god* god)
 {
 	int i;
 	int j;
-	int pixels_x; //size of 1 square
-	int pixels_y; //size of 1 square
-	
-	pixels_x = WINDOW_SIZE_X / god->cols;
-	pixels_y = WINDOW_SIZE_Y / god->rows;
+
 	i = -1;
 	while (++i < god->rows)
 	{
@@ -84,7 +79,7 @@ void draw_2d_map(t_god* god)
 		while (++j < god->cols)
 		{
 			if (god->map[i][j] == 1)
-				draw_square(god, i, j, pixels_x, pixels_y);
+				draw_square(god, i, j, god->pixels_per_x, god->pixels_per_y);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 15:45:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 16:41:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,22 @@ void    ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
     }
 }
 
-int	normalize_coordinate(int coord, int type)
+int	normalize_coordinate(float coord, int type)
 {
 	if (type == XCOORD)
-		return (coord + WINDOW_SIZE_X / 2);
+		return (roundf(coord + WINDOW_SIZE_X / 2));
 	else if (type == YCOORD)
-		return (coord + WINDOW_SIZE_Y / 2);
+		return (roundf(coord + WINDOW_SIZE_Y / 2));
+	else
+		return (-666);
+}
+
+int	normalize_coordinate2(t_god *god, float coord, int type)
+{
+	if (type == XCOORD)
+		return (coord * god->pixels_per_x);
+	else if (type == YCOORD)
+		return (coord * god->pixels_per_y);
 	else
 		return (-666);
 }
@@ -65,21 +75,24 @@ int	normalize_coordinate(int coord, int type)
 // this should be enough but we have to keep in mind to update the
 // relative position from the player (he is always in the middle bc FPV)
 // but his position is different on the map
-
-void	draw_beam_from_center(t_god *god, float beam_angle)
+void	draw_beam_from_player(t_god *god, float beam_angle)
 {
-	int	count;
-	int	pixel_x;
-	int	pixel_y;
-	int	len;
-	float shifted_angle;
+	float	start_x;
+	float	start_y;
+	float	end_x;
+	float	end_y;
+	int		len;
+	float	shifted_angle;
 
-	count = 0;
 	len = 50;
 	shifted_angle = beam_angle - (PI / 2);
-	pixel_x = len * cos(shifted_angle);
-	pixel_y = len * sin(shifted_angle);
-	ft_draw_line(god, normalize_coordinate(0, XCOORD), normalize_coordinate(0,YCOORD), normalize_coordinate(pixel_x, XCOORD),	normalize_coordinate(pixel_y, YCOORD), COLOR_ORANGE);
+
+	start_x = (god->player_x * god->pixels_per_x) + (god->pixels_per_x / 2);
+	start_y = (god->player_y * god->pixels_per_y) + (god->pixels_per_y / 2);
+	end_x = start_x + (len * cos(shifted_angle));
+	end_y = start_y + (len * sin(shifted_angle));
+
+	ft_draw_line(god, (int)start_x, (int)start_y, (int)end_x, (int)end_y, COLOR_ORANGE);
 }
 
 void	my_mlx_pixel_put(t_god *god, int x, int y, int color)

@@ -6,17 +6,17 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 15:47:29 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 17:00:38 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void update_player_position(t_god *god, int x, int y)
-{
-	god->player_x += x;
-	god->player_y += y;
-}
+// void update_player_position(t_god *god, int x, int y)
+// {
+// 	god->player_x += x;
+// 	god->player_y += y;
+// }
 
 //360 degrees equals 2 pi (6.283)
 void update_player_angle (t_god *god, int direction)
@@ -43,22 +43,6 @@ void	angle_handler(t_god *god)
 		update_player_angle(god, LEFT);
 	if (god->key_right)
 		update_player_angle(god, RIGHT);
-}
-
-//we can't change the players position each time bc the game would be way
-//too fast like that. should we implement some kind of tick? static var?
-//or is there some mlx magic we can use
-int	position_handler (t_god *god)
-{
-	//check for WASD keys
-	//if smth is pressed, update the x and y position of the player
-	//if (something pressed)
-	// {
-	// 	calculate movement
-	// 	update position
-	// 	return 1;
-	// }
-	return 0;
 }
 
 void render(t_god *god)

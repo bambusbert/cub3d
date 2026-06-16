@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:22:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 15:49:44 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 16:59:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	init_stuff(t_god *god)
 								&god->img_endian);
 	//TODO error protection?
 	init_angles(god);
+	god->pixels_per_x = roundf(WINDOW_SIZE_X / god->cols);
+	god->pixels_per_y = roundf(WINDOW_SIZE_Y / god->rows);
 	god->key_a = false;
 	god->key_s = false;
 	god->key_d = false;

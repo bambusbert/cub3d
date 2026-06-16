@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 15:50:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 16:59:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define ANGLE_FRACTION 0.0175 // equals 1 degree
 # define ANGLE_OFFSET 0.5      // defines FOV
 # define SENSITIVITY 0.025
+# define MOVE_TICK 0.015
 
 # define WINDOW_SIZE_X 800
 # define WINDOW_SIZE_Y 600
@@ -69,6 +70,8 @@ typedef struct s_god
 	int				**map;
 	unsigned int	rows;
 	unsigned int	cols;
+	unsigned int	pixels_per_x;
+	unsigned int	pixels_per_y;
 	bool			key_w;
 	bool			key_a;
 	bool			key_s;
@@ -95,7 +98,7 @@ typedef struct s_god
 	float			player_angle;
 	// defines the funnel where casts are sent out
 	float			angle_offset;
-	//float			angle_tick;
+	// float			angle_tick;
 	float			player_angle_min;
 	float			player_angle_max;
 }					t_god;
@@ -113,11 +116,14 @@ int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
 // laser.c
-void				draw_beam_from_center(t_god *god, float beam_angle);
+void				draw_beam_from_player(t_god *god, float beam_angle);
 
 // draw.c
 void				draw_funnel_beams(t_god *god);
 void				draw_2d_map(t_god *god);
+
+// movement.c
+int					position_handler(t_god *god);
 
 // libft
 void				ft_bzero(void *s, size_t n);
