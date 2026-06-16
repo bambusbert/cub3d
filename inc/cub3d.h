@@ -6,20 +6,20 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 12:24:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:50:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <math.h>
 # include <mlx.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 
 # define SPRITE_PLAYER "./sprites/player.xpm"
 # define SPRITE_WALL_N "./sprites/wall_e.xpm"
@@ -30,9 +30,9 @@
 # define PI 3.14159265
 # define LEFT 1
 # define RIGHT 2
-# define ANGLE_FRACTION 0.0175	//equals 1 degree
-# define ANGLE_OFFSET 0.5
-# define SENSITIVITY 0.0005
+# define ANGLE_FRACTION 0.0175 // equals 1 degree
+# define ANGLE_OFFSET 0.5      // defines FOV
+# define SENSITIVITY 0.025
 
 # define WINDOW_SIZE_X 800
 # define WINDOW_SIZE_Y 600
@@ -49,6 +49,9 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
+# define COLOR_ORANGE 551515151
+# define COLOR_BLUE 0x0000FF
+
 # define KEYDOWN_EVENT 2
 # define KEYUP_EVENT 3
 # define CLOSING_EVENT 17
@@ -57,8 +60,12 @@ typedef struct s_god
 {
 	void			*mlx;
 	void			*mlx_win;
-	// unsigned int	resolution_x;
-	// unsigned int	resolution_y;
+	// img stuff
+	void			*img;
+	char			*img_addr;
+	int				img_bits_per_pixel;
+	int				img_line_length;
+	int				img_endian;
 	int				**map;
 	unsigned int	rows;
 	unsigned int	cols;
@@ -88,7 +95,7 @@ typedef struct s_god
 	float			player_angle;
 	// defines the funnel where casts are sent out
 	float			angle_offset;
-	float			angle_tick;
+	//float			angle_tick;
 	float			player_angle_min;
 	float			player_angle_max;
 }					t_god;
@@ -108,6 +115,13 @@ int					key_up(int keycode, void *param);
 // laser.c
 void				draw_beam_from_center(t_god *god, float beam_angle);
 
+// draw.c
+void				draw_funnel_beams(t_god *god);
+void				draw_2d_map(t_god *god);
+
+// libft
+void				ft_bzero(void *s, size_t n);
+
 // unsorted
 void				*ft_calloc(size_t nmemb, size_t size);
 void				error_exit(char *msg, t_god *p_god);
@@ -115,5 +129,6 @@ size_t				ft_putstr_fd(char *s, int fd);
 int					close_window(t_god *god);
 void				destroy_sprites(t_god *p_god);
 void				normalize_angle(float *angle);
+void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
 
 #endif

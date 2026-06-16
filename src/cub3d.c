@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 12:45:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:47:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,6 @@ void update_player_position(t_god *god, int x, int y)
 {
 	god->player_x += x;
 	god->player_y += y;
-}
-
-//possible TODO change into normalize_angles function that handles
-//all 3 angle variables at once so we do not have 3 calls in update_player_angle
-void normalize_angle (float *angle)
-{
-	if (*angle > 2 * PI)
-		*angle -= 2 * PI;
-	else if (*angle < 0)
-		*angle += 2 * PI;
 }
 
 //360 degrees equals 2 pi (6.283)
@@ -71,82 +61,20 @@ int	position_handler (t_god *god)
 	return 0;
 }
 
-int get_no_beams(t_god *god)
-{
-	return (god->angle_offset * 2) * (1 / ANGLE_FRACTION);
-}
-void draw_funnel_beams(t_god *god)
-{
-	float angle_to_draw;
-	int count;
-	int no_beams;
-
-	count = -1;
-	no_beams = get_no_beams(god);
-	angle_to_draw = god->player_angle_min;
-	while (++count < no_beams)
-	{
-		normalize_angle(&angle_to_draw);
-		draw_beam_from_center(god, angle_to_draw);
-		angle_to_draw += god->angle_tick;
-	}
-}
-
-//TODO performance (change from mlx_pixel_put to image)
-void draw_square (t_god* god, int row, int col, int pixels_x, int pixels_y)
-{
-	int cur_x;
-	int cur_y;
-	int start_x;
-	int start_y;
-	int color;
-	
-	start_x = col * pixels_x;
-	start_y = row * pixels_y;
-	color = 551515151;
-	cur_x = -1;
-	while (++cur_x < pixels_x)
-	{
-		cur_y = -1;
-		while (++cur_y < pixels_y)
-		{
-			mlx_pixel_put(god->mlx, god->mlx_win, cur_x + start_x, cur_y + start_y, color);
-		}
-	}
-}
-
-//atm only possible to draw recangular maps.
-//TODO change that
-void draw_2d_map(t_god* god)
-{
-	int i;
-	int j;
-	int pixels_x; //size of 1 square
-	int pixels_y; //size of 1 square
-	
-	pixels_x = WINDOW_SIZE_X / god->cols;
-	pixels_y = WINDOW_SIZE_Y / god->rows;
-	i = -1;
-	while (++i < god->rows)
-	{
-		j = -1;
-		while (++j < god->cols)
-		{
-			if (god->map[i][j] == 1)
-				draw_square(god, i, j, pixels_x, pixels_y);
-		}
-	}
-}
-
 void render(t_god *god)
 {
-	mlx_clear_window(god->mlx, god->mlx_win);
+	//mlx_clear_window(god->mlx, god->mlx_win);
+	//my_mlx_clear_window(god->mlx, god->mlx_win);
+	//clear image
+	ft_bzero(god->img_addr, WINDOW_SIZE_Y * god->img_line_length);
 	//this is where the raycasting magic happens
 	
 	//DEBUG
 	draw_2d_map(god);
 	//DEBUG draw the beams in the funnel
 	draw_funnel_beams(god);
+	//mlx_destroy_image(god->mlx, god->img);
+	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
 }
 
 //this is the entry for the raycasting logic. will get executed once per frame

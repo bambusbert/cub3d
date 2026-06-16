@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:22:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 16:50:43 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:49:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void    init_angles(t_god *god)
     normalize_angle(&god->player_angle_min);
     god->player_angle_max = 0 + god->angle_offset;
     normalize_angle(&god->player_angle_max);
-    god->angle_tick = ANGLE_FRACTION;   //equals 1 degree
+    //god->angle_tick = ANGLE_FRACTION;   //equals 1 degree
 }
 
+//TODO initialize every pointer with NULL
 void	init_stuff(t_god *god)
 {
 	// we should do something like:
@@ -37,7 +38,12 @@ void	init_stuff(t_god *god)
 	//3/4 is a placeholder, that's the position of the player in the sample map
 	god->player_x = 3;
 	god->player_y = 4;
-    init_angles(god);
+	god->img = mlx_new_image(god->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y);
+	//TODO error protection
+	god->img_addr = mlx_get_data_addr(god->img, &god->img_bits_per_pixel, &god->img_line_length,
+								&god->img_endian);
+	//TODO error protection?
+	init_angles(god);
 	god->key_a = false;
 	god->key_s = false;
 	god->key_d = false;

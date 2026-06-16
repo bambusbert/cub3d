@@ -32,7 +32,8 @@ SRC =	src/cub3d.c \
 		src/input_handling.c \
 		src/debug.c \
 		src/init.c \
-		src/laser.c
+		src/laser.c \
+		src/draw.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 HEAD = inc/cub3d.h

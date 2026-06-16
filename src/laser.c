@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 12:12:16 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:45:57 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void    ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
     i = -1;
     while (++i <= step)
     {
-        mlx_pixel_put(god->mlx, god->mlx_win, (int)round(x), (int)round(y), color);
+        //mlx_pixel_put(god->mlx, god->mlx_win, (int)round(x), (int)round(y), color);
+        my_mlx_pixel_put(god, (int)round(x), (int)round(y), color);
         x += delta_x;
         y += delta_y;
     }
@@ -71,7 +72,6 @@ void	draw_beam_from_center(t_god *god, float beam_angle)
 	int	pixel_x;
 	int	pixel_y;
 	int	len;
-	int	color;
 	float shifted_angle;
 
 	count = 0;
@@ -79,12 +79,15 @@ void	draw_beam_from_center(t_god *god, float beam_angle)
 	shifted_angle = beam_angle - (PI / 2);
 	pixel_x = len * cos(shifted_angle);
 	pixel_y = len * sin(shifted_angle);
-	color = 551515151;
-	ft_draw_line(god, normalize_coordinate(0, XCOORD), normalize_coordinate(0,YCOORD), normalize_coordinate(pixel_x, XCOORD),	normalize_coordinate(pixel_y, YCOORD), color);
-	// while (count++ < 100)
-	// {
-	// 	mlx_pixel_put(god->mlx, god->mlx_win, pixel_x + WINDOW_SIZE_X / 2,
-	// 		pixel_y + WINDOW_SIZE_Y / 2, color);
-	// 	// update pixel_x and pixel_y
-	// }
+	ft_draw_line(god, normalize_coordinate(0, XCOORD), normalize_coordinate(0,YCOORD), normalize_coordinate(pixel_x, XCOORD),	normalize_coordinate(pixel_y, YCOORD), COLOR_ORANGE);
+}
+
+void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WINDOW_SIZE_X || y < 0 || y >= WINDOW_SIZE_Y)
+		return ;
+	dst = god->img_addr + (y * god->img_line_length + x * (god->img_bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }
