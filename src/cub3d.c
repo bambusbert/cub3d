@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 17:07:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 12:45:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,60 @@ void draw_funnel_beams(t_god *god)
 	}
 }
 
+//TODO performance (change from mlx_pixel_put to image)
+void draw_square (t_god* god, int row, int col, int pixels_x, int pixels_y)
+{
+	int cur_x;
+	int cur_y;
+	int start_x;
+	int start_y;
+	int color;
+	
+	start_x = col * pixels_x;
+	start_y = row * pixels_y;
+	color = 551515151;
+	cur_x = -1;
+	while (++cur_x < pixels_x)
+	{
+		cur_y = -1;
+		while (++cur_y < pixels_y)
+		{
+			mlx_pixel_put(god->mlx, god->mlx_win, cur_x + start_x, cur_y + start_y, color);
+		}
+	}
+}
+
+//atm only possible to draw recangular maps.
+//TODO change that
+void draw_2d_map(t_god* god)
+{
+	int i;
+	int j;
+	int pixels_x; //size of 1 square
+	int pixels_y; //size of 1 square
+	
+	pixels_x = WINDOW_SIZE_X / god->cols;
+	pixels_y = WINDOW_SIZE_Y / god->rows;
+	i = -1;
+	while (++i < god->rows)
+	{
+		j = -1;
+		while (++j < god->cols)
+		{
+			if (god->map[i][j] == 1)
+				draw_square(god, i, j, pixels_x, pixels_y);
+		}
+	}
+}
+
 void render(t_god *god)
 {
+	mlx_clear_window(god->mlx, god->mlx_win);
 	//this is where the raycasting magic happens
 	
-	//for testing we draw the beams in the funnel
+	//DEBUG
+	draw_2d_map(god);
+	//DEBUG draw the beams in the funnel
 	draw_funnel_beams(god);
 }
 
@@ -116,6 +165,7 @@ int	game_loop(t_god *god)
 	//then we have to re-render
 	if (position_handler(god))
 		render(god);
+	//for now we just render either way
 	render(god);
 	return 1;
 }
@@ -126,7 +176,7 @@ void	game_function(t_god *god)
 	if (!god->mlx)
 		error_exit("Error\nMLX init failed\n", god);
 	initialize_map(god);
-	god->mlx_win = mlx_new_window(god->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, "so_long");
+	god->mlx_win = mlx_new_window(god->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, "cub3d");
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
 	mlx_hook(god->mlx_win, CLOSING_EVENT, 0, close_window, god);

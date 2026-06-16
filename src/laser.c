@@ -6,42 +6,22 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 17:11:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 12:12:16 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-/* void	ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
-{
-	int	step;
-	int	x;
-	int	y;
-	int	i;
-	int	delta_x;
-	int	delta_y;
-
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	if (abs(delta_x) >= abs(delta_y))
-		step = abs(delta_x);
-	else
-		step = abs(delta_y);
-	delta_x = delta_x / step;
-	delta_y = delta_y / step;
-	x = x1;
-	y = x2;
-	i = 0;
-	while (i < step)
-	{
-		//mlx_pixel_put(god->mlx, god->mlx_win, x, y, color);
-		mlx_pixel_put(god->mlx, god->mlx_win, x, y, color);
-		x += delta_x;
-		y += delta_y;
-		i++;
-	}
-} */
-
+/*	1.	calculate dx and dy. these distances are the x any y values the line to
+ *		be drawn travels (line = hypothenuse, dx and dy kathete).
+ *	2.	calculate the step. this is the max of the absolute values of dx and dy.
+ *	3.	calculate dx and dy PER STEP - divide by step.
+ *		(start from point 1 - x1 & y1)
+ *	4.	loop from i to step and increment by the values from 3.
+ *		round to nearest pixel.
+ */
+//TODO:	this is very slow. change to image buffer (calculate memory adresses &
+//		change color value directly in memory)
 void    ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
 {
     float   step;
@@ -57,20 +37,16 @@ void    ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
         step = abs((int)delta_x);
     else
         step = abs((int)delta_y);
-    
     delta_x = delta_x / step;
     delta_y = delta_y / step;
-    
     x = x1;
     y = y1;
-    i = 0;
-    while (i <= step)
+    i = -1;
+    while (++i <= step)
     {
-        // Round to nearest pixel when actually drawing
         mlx_pixel_put(god->mlx, god->mlx_win, (int)round(x), (int)round(y), color);
         x += delta_x;
         y += delta_y;
-        i++;
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/15 17:06:30 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 12:24:59 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,17 @@ typedef struct s_god
 {
 	void			*mlx;
 	void			*mlx_win;
+	// unsigned int	resolution_x;
+	// unsigned int	resolution_y;
 	int				**map;
+	unsigned int	rows;
+	unsigned int	cols;
 	bool			key_w;
 	bool			key_a;
 	bool			key_s;
 	bool			key_d;
 	bool			key_left;
 	bool			key_right;
-	unsigned int	cols;
-	unsigned int	rows;
 	// unsigned int	count_collectible;
 	// unsigned int	count_player;
 	// unsigned int	count_exit;
