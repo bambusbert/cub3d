@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 16:59:01 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/17 15:56:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
 // laser.c
-void				draw_beam_from_player(t_god *god, float beam_angle);
+void				draw_beam_from_player_inefficient(t_god *god, float beam_angle);
 
 // draw.c
 void				draw_funnel_beams(t_god *god);

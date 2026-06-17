@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 16:40:53 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/17 15:56:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int get_no_beams(t_god *god)
 {
 	return (god->angle_offset * 2) * (1 / ANGLE_FRACTION);
 }
+
+//TODO change so that we cast always WINDOW_SIZE_X beams
 void draw_funnel_beams(t_god *god)
 {
 	float angle_to_draw;
@@ -60,7 +62,7 @@ void draw_funnel_beams(t_god *god)
 	while (++count < no_beams)
 	{
 		normalize_angle(&angle_to_draw);
-		draw_beam_from_player(god, angle_to_draw);
+		draw_beam_from_player_inefficient(god, angle_to_draw);
         angle_to_draw += ANGLE_FRACTION;
 	}
 }

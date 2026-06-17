@@ -15,3 +15,5 @@
 !*.cub
 !*.xpm
 !Makefile
+!TODO.md
+!README.md
