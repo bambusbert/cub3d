@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/17 16:51:02 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/17 21:17:13 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
     float   delta_y;
     int     i;
 
-    delta_x = x2 - x1;
+    delta_x = (x2 - x1);
     delta_y = y2 - y1;
     if (abs((int)delta_x) >= abs((int)delta_y))
         step = abs((int)delta_x);
@@ -136,6 +136,7 @@ void	draw_beam_from_player_inefficient(t_god *god, float beam_angle)
 
 	start_x = (god->player_x * god->pixels_per_x) + (god->pixels_per_x / 2);
 	start_y = (god->player_y * god->pixels_per_y) + (god->pixels_per_y / 2);
+
 	end_x = start_x + (len * cos(beam_angle));
 	end_y = start_y + (len * sin(beam_angle));
 
@@ -175,17 +176,19 @@ void	draw_beam_from_player_inefficient(t_god *god, float beam_angle)
 //TODO understand DDA better and put these variables in a struct
 void	draw_beam_from_player_dda(t_god *god, float beam_angle)
 {
+    float   ray_dir_x;
+    float   ray_dir_y;
  	int     player_x_int;
     int     player_y_int;
-    int     step_x;
-    int     step_y;
     float   delta_x;
     float   delta_y;
     float   first_x;
     float   first_y;
-    
-    float   ray_dir_x = cos(beam_angle);
-    float   ray_dir_y = sin(beam_angle);
+    int     step_x;
+    int     step_y;
+
+    ray_dir_x = cos(beam_angle);
+    ray_dir_y = sin(beam_angle);
 
     player_x_int = (int)god->player_x;
     player_y_int = (int)god->player_y;
