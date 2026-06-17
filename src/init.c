@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:22:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 16:59:06 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:11:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void    init_angles(t_god *god)
 	god->player_angle = 0;
     //initially 0.5f so the funnel is 2*0.5=1rad wide
     god->angle_offset = ANGLE_OFFSET;
-    god->player_angle_min = 0 - god->angle_offset;
+    god->player_angle_min = god->player_angle - god->angle_offset;
     normalize_angle(&god->player_angle_min);
-    god->player_angle_max = 0 + god->angle_offset;
+    god->player_angle_max = god->player_angle + god->angle_offset;
     normalize_angle(&god->player_angle_max);
     //god->angle_tick = ANGLE_FRACTION;   //equals 1 degree
 }

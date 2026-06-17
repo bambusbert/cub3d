@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 16:41:54 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:15:35 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,13 @@ void	draw_beam_from_player(t_god *god, float beam_angle)
 	float	end_x;
 	float	end_y;
 	int		len;
-	float	shifted_angle;
 
-	len = 50;
-	shifted_angle = beam_angle - (PI / 2);
+	len = 200;
 
 	start_x = (god->player_x * god->pixels_per_x) + (god->pixels_per_x / 2);
 	start_y = (god->player_y * god->pixels_per_y) + (god->pixels_per_y / 2);
-	end_x = start_x + (len * cos(shifted_angle));
-	end_y = start_y + (len * sin(shifted_angle));
+	end_x = start_x + (len * cos(beam_angle));
+	end_y = start_y + (len * sin(beam_angle));
 
 	ft_draw_line(god, (int)start_x, (int)start_y, (int)end_x, (int)end_y, COLOR_ORANGE);
 }

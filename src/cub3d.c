@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 17:00:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/16 17:14:32 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	game_function(t_god *god)
 	
 	init_stuff(god);
 	mlx_do_key_autorepeatoff(god->mlx);
+	//render(god);
 	mlx_loop_hook(god->mlx, game_loop, god);
 	mlx_loop(god->mlx);
 }

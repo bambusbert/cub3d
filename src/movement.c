@@ -6,35 +6,24 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 16:57:27 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:14:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-static void move_forward(t_god *god)
-{
-    float dx;
-    float dy;
-
-    dx = MOVE_TICK * cos(god->player_angle - (PI / 2));
-    dy = MOVE_TICK * sin(god->player_angle - (PI / 2));
-    god->player_x += dx;
-    god->player_y += dy;
-}
 
 static void move_back(t_god *god)
 {
     float dx;
     float dy;
 
-    dx = MOVE_TICK * cos(god->player_angle - (PI / 2));
-    dy = MOVE_TICK * sin(god->player_angle - (PI / 2));
+    dx = MOVE_TICK * cos(god->player_angle);
+    dy = MOVE_TICK * sin(god->player_angle);
     god->player_x -= dx;
     god->player_y -= dy;
 }
 
-static void move_right(t_god *god)
+static void move_forward(t_god *god)
 {
     float dx;
     float dy;
@@ -50,8 +39,19 @@ static void move_left(t_god *god)
     float dx;
     float dy;
 
-    dx = MOVE_TICK * cos(god->player_angle);
-    dy = MOVE_TICK * sin(god->player_angle);
+    dx = MOVE_TICK * cos(god->player_angle - (PI / 2));
+    dy = MOVE_TICK * sin(god->player_angle - (PI / 2));
+    god->player_x += dx;
+    god->player_y += dy;
+}
+
+static void move_right(t_god *god)
+{
+    float dx;
+    float dy;
+
+    dx = MOVE_TICK * cos(god->player_angle - (PI / 2));
+    dy = MOVE_TICK * sin(god->player_angle - (PI / 2));
     god->player_x -= dx;
     god->player_y -= dy;
 }
