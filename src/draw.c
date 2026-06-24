@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/17 15:56:51 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 12:30:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void draw_funnel_beams(t_god *god)
 	while (++count < no_beams)
 	{
 		normalize_angle(&angle_to_draw);
-		draw_beam_from_player_inefficient(god, angle_to_draw);
+		//draw_beam_from_player_inefficient(god, angle_to_draw);
+		draw_beam_from_player_dda(god, angle_to_draw);
         angle_to_draw += ANGLE_FRACTION;
 	}
 }

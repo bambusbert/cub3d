@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/17 21:17:13 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 13:50:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void    ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
     i = -1;
     while (++i <= step)
     {
-		if (is_wall_coord(god, x, y))
-			break;
+		// if (is_wall_coord(god, x, y))
+		// 	break;
         my_mlx_pixel_put(god, (int)round(x), (int)round(y), color);
         x += delta_x;
         y += delta_y;
@@ -162,9 +162,9 @@ void	draw_beam_from_player_inefficient(t_god *god, float beam_angle)
  * 						vertical line to another
  * 			- delta_y:	length of a vector that passes from one
  * 						horizontal line to another
- * 			- first_x:	length of the vector that passes from the
+ * 			- next_x:	length of the vector that passes from the
  * 						player to the first vertical line
- * 			- first_y:	length of the vector that passes from the
+ * 			- next_y:	length of the vector that passes from the
  * 						player to the first horizontal line
  * 
  * Phase 2: the actual while loop. while no wall has been hit,
@@ -174,6 +174,7 @@ void	draw_beam_from_player_inefficient(t_god *god, float beam_angle)
  * 			and draw the line.
  */
 //TODO understand DDA better and put these variables in a struct
+//TODO rename to dda
 void	draw_beam_from_player_dda(t_god *god, float beam_angle)
 {
     float   ray_dir_x;
@@ -182,14 +183,19 @@ void	draw_beam_from_player_dda(t_god *god, float beam_angle)
     int     player_y_int;
     float   delta_x;
     float   delta_y;
-    float   first_x;
-    float   first_y;
-    int     step_x;
-    int     step_y;
-
-    ray_dir_x = cos(beam_angle);
-    ray_dir_y = sin(beam_angle);
-
+    float   next_x;
+    float   next_y;
+    //we use a vector instead of the rad angle.
+    float   ray_dir_x = cos(beam_angle);
+    float   ray_dir_y = sin(beam_angle);
+    int     map_x;
+    int     map_y;
+    bool    wall_hit;
+    bool    which_wall_hit; //true if horizontal and false for vertical
+    float   distance; // WINDOWS_SIZE_Y / distance is lie height
+    float   hit_x;
+    float   hit_y;
+    
     player_x_int = (int)god->player_x;
     player_y_int = (int)god->player_y;
 
@@ -199,24 +205,65 @@ void	draw_beam_from_player_dda(t_god *god, float beam_angle)
     if (ray_dir_x < 0)
     {
         step_x = -1; // Looking Left
-        first_x = (god->player_x - player_x_int) * delta_x;
+        next_x = (god->player_x - player_x_int) * delta_x;
     }
     else
     {
         step_x = 1; // Looking Right
-        first_x = (player_x_int + 1.0 - god->player_x) * delta_x;
+        next_x = (player_x_int + 1.0 - god->player_x) * delta_x;
     }
 
     if (ray_dir_y < 0)
     {
         step_y = -1; // Looking Up
-        first_y = (god->player_y - player_y_int) * delta_y;
+        next_y = (god->player_y - player_y_int) * delta_y;
     }
     else
     {
         step_y = 1; // Looking Down
-        first_y = (player_y_int + 1.0 - god->player_y) * delta_y;
+        next_y = (player_y_int + 1.0 - god->player_y) * delta_y;
     }
+    wall_hit = false;
+    map_x = player_x_int;
+    map_y = player_y_int;
+    while (!wall_hit)
+    {
+        if (next_x < next_y)
+        {
+            next_x += delta_x;
+            map_x += step_x;
+            which_wall_hit = true;
+        }
+        else
+        {
+            next_y += delta_y;
+            map_y += step_y;
+            which_wall_hit = false;
+        }
+        //boundary check
+        if (map_x < 0 || map_x >= god->cols || map_y < 0 || map_y >= god->rows)
+        {
+            wall_hit = true;
+            break; 
+        }
+        //collision check
+        if (god->map[map_y][map_x] == 1)
+            wall_hit = true;
+    }
+    //for debugging (and minimap) we draw the 2d rays
+    if (which_wall_hit)
+        distance = (map_x - god->player_x + (1 - step_x) / 2) / ray_dir_x;
+    else
+        distance = (map_y - god->player_y + (1 - step_y) / 2) / ray_dir_y;
+    hit_x = god->player_x + (ray_dir_x * distance);
+    hit_y = god->player_y + (ray_dir_y * distance);
+    
+    int start_pixel_x = god->player_x * god->pixels_per_x;
+    int start_pixel_y = god->player_y * god->pixels_per_y;
+
+    int end_pixel_x = hit_x * god->pixels_per_x;
+    int end_pixel_y = hit_y * god->pixels_per_y;
+    ft_draw_line(god, start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y, COLOR_ORANGE);
 }
 
 void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
