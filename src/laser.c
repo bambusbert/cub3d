@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 13:50:05 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 13:51:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,12 +177,12 @@ void	draw_beam_from_player_inefficient(t_god *god, float beam_angle)
 //TODO rename to dda
 void	draw_beam_from_player_dda(t_god *god, float beam_angle)
 {
-    float   ray_dir_x;
-    float   ray_dir_y;
  	int     player_x_int;
     int     player_y_int;
     float   delta_x;
     float   delta_y;
+    int     step_x;
+    int     step_y;
     float   next_x;
     float   next_y;
     //we use a vector instead of the rad angle.
