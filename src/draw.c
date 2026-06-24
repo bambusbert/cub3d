@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:18:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 14:28:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,6 @@ void draw_square (t_god* god, int row, int col, int pixels_x, int pixels_y)
 			my_mlx_pixel_put(god, cur_x + start_x, cur_y + start_y, COLOR_BLUE);
 			// mlx_pixel_put(god->mlx, god->mlx_win, cur_x + start_x, cur_y + start_y, color);
 		}
-	}
-}
-
-int get_no_beams(t_god *god)
-{
-	return (god->angle_offset * 2) * (1 / ANGLE_FRACTION);
-}
-
-//TODO change so that we cast always WINDOW_SIZE_X beams
-void draw_funnel_beams(t_god *god)
-{
-	float angle_to_draw;
-	int count;
-	int no_beams;
-
-	count = -1;
-	no_beams = get_no_beams(god);
-	angle_to_draw = god->player_angle_min;
-	while (++count < no_beams)
-	{
-		normalize_angle(&angle_to_draw);
-		//draw_beam_from_player_inefficient(god, angle_to_draw);
-		dda_wrapper(god, angle_to_draw);
-        angle_to_draw += ANGLE_FRACTION;
 	}
 }
 

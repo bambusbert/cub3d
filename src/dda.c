@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:22:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 14:40:59 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,16 +115,16 @@ t_dda	*init_dda_struct(t_god *god, float beam_angle)
 	return (dda);
 }
 
-void visualize_beam(t_god *god, t_dda *dda)
+void	visualize_beam(t_god *god, t_dda *dda)
 {
-    float	hit_x;
+	float	hit_x;
 	float	hit_y;
 	int		start_pixel_x;
 	int		start_pixel_y;
 	int		end_pixel_x;
 	int		end_pixel_y;
-    
-    hit_x = god->player_x + (dda->ray_dir_x * dda->distance);
+
+	hit_x = god->player_x + (dda->ray_dir_x * dda->distance);
 	hit_y = god->player_y + (dda->ray_dir_y * dda->distance);
 	start_pixel_x = god->player_x * god->pixels_per_x;
 	start_pixel_y = god->player_y * god->pixels_per_y;
@@ -136,21 +136,44 @@ void visualize_beam(t_god *god, t_dda *dda)
 
 // TODO understand DDA better and put these variables in a struct
 // TODO rename to dda
-void	dda_wrapper(t_god *god, float beam_angle)
+void	dda_inner_wrapper(t_god *god, float beam_angle, int x)
 {
 	t_dda	*dda;
+	int		line_len;
 
 	dda = init_dda_struct(god, beam_angle);
 	dda_loop(god, dda);
 	// for debugging (and minimap) we draw the 2d rays
 	if (dda->which_wall_hit)
-		dda->distance = (dda->map_x - god->player_x + (1 - dda->step_x) / 2)/ dda->ray_dir_x;
+		dda->distance = (dda->map_x - god->player_x + (1 - dda->step_x) / 2)
+			/ dda->ray_dir_x;
 	else
-		dda->distance = (dda->map_y - god->player_y + (1 - dda->step_y) / 2)/ dda->ray_dir_y;
-	//TODO calculate the line length which is WINDOWS_SIZE_Y / distance
-    
-    //TODOvisualize line length
-    
-    //for Debug (and minimap later) visualize it
-    visualize_beam(god, dda);
+		dda->distance = (dda->map_y - god->player_y + (1 - dda->step_y) / 2)
+			/ dda->ray_dir_y;
+	line_len = WINDOW_SIZE_Y / dda->distance;
+	// TODO visualize line length at pixel x
+    (void)x;
+	// for Debug (and minimap later) visualize it
+	visualize_beam(god, dda);
+}
+
+void	dda_outer_wrapper(t_god *god)
+{
+	float	angle_to_draw;
+	float	angle_step;
+	int		x;
+
+	// Divide the total FOV by the screen width to get the angle per pixel column
+	angle_step = god->angle_offset * 2 / WINDOW_SIZE_X;
+	angle_to_draw = god->player_angle_min;
+	x = -1;
+	while (++x < WINDOW_SIZE_X)
+	{
+		normalize_angle(&angle_to_draw);
+		// TODO update the signature of this function
+		// to: dda_inner_wrapper(god, angle_to_draw, x);
+		// so that the DDA function knows which screen column to draw the 3D wall on
+		dda_inner_wrapper(god, angle_to_draw, x);
+		angle_to_draw += angle_step;
+	}
 }
