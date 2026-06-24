@@ -6,10 +6,40 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:20:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 14:22:59 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ *	it would be very inefficient if we just drew pixel by pixel.
+ *	a wall can only be at the grid lines (not inbetween).
+ *	therefore, it is enough to check whether the next grid line
+ *	that is reached by the beam is the next horizontal or
+ *	vertical grid line. we can draw this line. after that we
+ *	check if the regarding block is a wall or not. if it is,
+ *	stop and calculate the total beam distance (i guess we need
+ *	an array of size WINDOW_SIZE_X for that?)
+ *
+ * the DDA algo is split into 2 phases.
+ * Phase 1: set up all the variables needed.
+ * 			- x / y position of the player (int)
+ * 			- step_x / step_y:	binary information regarding the
+ * 								the player angle (1 or -1)
+ * 			- delta_x:	length of a vector that passes from one
+ * 						vertical line to another
+ * 			- delta_y:	length of a vector that passes from one
+ * 						horizontal line to another
+ * 			- next_x:	length of the vector that passes from the
+ * 						player to the first vertical line
+ * 			- next_y:	length of the vector that passes from the
+ * 						player to the first horizontal line
+ *
+ * Phase 2: the actual while loop. while no wall has been hit,
+ * 			we add the distance to the nearest grid line to the
+ * 			total distance. if the next block is a wall, we stop.
+ * 			if not, we continue. if we hit a wall, save distance
+ * 			and draw the line.
+ */
 #include "cub3d.h"
 
 void	dda_loop(t_god *god, t_dda *dda)
@@ -104,36 +134,6 @@ void visualize_beam(t_god *god, t_dda *dda)
 		COLOR_ORANGE);
 }
 
-/*
- *	it would be very inefficient if we just drew pixel by pixel.
- *	a wall can only be at the grid lines (not inbetween).
- *	therefore, it is enough to check whether the next grid line
- *	that is reached by the beam is the next horizontal or
- *	vertical grid line. we can draw this line. after that we
- *	check if the regarding block is a wall or not. if it is,
- *	stop and calculate the total beam distance (i guess we need
- *	an array of size WINDOW_SIZE_X for that?)
- *
- * the DDA algo is split into 2 phases.
- * Phase 1: set up all the variables needed.
- * 			- x / y position of the player (int)
- * 			- step_x / step_y:	binary information regarding the
- * 								the player angle (1 or -1)
- * 			- delta_x:	length of a vector that passes from one
- * 						vertical line to another
- * 			- delta_y:	length of a vector that passes from one
- * 						horizontal line to another
- * 			- next_x:	length of the vector that passes from the
- * 						player to the first vertical line
- * 			- next_y:	length of the vector that passes from the
- * 						player to the first horizontal line
- *
- * Phase 2: the actual while loop. while no wall has been hit,
- * 			we add the distance to the nearest grid line to the
- * 			total distance. if the next block is a wall, we stop.
- * 			if not, we continue. if we hit a wall, save distance
- * 			and draw the line.
- */
 // TODO understand DDA better and put these variables in a struct
 // TODO rename to dda
 void	dda_wrapper(t_god *god, float beam_angle)
