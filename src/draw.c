@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:28:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 15:49:48 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void draw_square (t_god* god, int row, int col, int pixels_x, int pixels_y)
 
 //atm only possible to draw recangular maps.
 //TODO change that
+//or not - a non rectangular map is also rectangular when we just fill the
+//space in between
 void draw_2d_map(t_god* god)
 {
 	int i;

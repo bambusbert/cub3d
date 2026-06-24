@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:41:13 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 14:53:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define LEFT 1
 # define RIGHT 2
 //# define ANGLE_FRACTION 0.0175 // equals 1 degree
-# define ANGLE_OFFSET    0.5   // defines FOV / 2
+# define ANGLE_OFFSET 0.5 // defines FOV / 2
 # define SENSITIVITY 0.025
 # define MOVE_TICK 0.015
 
@@ -119,7 +119,7 @@ typedef struct s_dda
 	int				map_y;
 	bool			wall_hit;
 	bool which_wall_hit; // true if horizontal and false for vertical
-	float distance;      // WINDOWS_SIZE_Y / distance is lie height
+	float dist;          // WINDOWS_SIZE_Y / distance is lie height
 	float			hit_x;
 	float			hit_y;
 }					t_dda;
@@ -137,11 +137,11 @@ int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
 // laser.c<
-void				dda_inner_wrapper(t_god *god, float beam_angle, int x);
+void				dda_single_ray(t_god *god, float beam_angle, int x);
 void				ft_draw_line(t_god *god, int x1, int y1, int x2, int y2,
 						int color);
 // draw.c
-void				dda_outer_wrapper(t_god *god);
+void				dda_wrapper(t_god *god);
 void				draw_2d_map(t_god *god);
 
 // movement.c

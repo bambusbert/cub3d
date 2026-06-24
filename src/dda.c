@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:40:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 15:59:03 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_dda	*init_dda_struct(t_god *god, float beam_angle)
 	return (dda);
 }
 
-void	visualize_beam(t_god *god, t_dda *dda)
+void	visualize_2d_beam(t_god *god, t_dda *dda)
 {
 	float	hit_x;
 	float	hit_y;
@@ -124,8 +124,8 @@ void	visualize_beam(t_god *god, t_dda *dda)
 	int		end_pixel_x;
 	int		end_pixel_y;
 
-	hit_x = god->player_x + (dda->ray_dir_x * dda->distance);
-	hit_y = god->player_y + (dda->ray_dir_y * dda->distance);
+	hit_x = god->player_x + (dda->ray_dir_x * dda->dist);
+	hit_y = god->player_y + (dda->ray_dir_y * dda->dist);
 	start_pixel_x = god->player_x * god->pixels_per_x;
 	start_pixel_y = god->player_y * god->pixels_per_y;
 	end_pixel_x = hit_x * god->pixels_per_x;
@@ -134,30 +134,49 @@ void	visualize_beam(t_god *god, t_dda *dda)
 		COLOR_ORANGE);
 }
 
+//TODO maybe use FLT_MIN instead of hardcoded magic number?
+void	calc_dist(t_god *god, t_dda *dda)
+{
+	if (dda->which_wall_hit)
+	{
+        if (dda->ray_dir_x == 0)
+            dda->ray_dir_x = 0.0000001;
+		dda->dist = (dda->map_x - god->player_x + (1 - dda->step_x) / 2)
+			/ dda->ray_dir_x;
+	}
+	else
+	{
+        if (dda->ray_dir_y == 0)
+            dda->ray_dir_y = 0.0000001;
+		dda->dist = (dda->map_y - god->player_y + (1 - dda->step_y) / 2)
+			/ dda->ray_dir_y;
+	}
+}
+
+void draw_candle(t_god *god, t_dda* dda, float dist, int x)
+{
+
+}
+
 // TODO understand DDA better and put these variables in a struct
-// TODO rename to dda
-void	dda_inner_wrapper(t_god *god, float beam_angle, int x)
+// TODO may don't use malloc/free here but create on the stack
+void	dda_single_ray(t_god *god, float beam_angle, int x)
 {
 	t_dda	*dda;
 	int		line_len;
 
 	dda = init_dda_struct(god, beam_angle);
 	dda_loop(god, dda);
-	// for debugging (and minimap) we draw the 2d rays
-	if (dda->which_wall_hit)
-		dda->distance = (dda->map_x - god->player_x + (1 - dda->step_x) / 2)
-			/ dda->ray_dir_x;
-	else
-		dda->distance = (dda->map_y - god->player_y + (1 - dda->step_y) / 2)
-			/ dda->ray_dir_y;
-	line_len = WINDOW_SIZE_Y / dda->distance;
+	calc_dist(god, dda);
+	line_len = WINDOW_SIZE_Y / dda->dist;
 	// TODO visualize line length at pixel x
-    (void)x;
-	// for Debug (and minimap later) visualize it
-	visualize_beam(god, dda);
+	draw_candle(god, dda, line_len, x);
+	// for debugging (and minimap) we draw the 2d rays
+	visualize_2d_beam(god, dda);
+    free(dda);
 }
 
-void	dda_outer_wrapper(t_god *god)
+void	dda_wrapper(t_god *god)
 {
 	float	angle_to_draw;
 	float	angle_step;
@@ -170,10 +189,7 @@ void	dda_outer_wrapper(t_god *god)
 	while (++x < WINDOW_SIZE_X)
 	{
 		normalize_angle(&angle_to_draw);
-		// TODO update the signature of this function
-		// to: dda_inner_wrapper(god, angle_to_draw, x);
-		// so that the DDA function knows which screen column to draw the 3D wall on
-		dda_inner_wrapper(god, angle_to_draw, x);
+		dda_single_ray(god, angle_to_draw, x);
 		angle_to_draw += angle_step;
 	}
 }

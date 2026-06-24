@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:27:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 15:50:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void render(t_god *god)
 	ft_bzero(god->img_addr, WINDOW_SIZE_Y * god->img_line_length);
 	//this is where the raycasting magic happens
 	
-	//DEBUG
-	draw_2d_map(god);
+	//DEBUG this is the minimap (together with the funnel beams)
+	//draw_2d_map(god);
 	//DEBUG draw the beams in the funnel
-	dda_outer_wrapper(god);
+	dda_wrapper(god);
 	//mlx_destroy_image(god->mlx, god->img);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
 }
