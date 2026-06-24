@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 12:31:22 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/24 14:21:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,27 @@ typedef struct s_god
 	float			player_angle_max;
 }					t_god;
 
+typedef struct s_dda
+{
+	int				player_x_int;
+	int				player_y_int;
+	float			delta_x;
+	float			delta_y;
+	int				step_x;
+	int				step_y;
+	float			next_x;
+	float			next_y;
+	float			ray_dir_x;
+	float			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	bool			wall_hit;
+	bool which_wall_hit; // true if horizontal and false for vertical
+	float distance;      // WINDOWS_SIZE_Y / distance is lie height
+	float			hit_x;
+	float			hit_y;
+}					t_dda;
+
 // debug.c
 void				print_keys(t_god *god);
 int					**create_sample_map(t_god *p_god);
@@ -115,10 +136,10 @@ void				initialize_map(t_god *p_god);
 int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
-// laser.c
-void				draw_beam_from_player_inefficient(t_god *god,
-						float beam_angle);
-void				draw_beam_from_player_dda(t_god *god, float beam_angle);
+// laser.c<
+void				dda_wrapper(t_god *god, float beam_angle);
+void				ft_draw_line(t_god *god, int x1, int y1, int x2, int y2,
+						int color);
 // draw.c
 void				draw_funnel_beams(t_god *god);
 void				draw_2d_map(t_god *god);
