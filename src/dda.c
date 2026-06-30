@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 13:50:54 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:22:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,8 @@ void	visualize_2d_beam(t_god *god, t_dda *dda)
 		COLOR_ORANGE);
 }
 
+//TODO calculate the actual perpendicular distance.
+//atm the euclidian distance gets calculated
 void	calc_perpendicular_dist(t_god *god, t_dda *dda)
 {
 	if (dda->which_wall_hit)
@@ -148,45 +150,31 @@ void	calc_perpendicular_dist(t_god *god, t_dda *dda)
             dda->ray_dir_y = 0.0000001;
 		dda->dist = dda->next_y - dda->delta_y;
     }
+    if (dda->dist < 0.0001)
+        dda->dist = 0.0001;
 }
 
-//TODO maybe use FLT_MIN instead of hardcoded magic number?
-//TODO	to remove the fisheye effect we have to use the distance
-//		of the camera plane to the wall and not from the player.
-//		(perpendicular instead of euclidian distance)
-void	calc_euclid_dist(t_god *god, t_dda *dda)
-{
-	if (dda->which_wall_hit)
-	{
-        if (dda->ray_dir_x == 0)
-            dda->ray_dir_x = 0.0000001;
-		dda->dist = (dda->map_x - god->player_x + (1 - dda->step_x) / 2)
-			/ dda->ray_dir_x;
-	}
-	else
-	{
-        if (dda->ray_dir_y == 0)
-            dda->ray_dir_y = 0.0000001;
-		dda->dist = (dda->map_y - god->player_y + (1 - dda->step_y) / 2)
-			/ dda->ray_dir_y;
-	}
-}
-
-//we draw 1 single candle in the middle of the screen
-void draw_candle(t_god *god, t_dda* dda, float line_len, int x)
+//draws the vertical slice
+void draw_candle(t_god *god, t_dda* dda, float wall_len, int x)
 {
 	int draw_start;
 	int draw_end;
 	int middle;
 
 	middle = WINDOW_SIZE_Y / 2;
-	draw_start = middle - line_len / 2;
-	draw_end = middle + line_len / 2;
+	draw_start = middle - wall_len / 2;
+	draw_end = middle + wall_len / 2;
 	if (draw_start < 0)
 		draw_start = 0;
-	if (draw_end > WINDOW_SIZE_Y)
-		draw_end = WINDOW_SIZE_Y;
-	ft_draw_line(god, x, draw_start, x, draw_end, COLOR_BLUE);
+	if (draw_end >= WINDOW_SIZE_Y)
+		draw_end = WINDOW_SIZE_Y - 1;
+	if (draw_start < 0 || draw_start > WINDOW_SIZE_Y)
+		draw_start = 0;
+	if (draw_end >= WINDOW_SIZE_Y || draw_end < 0)
+		draw_end = WINDOW_SIZE_Y - 1;
+	ft_draw_line(god, x, 0, x, draw_start - 1, COLOR_CEILING);
+	ft_draw_line(god, x, draw_start, x, draw_end, COLOR_WALL);
+	ft_draw_line(god, x, draw_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 }
 
 // TODO may don't use malloc/free here but create on the stack

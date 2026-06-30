@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 14:36:45 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:23:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@
 
 # define COLOR_ORANGE 551515151
 # define COLOR_BLUE 0x0000FF
+# define COLOR_CEILING 0x555555
+# define COLOR_FLOOR 0xFF77BA
+# define COLOR_WALL COLOR_BLUE
 
 # define KEYDOWN_EVENT 2
 # define KEYUP_EVENT 3
@@ -121,7 +124,7 @@ typedef struct s_dda
 	int				map_y;
 	bool			wall_hit;
 	bool which_wall_hit; // true if horizontal and false for vertical
-	float dist;          // WINDOWS_SIZE_Y / distance is lie height
+	float dist;          // WINDOW_SIZE_Y / distance is line height
 	float			hit_x;
 	float			hit_y;
 }					t_dda;
