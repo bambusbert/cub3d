@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 17:06:12 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:15:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ void	calc_perpendicular_dist(t_god *god, float angle_diff, t_dda *dda)
         dda->dist = 0.0001;
 }
 
-//draws the vertical slice
-void draw_candle(t_god *god, t_dda* dda, float wall_len, int x)
+//draws one vertical slice
+void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 {
 	int draw_start;
 	int draw_end;
@@ -165,11 +165,14 @@ void draw_candle(t_god *god, t_dda* dda, float wall_len, int x)
 	if (draw_end >= WINDOW_SIZE_Y || draw_end < 0)
 		draw_end = WINDOW_SIZE_Y - 1;
 	ft_draw_line(god, x, 0, x, draw_start - 1, COLOR_CEILING);
-	ft_draw_line(god, x, draw_start, x, draw_end, COLOR_WALL);
+	if (dda->which_wall_hit)
+		ft_draw_line(god, x, draw_start, x, draw_end, COLOR_WALL / 2);
+	else
+		ft_draw_line(god, x, draw_start, x, draw_end, COLOR_WALL);
 	ft_draw_line(god, x, draw_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 }
 
-//dPerp = dEuclidian * cos(theta_ray - theta_player)
+//dPerp = dEuclidian * cos(ray_angle - player_angle)
 void	dda_single_ray(t_god *god, float beam_angle, int x)
 {
 	t_dda	dda;
@@ -182,7 +185,7 @@ void	dda_single_ray(t_god *god, float beam_angle, int x)
 	calc_perpendicular_dist(god, angle_diff, &dda);
 	line_len = WINDOW_SIZE_Y / dda.dist;
 	if(!DEBUG_MODE)
-		draw_candle(god, &dda, line_len, x);
+		draw_vertical(god, &dda, line_len, x);
 	if (DEBUG_MODE)
 		visualize_2d_beam(god, &dda);
 }
