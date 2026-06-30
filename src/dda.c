@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 15:59:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/30 13:50:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,27 @@ void	visualize_2d_beam(t_god *god, t_dda *dda)
 		COLOR_ORANGE);
 }
 
+void	calc_perpendicular_dist(t_god *god, t_dda *dda)
+{
+	if (dda->which_wall_hit)
+	{
+		if (dda->ray_dir_x == 0)
+            dda->ray_dir_x = 0.0000001;
+		dda->dist = dda->next_x - dda->delta_x;
+    }
+	else
+	{
+		if (dda->ray_dir_y == 0)
+            dda->ray_dir_y = 0.0000001;
+		dda->dist = dda->next_y - dda->delta_y;
+    }
+}
+
 //TODO maybe use FLT_MIN instead of hardcoded magic number?
-void	calc_dist(t_god *god, t_dda *dda)
+//TODO	to remove the fisheye effect we have to use the distance
+//		of the camera plane to the wall and not from the player.
+//		(perpendicular instead of euclidian distance)
+void	calc_euclid_dist(t_god *god, t_dda *dda)
 {
 	if (dda->which_wall_hit)
 	{
@@ -153,13 +172,25 @@ void	calc_dist(t_god *god, t_dda *dda)
 	}
 }
 
-void draw_candle(t_god *god, t_dda* dda, float dist, int x)
+//we draw 1 single candle in the middle of the screen
+void draw_candle(t_god *god, t_dda* dda, float line_len, int x)
 {
+	int draw_start;
+	int draw_end;
+	int middle;
 
+	middle = WINDOW_SIZE_Y / 2;
+	draw_start = middle - line_len / 2;
+	draw_end = middle + line_len / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end > WINDOW_SIZE_Y)
+		draw_end = WINDOW_SIZE_Y;
+	ft_draw_line(god, x, draw_start, x, draw_end, COLOR_BLUE);
 }
 
-// TODO understand DDA better and put these variables in a struct
 // TODO may don't use malloc/free here but create on the stack
+// (bc this is done for each ray)
 void	dda_single_ray(t_god *god, float beam_angle, int x)
 {
 	t_dda	*dda;
@@ -167,12 +198,15 @@ void	dda_single_ray(t_god *god, float beam_angle, int x)
 
 	dda = init_dda_struct(god, beam_angle);
 	dda_loop(god, dda);
-	calc_dist(god, dda);
+	//calc_euclid_dist(god, dda);
+	calc_perpendicular_dist(god, dda);
 	line_len = WINDOW_SIZE_Y / dda->dist;
 	// TODO visualize line length at pixel x
-	draw_candle(god, dda, line_len, x);
+	if(!DEBUG_MODE)
+		draw_candle(god, dda, line_len, x);
 	// for debugging (and minimap) we draw the 2d rays
-	visualize_2d_beam(god, dda);
+	if (DEBUG_MODE)
+		visualize_2d_beam(god, dda);
     free(dda);
 }
 
