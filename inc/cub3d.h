@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 16:23:24 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:28:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define SPRITE_WALL_W "./sprites/wall_w.xpm"
 # define SPRITE_WALL_E "./sprites/wall_e.xpm"
 
+//if that is set to 1 than the minimap gets drawn instead of 3d view
 # define DEBUG_MODE 0
 
 # define PI 3.14159265

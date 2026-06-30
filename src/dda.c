@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 16:22:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/30 16:27:28 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,8 @@ void	init_dda_step_and_next(t_god *god, t_dda *dda)
 	}
 }
 
-t_dda	*init_dda_struct(t_god *god, float beam_angle)
+void init_dda_struct(t_dda *dda, t_god *god, float beam_angle)
 {
-	t_dda	*dda;
-
-	dda = ft_calloc(sizeof(t_dda), 1);
-	if (!dda)
-		error_exit("malloc failure in init_dda\n", god);
 	dda->ray_dir_x = cos(beam_angle);
 	dda->ray_dir_y = sin(beam_angle);
 	dda->player_x_int = (int)god->player_x;
@@ -112,7 +107,6 @@ t_dda	*init_dda_struct(t_god *god, float beam_angle)
 	dda->wall_hit = false;
 	dda->map_x = dda->player_x_int;
 	dda->map_y = dda->player_y_int;
-	return (dda);
 }
 
 void	visualize_2d_beam(t_god *god, t_dda *dda)
@@ -177,25 +171,19 @@ void draw_candle(t_god *god, t_dda* dda, float wall_len, int x)
 	ft_draw_line(god, x, draw_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 }
 
-// TODO may don't use malloc/free here but create on the stack
-// (bc this is done for each ray)
 void	dda_single_ray(t_god *god, float beam_angle, int x)
 {
-	t_dda	*dda;
+	t_dda	dda;
 	int		line_len;
 
-	dda = init_dda_struct(god, beam_angle);
-	dda_loop(god, dda);
-	//calc_euclid_dist(god, dda);
-	calc_perpendicular_dist(god, dda);
-	line_len = WINDOW_SIZE_Y / dda->dist;
-	// TODO visualize line length at pixel x
+	init_dda_struct(&dda, god, beam_angle);
+	dda_loop(god, &dda);
+	calc_perpendicular_dist(god, &dda);
+	line_len = WINDOW_SIZE_Y / dda.dist;
 	if(!DEBUG_MODE)
-		draw_candle(god, dda, line_len, x);
-	// for debugging (and minimap) we draw the 2d rays
+		draw_candle(god, &dda, line_len, x);
 	if (DEBUG_MODE)
-		visualize_2d_beam(god, dda);
-    free(dda);
+		visualize_2d_beam(god, &dda);
 }
 
 void	dda_wrapper(t_god *god)
