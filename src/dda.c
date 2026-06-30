@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 16:27:28 by slambert         ###   ########.fr       */
+/*   Updated: 2026/06/30 17:06:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,21 +128,19 @@ void	visualize_2d_beam(t_god *god, t_dda *dda)
 		COLOR_ORANGE);
 }
 
-//TODO calculate the actual perpendicular distance.
-//atm the euclidian distance gets calculated
-void	calc_perpendicular_dist(t_god *god, t_dda *dda)
+void	calc_perpendicular_dist(t_god *god, float angle_diff, t_dda *dda)
 {
 	if (dda->which_wall_hit)
 	{
 		if (dda->ray_dir_x == 0)
             dda->ray_dir_x = 0.0000001;
-		dda->dist = dda->next_x - dda->delta_x;
+		dda->dist = (dda->next_x - dda->delta_x) * cos(angle_diff);
     }
 	else
 	{
 		if (dda->ray_dir_y == 0)
             dda->ray_dir_y = 0.0000001;
-		dda->dist = dda->next_y - dda->delta_y;
+		dda->dist = (dda->next_y - dda->delta_y) * cos(angle_diff);
     }
     if (dda->dist < 0.0001)
         dda->dist = 0.0001;
@@ -171,14 +169,17 @@ void draw_candle(t_god *god, t_dda* dda, float wall_len, int x)
 	ft_draw_line(god, x, draw_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 }
 
+//dPerp = dEuclidian * cos(theta_ray - theta_player)
 void	dda_single_ray(t_god *god, float beam_angle, int x)
 {
 	t_dda	dda;
 	int		line_len;
+	float	angle_diff;
 
 	init_dda_struct(&dda, god, beam_angle);
 	dda_loop(god, &dda);
-	calc_perpendicular_dist(god, &dda);
+	angle_diff = beam_angle - god->player_angle;
+	calc_perpendicular_dist(god, angle_diff, &dda);
 	line_len = WINDOW_SIZE_Y / dda.dist;
 	if(!DEBUG_MODE)
 		draw_candle(god, &dda, line_len, x);
