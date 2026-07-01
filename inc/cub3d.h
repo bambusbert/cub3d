@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 16:28:02 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 12:32:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define WALL_CHAR 1
+# define MAX_DIST_TO_WALL 0.08 
 
 # define SPRITE_PLAYER "./sprites/player.xpm"
 # define SPRITE_WALL_N "./sprites/wall_e.xpm"
@@ -125,6 +128,8 @@ typedef struct s_dda
 	int				map_y;
 	bool			wall_hit;
 	bool which_wall_hit; // true if horizontal and false for vertical
+	//for the 4 wall sprites we would need not only this info but also
+	//the info north and south was hit
 	float dist;          // WINDOW_SIZE_Y / distance is line height
 	float			hit_x;
 	float			hit_y;
