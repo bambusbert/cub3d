@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 12:51:37 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 13:40:59 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ void	dda_single_ray(t_god *god, float beam_angle, int x)
 	angle_diff = beam_angle - god->player_angle;
 	calc_distances(angle_diff, &dda);
 	line_len = WINDOW_SIZE_Y / dda.wall_dist;
-	if(!DEBUG_MODE)
+	if(!god->debug_mode)
 		draw_vertical(god, &dda, line_len, x);
-	if (DEBUG_MODE)
+	if (god->debug_mode)
 		visualize_2d_beam(god, &dda);
 }
 

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:22:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:48:06 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 12:53:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_stuff(t_god *god)
 	god->key_w = false;
 	god->key_left = false;
 	god->key_right = false;
+	god->debug_mode = DEBUG_MODE;
 }
 
 void	initialize_map(t_god *p_god)

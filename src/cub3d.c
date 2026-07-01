@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/30 12:17:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:07:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,30 @@ void update_player_angle (t_god *god, int direction)
 	normalize_angle(&god->player_angle_max);
 }
 
-void	angle_handler(t_god *god)
+int	rotation_manager(t_god *god)
 {
 	if (god->key_left && god->key_right)
-		return ;
+		return 0;
 	if (god->key_left)
-		update_player_angle(god, LEFT);
+		return (update_player_angle(god, LEFT), 1);
 	if (god->key_right)
-		update_player_angle(god, RIGHT);
+		return (update_player_angle(god, RIGHT), 1);
+	return 0;
 }
 
+//if i want to implement an FPS counter, i need to be aware that with the
+//current implementation i have 0 FPS if the player does not move or rotate
 void render(t_god *god)
 {
-	//mlx_clear_window(god->mlx, god->mlx_win);
-	//my_mlx_clear_window(god->mlx, god->mlx_win);
-	//clear image
+	static int frame_count = 0;
+	frame_count++;
+	//possible FPS counter here
+	printf("Frame %d rendered\n", frame_count);
 	ft_bzero(god->img_addr, WINDOW_SIZE_Y * god->img_line_length);
-	//this is where the raycasting magic happens
-	
-	//DEBUG this is the minimap (together with the funnel beams)
-	if (DEBUG_MODE)
+	if (god->debug_mode)
 		draw_2d_map(god);
 	//DEBUG draw the beams in the funnel
 	dda_wrapper(god);
-	//mlx_destroy_image(god->mlx, god->img);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
 }
 
@@ -67,19 +67,19 @@ void render(t_god *god)
 //theoretically i don't have to render on a fixed time interval but only on any key press?
 int	game_loop(t_god *god)
 {
-	//debug print key status
-	print_keys(god);
+	int ret_rot;
+	int ret_pos;
 	
-	//here we have to update everything. what exactly needs to be updated is regarding
-	//which keys are currently pressed (info from the god struct)
-	angle_handler(god);
-	
-	//if wasd key(s) pressed, position handler returns 1
-	//then we have to re-render
-	if (position_handler(god))
+	ret_rot = 0;
+	ret_pos = 0;
+	if (god->debug_mode)
+		print_keys(god);
+	ret_rot = rotation_manager(god);
+	ret_pos = position_handler(god);
+	if (ret_rot || ret_pos)
 		render(god);
 	//for now we just render either way
-	render(god);
+	//render(god);
 	return 1;
 }
 
@@ -101,7 +101,7 @@ void	game_function(t_god *god)
 	
 	init_stuff(god);
 	mlx_do_key_autorepeatoff(god->mlx);
-	//render(god);
+	render(god);
 	mlx_loop_hook(god->mlx, (int (*)(void))game_loop, god);
 	mlx_loop(god->mlx);
 }

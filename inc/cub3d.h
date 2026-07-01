@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 12:46:26 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:07:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
+# define KEY_T 116
 # define KEY_D 100
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -76,6 +77,7 @@ typedef struct s_god
 	int				img_bits_per_pixel;
 	int				img_line_length;
 	int				img_endian;
+	bool			debug_mode;
 	int				**map;
 	unsigned int	rows;
 	unsigned int	cols;
@@ -87,16 +89,6 @@ typedef struct s_god
 	bool			key_d;
 	bool			key_left;
 	bool			key_right;
-	// unsigned int	count_collectible;
-	// unsigned int	count_player;
-	// unsigned int	count_exit;
-	// unsigned int	count_wall;
-	// unsigned int	count_empty;
-	// unsigned int	player_col;
-	// unsigned int	player_row;
-	// unsigned int	exit_col;
-	// unsigned int	exit_row;
-	// unsigned int	moves;
 	void			*sprite_player;
 	void			*sprite_wall_S;
 	void			*sprite_wall_E;
