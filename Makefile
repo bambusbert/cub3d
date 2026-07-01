@@ -10,8 +10,8 @@ RED = \033[0;31m
 
 # Compiler and flags
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -g
 INCLUDES = -I./inc
 
 # libft
@@ -35,7 +35,8 @@ SRC =	src/cub3d.c \
 		src/laser.c \
 		src/draw.c \
 		src/movement.c \
-		src/dda.c
+		src/dda.c \
+		src/dda_init.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 HEAD = inc/cub3d.h

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/24 14:48:06 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 12:47:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_keys(t_god *god)
 {
-	static long long x = 0;
+	//static long long x = 0;
 	// if (x++ % 5 != 0)     //only print each 50th function call
 	// 	return ;
 	printf("Key: W | Status: %d\n", god->key_w);

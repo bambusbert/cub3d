@@ -6,23 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 12:32:12 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 12:33:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// static int move_possible(t_god *god, float dx, float dy)
-// {
-//     float new_x;
-//     float new_y;
-    
-//     new_x = god->player_x + dx;
-//     new_y = god->player_y + dy;
-//     if (god->map[(int)new_y][(int)new_x] == WALL_CHAR)
-//         return 0;
-//     return 1;
-// }
 
 static int move_possible(t_god *god, float dx, float dy)
 {

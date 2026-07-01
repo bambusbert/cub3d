@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:19:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 11:55:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 12:47:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	key_up(int keycode, void *param)
 
 	god = (t_god *)param;
 	// printf("key up\n");
-	static int i = 0;
 	if (keycode == KEY_W)
 	{
 		// printf("W up %d\n", i++);

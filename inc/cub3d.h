@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 12:32:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 12:46:26 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define SPRITE_WALL_E "./sprites/wall_e.xpm"
 
 //if that is set to 1 than the minimap gets drawn instead of 3d view
-# define DEBUG_MODE 0
+# define DEBUG_MODE 1
 
 # define PI 3.14159265
 # define LEFT 1
@@ -130,7 +130,8 @@ typedef struct s_dda
 	bool which_wall_hit; // true if horizontal and false for vertical
 	//for the 4 wall sprites we would need not only this info but also
 	//the info north and south was hit
-	float dist;          // WINDOW_SIZE_Y / distance is line height
+	float wall_dist;          // WINDOW_SIZE_Y / distance is line height
+	float beam_dist;
 	float			hit_x;
 	float			hit_y;
 }					t_dda;
@@ -147,19 +148,26 @@ void				initialize_map(t_god *p_god);
 int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
-// laser.c<
+// laser.c
 void				dda_single_ray(t_god *god, float beam_angle, int x);
 void				ft_draw_line(t_god *god, int x1, int y1, int x2, int y2,
 						int color);
+void	visualize_2d_beam(t_god *god, t_dda *dda);
+						
 // draw.c
 void				dda_wrapper(t_god *god);
 void				draw_2d_map(t_god *god);
+void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x);
+void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
 
 // movement.c
 int					position_handler(t_god *god);
 
 // libft
 void				ft_bzero(void *s, size_t n);
+
+//dda_init.c
+void init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 
 // unsorted
 void				*ft_calloc(size_t nmemb, size_t size);
@@ -168,6 +176,5 @@ size_t				ft_putstr_fd(char *s, int fd);
 int					close_window(t_god *god);
 void				destroy_sprites(t_god *p_god);
 void				normalize_angle(float *angle);
-void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
 
 #endif
