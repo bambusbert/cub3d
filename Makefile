@@ -32,7 +32,7 @@ SRC =	src/cub3d.c \
 		src/input_handling.c \
 		src/debug.c \
 		src/init.c \
-		src/laser.c \
+		src/helper.c \
 		src/draw.c \
 		src/movement.c \
 		src/dda.c \

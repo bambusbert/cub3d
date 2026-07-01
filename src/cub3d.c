@@ -6,17 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:34:07 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 18:01:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// void update_player_position(t_god *god, int x, int y)
-// {
-// 	god->player_x += x;
-// 	god->player_y += y;
-// }
 
 //360 degrees equals 2 pi (6.283)
 void update_player_angle (t_god *god, int direction)

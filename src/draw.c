@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:49:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 17:37:01 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,27 @@ void	ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
 	}
 }
 
-void draw_square (t_god* god, int row, int col, int pixels_x, int pixels_y)
+void draw_square (t_god* god, int row, int col)
 {
 	int cur_x;
 	int cur_y;
 	int start_x;
 	int start_y;
-	//int color;
 	
-	start_x = col * pixels_x;
-	start_y = row * pixels_y;
+	start_x = col * god->pixels_per_x;
+	start_y = row * god->pixels_per_y;
 	cur_x = -1;
-	while (++cur_x < pixels_x)
+	while (++cur_x < (int)god->pixels_per_x)
 	{
 		cur_y = -1;
-		while (++cur_y < pixels_y)
+		while (++cur_y < (int)god->pixels_per_y)
 		{
 			my_mlx_pixel_put(god, cur_x + start_x, cur_y + start_y, COLOR_BLUE);
-			// mlx_pixel_put(god->mlx, god->mlx_win, cur_x + start_x, cur_y + start_y, color);
 		}
 	}
 }
 
 //atm only possible to draw recangular maps.
-//TODO change that
-//or not - a non rectangular map is also rectangular when we just fill the
-//space in between
 void draw_2d_map(t_god* god)
 {
 	int i;
@@ -97,15 +92,18 @@ void draw_2d_map(t_god* god)
 		while (++j < (int)god->cols)
 		{
 			if (god->map[i][j] == 1)
-				draw_square(god, i, j, god->pixels_per_x, god->pixels_per_y);
+				draw_square(god, i, j);
 		}
 	}
 }
 
 //draws one vertical slice. a slice contains of the ceiling, the wall
 //and the floor (up ---> down)
+//atm we just print a color for the walls. TODO change that so that
+//1 of 4 different sprites are printed
 void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 {
+	static float rand = 1;
 	int wall_start;
 	int wall_end;
 	int middle;
@@ -123,8 +121,9 @@ void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 		wall_end = WINDOW_SIZE_Y - 1;
 	ft_draw_line(god, x, 0, x, wall_start - 1, COLOR_CEILING);
 	if (dda->which_wall_hit)
-		ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL / 2);
+		ft_draw_line(god, x, wall_start, x, wall_end, (COLOR_WALL / 2) * rand);
 	else
-		ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL);
+		ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL * rand);
 	ft_draw_line(god, x, wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
+	//rand *= 1.00001;
 }

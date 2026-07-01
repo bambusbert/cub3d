@@ -1,1 +1,11 @@
+- implement textured walls
+- Player char currently is 2. this should be N,S,E or W and the
+spawning position should be accordingly
 - FPS counter?
+- if FOV bigger: distorts the walls, wtf
+- change some variables on-the-fly with keys
+	- FOV
+	- speed
+	- rotation tick
+	- mouse rotation
+- separation of mandatory part and bonus
