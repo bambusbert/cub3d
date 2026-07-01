@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:07:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:50:53 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 
 # define WALL_CHAR 1
+//TODO #define PLAYER_CHAR 2 and check for that and not hardcoded 2
 # define MAX_DIST_TO_WALL 0.08 
 
 # define SPRITE_PLAYER "./sprites/player.xpm"
@@ -38,8 +39,8 @@
 # define RIGHT 2
 //# define ANGLE_FRACTION 0.0175 // equals 1 degree
 # define ANGLE_OFFSET 0.5 // defines FOV / 2
-# define SENSITIVITY 0.025
-# define MOVE_TICK 0.015
+# define SENSITIVITY 0.015
+# define MOVE_TICK 0.025
 
 # define WINDOW_SIZE_X 800
 # define WINDOW_SIZE_Y 600
@@ -97,11 +98,10 @@ typedef struct s_god
 	float			player_x;
 	float			player_y;
 	float			player_angle;
-	// defines the funnel where casts are sent out
-	float			angle_offset;
-	// float			angle_tick;
 	float			player_angle_min;
 	float			player_angle_max;
+	float			angle_offset;
+	// float			angle_tick;
 }					t_god;
 
 typedef struct s_dda
@@ -168,5 +168,5 @@ size_t				ft_putstr_fd(char *s, int fd);
 int					close_window(t_god *god);
 void				destroy_sprites(t_god *p_god);
 void				normalize_angle(float *angle);
-
+void render(t_god *god);
 #endif

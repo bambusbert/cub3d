@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:19:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 13:55:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:30:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	key_press(int keycode, void *param)
 	else if (keycode == KEY_ESC)
 		close_window(god);
 	else if (keycode == KEY_T)
+	{
 		god->debug_mode = !god->debug_mode;
+		render(god);
+	}
 	return (1);
 }
 

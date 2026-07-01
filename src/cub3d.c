@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:07:02 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:34:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	rotation_manager(t_god *god)
 
 //if i want to implement an FPS counter, i need to be aware that with the
 //current implementation i have 0 FPS if the player does not move or rotate
+//OR is FPS considered how many times per second game_loop runs?
 void render(t_god *god)
 {
 	static int frame_count = 0;
@@ -57,7 +58,6 @@ void render(t_god *god)
 	ft_bzero(god->img_addr, WINDOW_SIZE_Y * god->img_line_length);
 	if (god->debug_mode)
 		draw_2d_map(god);
-	//DEBUG draw the beams in the funnel
 	dda_wrapper(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
 }
@@ -72,13 +72,13 @@ int	game_loop(t_god *god)
 	
 	ret_rot = 0;
 	ret_pos = 0;
-	if (god->debug_mode)
-		print_keys(god);
+	// if (god->debug_mode)
+	// 	print_keys(god);
 	ret_rot = rotation_manager(god);
 	ret_pos = position_handler(god);
 	if (ret_rot || ret_pos)
 		render(god);
-	//for now we just render either way
+	//alternative rendering strat: render every time
 	//render(god);
 	return 1;
 }
@@ -110,9 +110,10 @@ int main (int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
+	//argument check (one arg? correct file einding?)
 	t_god *p_god;
 	p_god = ft_calloc(1, sizeof(t_god));
-
+	//FRIDO ENTRY POINT - parsing
 	p_god->map = create_sample_map(p_god);;
 	game_function(p_god);
 }

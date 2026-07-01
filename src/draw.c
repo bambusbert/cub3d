@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 12:49:26 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/01 14:49:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,28 +102,29 @@ void draw_2d_map(t_god* god)
 	}
 }
 
-//draws one vertical slice
+//draws one vertical slice. a slice contains of the ceiling, the wall
+//and the floor (up ---> down)
 void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 {
-	int draw_start;
-	int draw_end;
+	int wall_start;
+	int wall_end;
 	int middle;
 
 	middle = WINDOW_SIZE_Y / 2;
-	draw_start = middle - wall_len / 2;
-	draw_end = middle + wall_len / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= WINDOW_SIZE_Y)
-		draw_end = WINDOW_SIZE_Y - 1;
-	if (draw_start < 0 || draw_start > WINDOW_SIZE_Y)
-		draw_start = 0;
-	if (draw_end >= WINDOW_SIZE_Y || draw_end < 0)
-		draw_end = WINDOW_SIZE_Y - 1;
-	ft_draw_line(god, x, 0, x, draw_start - 1, COLOR_CEILING);
+	wall_start = middle - wall_len / 2;
+	wall_end = middle + wall_len / 2;
+	if (wall_start < 0)
+		wall_start = 0;
+	if (wall_end >= WINDOW_SIZE_Y)
+		wall_end = WINDOW_SIZE_Y - 1;
+	if (wall_start < 0 || wall_start > WINDOW_SIZE_Y)
+		wall_start = 0;
+	if (wall_end >= WINDOW_SIZE_Y || wall_end < 0)
+		wall_end = WINDOW_SIZE_Y - 1;
+	ft_draw_line(god, x, 0, x, wall_start - 1, COLOR_CEILING);
 	if (dda->which_wall_hit)
-		ft_draw_line(god, x, draw_start, x, draw_end, COLOR_WALL / 2);
+		ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL / 2);
 	else
-		ft_draw_line(god, x, draw_start, x, draw_end, COLOR_WALL);
-	ft_draw_line(god, x, draw_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
+		ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL);
+	ft_draw_line(god, x, wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 }
