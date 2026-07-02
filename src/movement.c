@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:17:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 12:49:14 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	move_right(t_god *god)
 // possible TODO: add 45 degree movement (e.g. W + A)
 // possible TODO: implement wall sliding. for that i would have to implement
 // separate horizontal and vertical checks
-int	position_handler(t_god *god)
+int	position_manager(t_god *god)
 {
 	if (god->key_w && god->key_s)
 		return (0);

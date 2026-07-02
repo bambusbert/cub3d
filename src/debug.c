@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:14:02 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 14:22:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,15 @@ int **create_sample_map(t_god *p_god)
     
     return map;
 }
+
+//TODO das kommt weg, die variablen werden von frido bwefüllt.
+void debug_init_player(t_god *god)
+{
+    god->player_x = 3;
+    god->player_y = 4;
+    god->player_start_direction = WEST;
+}
+	// TODO 3/4 is a placeholder, that's the position of the player in the sample map
 
 // int **create_sample_map(t_god *p_god)
 // {

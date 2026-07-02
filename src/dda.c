@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:48:11 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 14:24:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	dda_wrapper(t_god *god)
 	int		x;
 
 	// Divide the total FOV by the screen width to get the angle per pixel column
-	angle_step = god->angle_offset * 2 / WINDOW_SIZE_X;
+	angle_step = ANGLE_OFFSET * 2 / WINDOW_SIZE_X;
 	angle_to_draw = god->player_angle_min;
 	x = -1;
 	while (++x < WINDOW_SIZE_X)

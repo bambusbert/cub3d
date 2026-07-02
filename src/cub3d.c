@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 18:01:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 14:24:26 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void update_player_angle (t_god *god, int direction)
 	normalize_angle(&god->player_angle);
 	//printf("Player angle: %.3f\n", god->player_angle);
 	//update player_angle_min and player_angle_max
-	god->player_angle_min = god->player_angle - god->angle_offset;
+	god->player_angle_min = god->player_angle - ANGLE_OFFSET;
 	normalize_angle(&god->player_angle_min);
-	god->player_angle_max = god->player_angle + god->angle_offset;
+	god->player_angle_max = god->player_angle + ANGLE_OFFSET;
 	normalize_angle(&god->player_angle_max);
 }
 
@@ -69,7 +69,7 @@ int	game_loop(t_god *god)
 	// if (god->debug_mode)
 	// 	print_keys(god);
 	ret_rot = rotation_manager(god);
-	ret_pos = position_handler(god);
+	ret_pos = position_manager(god);
 	if (ret_rot || ret_pos)
 		render(god);
 	//alternative rendering strat: render every time
@@ -93,7 +93,7 @@ void	game_function(t_god *god)
 	mlx_hook(god->mlx_win, KEYDOWN_EVENT, 1L<<0, (int (*)(void))key_press, god);
 	mlx_hook(god->mlx_win, KEYUP_EVENT, 1L<<1, (int (*)(void))key_up, god);
 	
-	init_stuff(god);
+	init_god(god);
 	mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
 	mlx_loop_hook(god->mlx, (int (*)(void))game_loop, god);

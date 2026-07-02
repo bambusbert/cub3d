@@ -9,3 +9,4 @@ spawning position should be accordingly
 	- rotation tick
 	- mouse rotation
 - separation of mandatory part and bonus
+- minimap: draw fewer beams

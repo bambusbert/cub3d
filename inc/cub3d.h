@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 17:59:43 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 14:25:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@
 # define KEYUP_EVENT 3
 # define CLOSING_EVENT 17
 
+//TODO check if there is a norm for enums
+enum e_direction {
+  NORTH,
+  EAST,
+  SOUTH,
+  WEST
+}; 
+
 typedef struct s_god
 {
 	void			*mlx;
@@ -78,30 +86,30 @@ typedef struct s_god
 	int				img_bits_per_pixel;
 	int				img_line_length;
 	int				img_endian;
-	bool			debug_mode;
 	int				**map;
-	unsigned int	rows;
-	unsigned int	cols;
+	unsigned int	rows;	//frido
+	unsigned int	cols;	//frido
 	unsigned int	pixels_per_x;
 	unsigned int	pixels_per_y;
+
+	void			*sprite_player;
+	void			*sprite_wall_S;
+	void			*sprite_wall_E;
+	void			*sprite_wall_N;
+	void			*sprite_wall_W;
+	float			player_x;	//frido
+	float			player_y;	//frido
+	int				player_start_direction;	//frido
+	float			player_angle;
+	float			player_angle_min;
+	float			player_angle_max;
+	bool			debug_mode;
 	bool			key_w;
 	bool			key_a;
 	bool			key_s;
 	bool			key_d;
 	bool			key_left;
 	bool			key_right;
-	void			*sprite_player;
-	void			*sprite_wall_S;
-	void			*sprite_wall_E;
-	void			*sprite_wall_N;
-	void			*sprite_wall_W;
-	float			player_x;
-	float			player_y;
-	float			player_angle;
-	float			player_angle_min;
-	float			player_angle_max;
-	float			angle_offset;
-	// float			angle_tick;
 }					t_god;
 
 typedef struct s_dda
@@ -131,9 +139,10 @@ typedef struct s_dda
 // debug.c
 void				print_keys(t_god *god);
 int					**create_sample_map(t_god *p_god);
+void				debug_init_player(t_god *god);
 
 // init.c
-void				init_stuff(t_god *god);
+void				init_god(t_god *god);
 void				initialize_map(t_god *p_god);
 
 // input_handling.c
@@ -154,7 +163,7 @@ void				draw_vertical(t_god *god, t_dda *dda, float wall_len,
 void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
 
 // movement.c
-int					position_handler(t_god *god);
+int					position_manager(t_god *god);
 
 // libft
 void				ft_bzero(void *s, size_t n);
