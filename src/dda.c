@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 14:24:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 15:39:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,20 @@ void	dda_loop(t_god *god, t_dda *dda)
 		{
 			dda->next_x += dda->delta_x;
 			dda->map_x += dda->step_x;
-			dda->which_wall_hit = true;
+			dda->horizontal_wall_hit = true;
 		}
 		else
 		{
 			dda->next_y += dda->delta_y;
 			dda->map_y += dda->step_y;
-			dda->which_wall_hit = false;
+			dda->horizontal_wall_hit = false;
 		}
-		// boundary check
 		if (dda->map_x < 0 || dda->map_x >= (int)god->cols || dda->map_y < 0
 			|| dda->map_y >= (int)god->rows)
 		{
 			dda->wall_hit = true;
 			break ;
 		}
-		// collision check
 		if (god->map[dda->map_y][dda->map_x] == 1)
 			dda->wall_hit = true;
 	}
@@ -79,9 +77,8 @@ void	dda_loop(t_god *god, t_dda *dda)
 
 void	calc_distances(float angle_diff, t_dda *dda)
 {
-	if (dda->which_wall_hit)
+	if (dda->horizontal_wall_hit)
 	{
-		//horizontal wall hit
 		if (dda->ray_dir_x == 0)
             dda->ray_dir_x = 0.0000001;
 		dda->wall_dist = (dda->next_x - dda->delta_x) * cos(angle_diff);
@@ -89,7 +86,6 @@ void	calc_distances(float angle_diff, t_dda *dda)
     }
 	else
 	{
-		//vertical wall hit
 		if (dda->ray_dir_y == 0)
             dda->ray_dir_y = 0.0000001;
 		dda->wall_dist = (dda->next_y - dda->delta_y) * cos(angle_diff);
@@ -100,32 +96,29 @@ void	calc_distances(float angle_diff, t_dda *dda)
     	dda->wall_dist = 0.0001;
 	}
 	if (dda->beam_dist < 0.0001)
-    {
 		dda->beam_dist = 0.0001;
-	}	
 }
 
 //dPerp = dEuclidian * cos(ray_angle - player_angle)
-void	dda_single_ray(t_god *god, float beam_angle, int x)
+void	dda_single_ray(t_god *god, t_dda* dda, float beam_angle, int x)
 {
-	t_dda	dda;
 	int		wall_height;
 	float	angle_diff;
 
-	init_dda_struct(&dda, god, beam_angle);
-	dda_loop(god, &dda);
+	dda_loop(god, dda);
 	//these angles should be normalized here
 	angle_diff = beam_angle - god->player_angle;
-	calc_distances(angle_diff, &dda);
-	wall_height = WINDOW_SIZE_Y / dda.wall_dist;
+	calc_distances(angle_diff, dda);
+	wall_height = WINDOW_SIZE_Y / dda->wall_dist;
 	if(!god->debug_mode)
-		draw_vertical(god, &dda, wall_height, x);
+		draw_vertical(god, dda, wall_height, x);
 	if (god->debug_mode)
-		visualize_2d_beam(god, &dda);
+		visualize_2d_beam(god, dda);
 }
 
 void	dda_wrapper(t_god *god)
 {
+	t_dda	dda;
 	float	angle_to_draw;
 	float	angle_step;
 	int		x;
@@ -137,7 +130,8 @@ void	dda_wrapper(t_god *god)
 	while (++x < WINDOW_SIZE_X)
 	{
 		normalize_angle(&angle_to_draw);
-		dda_single_ray(god, angle_to_draw, x);
+		init_dda_struct(&dda, god, angle_to_draw);
+		dda_single_ray(god, &dda, angle_to_draw, x);
 		angle_to_draw += angle_step;
 	}
 }

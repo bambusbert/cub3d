@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 14:25:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/02 15:39:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_dda
 	int				map_x;
 	int				map_y;
 	bool			wall_hit;
-	bool which_wall_hit; // true if horizontal and false for vertical
+	bool horizontal_wall_hit; // true if horizontal and false for vertical
 	// for the 4 wall sprites we would need not only this info but also
 	// the info north and south was hit
 	float wall_dist; // WINDOW_SIZE_Y / distance is line height
@@ -150,7 +150,7 @@ int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
 // helper.c
-void				dda_single_ray(t_god *god, float beam_angle, int x);
+void	dda_single_ray(t_god *god, t_dda* dda, float beam_angle, int x);
 void				ft_draw_line(t_god *god, int x1, int y1, int x2, int y2,
 						int color);
 void				visualize_2d_beam(t_god *god, t_dda *dda);
