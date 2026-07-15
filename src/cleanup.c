@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/06/16 16:01:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 14:34:19 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,30 @@ void	destroy_images (t_god *god)
 {
 	if (god->img)
 		mlx_destroy_image(god->mlx, god->img);
+	if (god->sprite_wall_E->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_E->img);
+	if (god->sprite_wall_W->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_W->img);	
+	if (god->sprite_wall_N->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_N->img);
+	if (god->sprite_wall_S->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_S->img);					
+}
+
+void free_textures(t_god *god)
+{
+	free(god->sprite_wall_E);
+	free(god->sprite_wall_W);
+	free(god->sprite_wall_S);
+	free(god->sprite_wall_N);
 }
 
 //TODO synchronize close_window and error_exit
 int	close_window(t_god	*god)
 {
-	destroy_sprites(god);
+	//destroy_sprites(god);
 	destroy_images(god);
+	free_textures(god);
 	if (god->mlx_win)
 		mlx_destroy_window(god->mlx, god->mlx_win);
 	if (god->mlx)
@@ -60,32 +77,33 @@ int	close_window(t_god	*god)
 	exit(0);
 }
 
-void	destroy_sprites(t_god *p_god)
-{
-	if (p_god->sprite_player)
-		mlx_destroy_image(p_god->mlx, p_god->sprite_player);
-	if (p_god->sprite_wall_S)
-		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_S);
-	if (p_god->sprite_wall_N)
-		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_N);
-	if (p_god->sprite_wall_E)
-		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_E);
-	if (p_god->sprite_wall_W)
-		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_W);
-	p_god->sprite_player = NULL;
-	p_god->sprite_wall_S = NULL;
-	p_god->sprite_wall_N = NULL;
-	p_god->sprite_wall_E = NULL;
-	p_god->sprite_wall_W = NULL;
-}
+// void	destroy_sprites(t_god *p_god)
+// {
+// 	if (p_god->sprite_player)
+// 		mlx_destroy_image(p_god->mlx, p_god->sprite_player);
+// 	if (p_god->sprite_wall_S->img)
+// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_S->img);
+// 	if (p_god->sprite_wall_N->img)
+// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_N->img);
+// 	if (p_god->sprite_wall_E->img)
+// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_E->img);
+// 	if (p_god->sprite_wall_W->img)
+// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_W->img);
+// 	p_god->sprite_player = NULL;
+// 	p_god->sprite_wall_S = NULL;
+// 	p_god->sprite_wall_N = NULL;
+// 	p_god->sprite_wall_E = NULL;
+// 	p_god->sprite_wall_W = NULL;
+// }
 
 void	error_exit(char *msg, t_god *p_god)
 {
 	ft_putstr_fd(msg, 2);
 	if (p_god->mlx)
 	{
-		destroy_sprites(p_god);
+		//destroy_sprites(p_god);
 		destroy_images(p_god);
+		free_textures(p_god);
 		if (p_god->mlx_win)
 			mlx_destroy_window(p_god->mlx, p_god->mlx_win);
 		mlx_destroy_display(p_god->mlx);

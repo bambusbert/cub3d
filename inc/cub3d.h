@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 15:39:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 13:25:45 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,25 @@
 # define KEYUP_EVENT 3
 # define CLOSING_EVENT 17
 
-//TODO check if there is a norm for enums
-enum e_direction {
-  NORTH,
-  EAST,
-  SOUTH,
-  WEST
-}; 
+// TODO check if there is a norm for enums
+enum				e_direction
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+};
+
+typedef struct s_texture
+{
+	void			*img;
+	char			*img_addr;
+	int				width;
+	int				height;
+	int				img_bits_per_pixel;
+	int				img_line_length;
+	int				img_endian;
+}					t_texture;
 
 typedef struct s_god
 {
@@ -86,20 +98,21 @@ typedef struct s_god
 	int				img_bits_per_pixel;
 	int				img_line_length;
 	int				img_endian;
+
 	int				**map;
-	unsigned int	rows;	//frido
-	unsigned int	cols;	//frido
+	unsigned int rows; // frido
+	unsigned int cols; // frido
 	unsigned int	pixels_per_x;
 	unsigned int	pixels_per_y;
 
-	void			*sprite_player;
-	void			*sprite_wall_S;
-	void			*sprite_wall_E;
-	void			*sprite_wall_N;
-	void			*sprite_wall_W;
-	float			player_x;	//frido
-	float			player_y;	//frido
-	int				player_start_direction;	//frido
+	void			*sprite_player;	//TODO weg
+	t_texture			*sprite_wall_S;
+	t_texture			*sprite_wall_E;
+	t_texture			*sprite_wall_N;
+	t_texture			*sprite_wall_W;
+	float player_x;             // frido
+	float player_y;             // frido
+	int player_start_direction; // frido
 	float			player_angle;
 	float			player_angle_min;
 	float			player_angle_max;
@@ -150,7 +163,8 @@ int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
 // helper.c
-void	dda_single_ray(t_god *god, t_dda* dda, float beam_angle, int x);
+void				dda_single_ray(t_god *god, t_dda *dda, float beam_angle,
+						int x);
 void				ft_draw_line(t_god *god, int x1, int y1, int x2, int y2,
 						int color);
 void				visualize_2d_beam(t_god *god, t_dda *dda);

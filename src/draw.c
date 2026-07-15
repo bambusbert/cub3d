@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 15:42:15 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 12:48:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
 			* (god->img_bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
+
+
 
 /*	1.	calculate dx and dy. these distances are the x any y values the line to
  *		be drawn travels (line = hypothenuse, dx and dy kathete).
