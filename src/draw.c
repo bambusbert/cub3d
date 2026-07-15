@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 15:14:29 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 17:52:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,63 @@ void draw_2d_map(t_god* god)
 	}
 }
 
+void print_single_texel(t_god *god, int x, int y, float tex_x, float tex_y, t_texture *tex)
+{
+	char* color;
+	
+	//int xp;
+	//int yp;
+	//color = tex->img_addr + (int) tex->width * tex_x;
+	
+	//x-Anteil - wie weit nach rechts in der texture:
+	//xp = (int)(tex->width * tex_x);
+
+	//y-Anteil - wie weit nach unten in der texture::
+	//yp = (int)(tex->height * tex_y);
+	
+	//my_mlx_pixel_put(god, x, y, COLOR_ERROR);
+	
+	color = tex + ((int)(tex->height * tex_y) * tex->img_line_length + (int)(tex->width * tex_x) * (tex->img_bits_per_pixel / 8));
+	
+	my_mlx_pixel_put(god, x, y, color);
+}
+
+void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda)
+{
+	float wall_x; //aka tex_x
+	float wall_y; //aka tex_y
+	float step;
+	t_texture *tex;
+	
+	if (!dda->horizontal_wall_hit)
+		wall_x = fmod(dda->hit_x, 1);
+	else
+		wall_x = fmod(dda->hit_y, 1);
+	//wall_x holds the information on where the wall was hit. i have to draw the
+	//wall_x % column of the corresponding wall texture. if wall_x is 0.5 we
+	//want to display the column in the middle of the texture.
+	printf("wall_x is %f\n", wall_x);
+	if (dda->which_wall_hit == NORTH)
+		tex = god->sprite_wall_N;
+	else if (dda->which_wall_hit == EAST)
+		tex = god->sprite_wall_E;
+	else if (dda->which_wall_hit == SOUTH)
+		tex = god->sprite_wall_S;
+	else if (dda->which_wall_hit == WEST)
+		tex = god->sprite_wall_W;
+	//we have to loop through each pixel to be drawn
+	//i think we have to calculate the step here ()
+	step = tex->height / (y2 - y1);
+	printf("step is %f\n", step);
+	wall_y = 0;
+	while (y1 <= y2)
+	{
+		print_single_texel(god, x, y1, wall_x, wall_y, tex);
+		wall_y += step;
+		y1++;
+	}
+}
+
 //draws one vertical slice. a slice contains of the ceiling, the wall
 //and the floor (up ---> down)
 //atm we just print a color for the walls. TODO change that so that
@@ -125,7 +182,10 @@ void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 	// 	ft_draw_line(god, x, wall_start, x, wall_end, (COLOR_WALL / 2));
 	// else
 	// 	ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL);
-	ft_draw_line(god, x, wall_start, x, wall_end, return_wall_color(dda->which_wall_hit));
+
+	
+	//ft_draw_line(god, x, wall_start, x, wall_end, return_wall_color(dda->which_wall_hit));
+	draw_wall_texture_slice(god, x, wall_start, wall_end, dda);
 	ft_draw_line(god, x, wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 	//rand *= 1.00001;
 }

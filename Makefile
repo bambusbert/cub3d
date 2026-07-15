@@ -10,8 +10,8 @@ RED = \033[0;31m
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-#CFLAGS = -g
+#CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -g
 INCLUDES = -I./inc
 
 # libft
