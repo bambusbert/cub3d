@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 19:29:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 19:47:28 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,26 +101,42 @@ void draw_2d_map(t_god* god)
 
 void print_single_texel(t_god *god, int x, int y, float tex_x, float tex_y, t_texture *tex)
 {
-	char* color;
-	// int hheight = tex->height - 1;
-	// int wwidth = tex->width - 1;
-	
-	//int xp;
-	//int yp;
-	//color = tex->img_addr + (int) tex->width * tex_x;
-	
-	//x-Anteil - wie weit nach rechts in der texture:
-	//xp = (int)(tex->width * tex_x);
+    char* color;
+    int tex_x_int;
+    int tex_y_int;
 
-	//y-Anteil - wie weit nach unten in der texture::
-	//yp = (int)(tex->height * tex_y);
-	
-	//my_mlx_pixel_put(god, x, y, COLOR_ERROR);
-	
-	color = tex->img_addr + ((int)(tex->height * tex_y) * tex->img_line_length + (int)(tex->width * tex_x) * (tex->img_bits_per_pixel / 8));
-	
-	my_mlx_pixel_put(god, x, y, *(unsigned int *)color);
+    tex_x_int = (int)(tex->width * tex_x);
+    tex_y_int = (int)(tex->height * tex_y);
+    if (tex_x_int >= tex->width) tex_x_int = tex->width - 1;
+    if (tex_y_int >= tex->height) tex_y_int = tex->height - 1;
+    if (tex_x_int < 0) tex_x_int = 0;
+    if (tex_y_int < 0) tex_y_int = 0;
+    color = tex->img_addr + (tex_y_int * tex->img_line_length + tex_x_int * (tex->img_bits_per_pixel / 8));
+    my_mlx_pixel_put(god, x, y, *(unsigned int *)color);
 }
+
+// void print_single_texel(t_god *god, int x, int y, float tex_x, float tex_y, t_texture *tex)
+// {
+// 	char* color;
+// 	// int hheight = tex->height - 1;
+// 	// int wwidth = tex->width - 1;
+	
+// 	//int xp;
+// 	//int yp;
+// 	//color = tex->img_addr + (int) tex->width * tex_x;
+	
+// 	//x-Anteil - wie weit nach rechts in der texture:
+// 	//xp = (int)(tex->width * tex_x);
+
+// 	//y-Anteil - wie weit nach unten in der texture::
+// 	//yp = (int)(tex->height * tex_y);
+	
+// 	//my_mlx_pixel_put(god, x, y, COLOR_ERROR);
+	
+// 	color = tex->img_addr + ((int)(tex->height * tex_y) * tex->img_line_length + (int)(tex->width * tex_x) * (tex->img_bits_per_pixel / 8));
+	
+// 	my_mlx_pixel_put(god, x, y, *(unsigned int *)color);
+// }
 
 void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda)
 {
@@ -133,10 +149,6 @@ void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda)
 		wall_x = fmod(dda->hit_x, 1);
 	else
 		wall_x = fmod(dda->hit_y, 1);
-	//wall_x holds the information on where the wall was hit. i have to draw the
-	//wall_x % column of the corresponding wall texture. if wall_x is 0.5 we
-	//want to display the column in the middle of the texture.
-	//printf("wall_x is %f\n", wall_x);
 	if (dda->which_wall_hit == NORTH)
 		tex = god->sprite_wall_N;
 	else if (dda->which_wall_hit == EAST)
@@ -145,8 +157,6 @@ void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda)
 		tex = god->sprite_wall_S;
 	else if (dda->which_wall_hit == WEST)
 		tex = god->sprite_wall_W;
-	//we have to loop through each pixel to be drawn
-	//i think we have to calculate the step here ()
 	step = 1.0 / (y2 - y1);
 	wall_y = 0;
 	while (y1 <= y2)
@@ -154,7 +164,6 @@ void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda)
 		print_single_texel(god, x, y1, wall_x, wall_y, tex);
 		wall_y += step;
 		y1++;
-		//printf("step is %f\n", step);
 	}
 }
 

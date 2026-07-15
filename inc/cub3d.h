@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 19:37:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 19:53:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define WALL_CHAR 1
 // TODO #define PLAYER_CHAR 2 and check for that and not hardcoded 2
-# define MAX_DIST_TO_WALL 0.08
+# define MAX_DIST_TO_WALL 0.2
 
 # define SPRITE_WALL_N "./sprites/wall_n.xpm"
 # define SPRITE_WALL_S "./sprites/wall_s.xpm"
