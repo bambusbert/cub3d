@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 12:48:12 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:09:43 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ void draw_2d_map(t_god* god)
 //1 of 4 different sprites are printed
 void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 {
-	//TODO rand weg
-	static float rand = 1;
 	int wall_start;
 	int wall_end;
 	int middle;
@@ -123,10 +121,11 @@ void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 	if (wall_end >= WINDOW_SIZE_Y || wall_end < 0)
 		wall_end = WINDOW_SIZE_Y - 1;
 	ft_draw_line(god, x, 0, x, wall_start - 1, COLOR_CEILING);
-	if (dda->horizontal_wall_hit)
-		ft_draw_line(god, x, wall_start, x, wall_end, (COLOR_WALL / 2) * rand);
-	else
-		ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL * rand);
+	// if (dda->horizontal_wall_hit)
+	// 	ft_draw_line(god, x, wall_start, x, wall_end, (COLOR_WALL / 2));
+	// else
+	// 	ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL);
+	ft_draw_line(god, x, wall_start, x, wall_end, debug_define_color(dda->which_wall_hit));
 	ft_draw_line(god, x, wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 	//rand *= 1.00001;
 }

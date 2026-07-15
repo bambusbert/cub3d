@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 12:45:32 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 12:46:07 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 14:49:09 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ void init_dda_struct(t_dda *dda, t_god *god, float beam_angle)
 	dda->wall_hit = false;
 	dda->map_x = dda->player_x_int;
 	dda->map_y = dda->player_y_int;
+	dda->which_wall_hit = -1;
 }

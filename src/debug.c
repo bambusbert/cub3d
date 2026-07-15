@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 14:22:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:06:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,19 @@ void debug_init_player(t_god *god)
     god->player_x = 3;
     god->player_y = 4;
     god->player_start_direction = WEST;
+}
+
+int debug_define_color(int which_wall_hit)
+{
+    if (which_wall_hit == NORTH)
+        return COLOR_ORANGE;
+    if (which_wall_hit == EAST)
+        return COLOR_RED;
+    if (which_wall_hit == SOUTH)
+        return COLOR_YELLOW;
+    if (which_wall_hit == WEST)
+        return COLOR_WHITE;
+    return COLOR_ERROR;
 }
 	// TODO 3/4 is a placeholder, that's the position of the player in the sample map
 

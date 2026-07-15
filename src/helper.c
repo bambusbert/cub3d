@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   laser.c                                            :+:      :+:    :+:   */
+/*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 12:48:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:04:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	visualize_2d_beam(t_god *god, t_dda *dda)
 	start_pixel_y = god->player_y * god->pixels_per_y;
 	end_pixel_x = hit_x * god->pixels_per_x;
 	end_pixel_y = hit_y * god->pixels_per_y;
-	ft_draw_line(god, start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y,
-		COLOR_ORANGE);
+	// ft_draw_line(god, start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y,
+	// 	COLOR_ORANGE);
+		ft_draw_line(god, start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y,
+		debug_define_color(dda->which_wall_hit));
 }

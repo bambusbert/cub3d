@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 15:39:51 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 14:57:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,25 @@
  */
 #include "cub3d.h"
 
+void	wall_was_hit(t_dda *dda)
+{
+	dda->wall_hit = true;
+	if (dda->horizontal_wall_hit)
+	{
+		if (dda->ray_dir_x > 0)
+			dda->which_wall_hit = EAST;
+		else
+			dda->which_wall_hit = WEST;
+	}
+	else
+	{
+		if (dda->ray_dir_y > 0)
+			dda->which_wall_hit = SOUTH;
+		else
+			dda->which_wall_hit = NORTH;
+	}
+}
+
 void	dda_loop(t_god *god, t_dda *dda)
 {
 	while (!dda->wall_hit)
@@ -71,7 +90,7 @@ void	dda_loop(t_god *god, t_dda *dda)
 			break ;
 		}
 		if (god->map[dda->map_y][dda->map_x] == 1)
-			dda->wall_hit = true;
+			wall_was_hit(dda);
 	}
 }
 

@@ -31,7 +31,8 @@ SRC =	src/cub3d.c \
 		src/cleanup.c \
 		src/input_handling.c \
 		src/debug.c \
-		src/init.c \
+		src/init_main.c \
+		src/init_textures.c \
 		src/helper.c \
 		src/draw.c \
 		src/movement.c \
