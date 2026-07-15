@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 18:37:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 19:37:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // TODO #define PLAYER_CHAR 2 and check for that and not hardcoded 2
 # define MAX_DIST_TO_WALL 0.08
 
-# define SPRITE_WALL_N "./sprites/wall_e.xpm"
+# define SPRITE_WALL_N "./sprites/wall_n.xpm"
 # define SPRITE_WALL_S "./sprites/wall_s.xpm"
 # define SPRITE_WALL_W "./sprites/wall_w.xpm"
 # define SPRITE_WALL_E "./sprites/wall_e.xpm"
@@ -101,7 +101,7 @@ typedef struct s_god
 	int				img_line_length;
 	int				img_endian;
 
-	int				**map;
+	char				**map;
 	unsigned int rows; // frido
 	unsigned int cols; // frido
 	unsigned int	pixels_per_x;
@@ -153,7 +153,7 @@ typedef struct s_dda
 
 // debug.c
 void				print_keys(t_god *god);
-int					**create_sample_map(t_god *p_god);
+char					**create_sample_map(t_god *p_god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 

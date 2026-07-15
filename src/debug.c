@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 18:35:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 19:22:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_keys(t_god *god)
     printf("Pixels per y: %d\n", god->pixels_per_y);
 }
 
-int **create_sample_map(t_god *p_god)
+char **create_sample_map(t_god *p_god)
 {
     int rows = 30;
     int cols = 20;
@@ -41,7 +41,7 @@ int **create_sample_map(t_god *p_god)
     p_god->cols = cols;
     
     // Player currently is 2
-    int static_map[30][20] = {
+    char static_map[30][20] = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -74,13 +74,13 @@ int **create_sample_map(t_god *p_god)
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
     
-    int **map = (int**)ft_calloc(rows + 1, sizeof(int*));
+    char **map = (char**)ft_calloc(rows + 1, sizeof(char*));
     if (!map)
         return NULL;
         
     for (int i = 0; i < rows; i++)
     {
-        map[i] = (int*)ft_calloc(cols, sizeof(int));
+        map[i] = (char*)ft_calloc(cols, sizeof(char));
         if (!map[i])
             return NULL; 
             
