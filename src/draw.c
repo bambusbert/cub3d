@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 15:09:43 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:14:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 	// 	ft_draw_line(god, x, wall_start, x, wall_end, (COLOR_WALL / 2));
 	// else
 	// 	ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL);
-	ft_draw_line(god, x, wall_start, x, wall_end, debug_define_color(dda->which_wall_hit));
+	ft_draw_line(god, x, wall_start, x, wall_end, return_wall_color(dda->which_wall_hit));
 	ft_draw_line(god, x, wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 	//rand *= 1.00001;
 }

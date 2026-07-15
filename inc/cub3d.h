@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 15:07:16 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:16:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 // TODO #define PLAYER_CHAR 2 and check for that and not hardcoded 2
 # define MAX_DIST_TO_WALL 0.08
 
-# define SPRITE_PLAYER "./sprites/player.xpm"
 # define SPRITE_WALL_N "./sprites/wall_e.xpm"
 # define SPRITE_WALL_S "./sprites/wall_s.xpm"
 # define SPRITE_WALL_W "./sprites/wall_w.xpm"
@@ -60,10 +59,10 @@
 
 # define COLOR_ORANGE 551515151
 # define COLOR_BLUE 0x0000FF
-#define COLOR_RED    0xFF0000
-#define COLOR_YELLOW 0xFFFF00
-#define COLOR_WHITE  0xFFFFFF
-#define COLOR_ERROR 0xDC3545
+# define COLOR_RED 0xFF0000
+# define COLOR_YELLOW 0xFFFF00
+# define COLOR_WHITE 0xFFFFFF
+# define COLOR_ERROR 0xDC3545
 # define COLOR_CEILING 0x555555
 # define COLOR_FLOOR 0xFF77BA
 # define COLOR_WALL COLOR_BLUE
@@ -72,7 +71,6 @@
 # define KEYUP_EVENT 3
 # define CLOSING_EVENT 17
 
-// TODO check if there is a norm for enums
 enum				e_direction
 {
 	NORTH,
@@ -109,11 +107,10 @@ typedef struct s_god
 	unsigned int	pixels_per_x;
 	unsigned int	pixels_per_y;
 
-	//void			*sprite_player;	//TODO weg
-	t_texture			*sprite_wall_S;
-	t_texture			*sprite_wall_E;
-	t_texture			*sprite_wall_N;
-	t_texture			*sprite_wall_W;
+	t_texture		*sprite_wall_S;
+	t_texture		*sprite_wall_E;
+	t_texture		*sprite_wall_N;
+	t_texture		*sprite_wall_W;
 	float player_x;             // frido
 	float player_y;             // frido
 	int player_start_direction; // frido
@@ -147,7 +144,7 @@ typedef struct s_dda
 	bool horizontal_wall_hit; // true if horizontal and false for vertical
 	// for the 4 wall sprites we would need not only this info but also
 	// the info north and south was hit
-	int which_wall_hit;
+	int				which_wall_hit;
 	float wall_dist; // WINDOW_SIZE_Y / distance is line height
 	float			beam_dist;
 	float			hit_x;
@@ -158,7 +155,7 @@ typedef struct s_dda
 void				print_keys(t_god *god);
 int					**create_sample_map(t_god *p_god);
 void				debug_init_player(t_god *god);
-int debug_define_color(int which_wall_hit);
+int					return_wall_color(int which_wall_hit);
 
 // init.c
 void				init_god(t_god *god);
@@ -191,8 +188,8 @@ void				ft_bzero(void *s, size_t n);
 // dda_init.c
 void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 
-//init_textures.c
-void	init_textures(t_god *p_god);
+// init_textures.c
+void				init_textures(t_god *p_god);
 
 // unsorted
 void				*ft_calloc(size_t nmemb, size_t size);

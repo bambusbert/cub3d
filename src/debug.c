@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 15:06:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:14:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void debug_init_player(t_god *god)
     god->player_start_direction = WEST;
 }
 
-int debug_define_color(int which_wall_hit)
+int return_wall_color(int which_wall_hit)
 {
     if (which_wall_hit == NORTH)
         return COLOR_ORANGE;

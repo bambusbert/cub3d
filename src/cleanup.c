@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 14:34:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:11:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,6 @@ int	close_window(t_god	*god)
 	exit(0);
 }
 
-// void	destroy_sprites(t_god *p_god)
-// {
-// 	if (p_god->sprite_player)
-// 		mlx_destroy_image(p_god->mlx, p_god->sprite_player);
-// 	if (p_god->sprite_wall_S->img)
-// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_S->img);
-// 	if (p_god->sprite_wall_N->img)
-// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_N->img);
-// 	if (p_god->sprite_wall_E->img)
-// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_E->img);
-// 	if (p_god->sprite_wall_W->img)
-// 		mlx_destroy_image(p_god->mlx, p_god->sprite_wall_W->img);
-// 	p_god->sprite_player = NULL;
-// 	p_god->sprite_wall_S = NULL;
-// 	p_god->sprite_wall_N = NULL;
-// 	p_god->sprite_wall_E = NULL;
-// 	p_god->sprite_wall_W = NULL;
-// }
-
 void	error_exit(char *msg, t_god *p_god)
 {
 	ft_putstr_fd(msg, 2);
@@ -110,5 +91,5 @@ void	error_exit(char *msg, t_god *p_god)
 		free(p_god->mlx);
 	}
 	free_god_struct(p_god);
-	exit(-1);
+	exit(1);
 }
