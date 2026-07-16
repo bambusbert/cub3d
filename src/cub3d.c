@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/02 14:24:26 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:46:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int main (int argc, char **argv)
 	//argument check (one arg? correct file einding?)
 	t_god *p_god;
 	p_god = ft_calloc(1, sizeof(t_god));
+	if (!p_god)
+		return (printf("Error\nfirst malloc failed omg\n"), 1);
 	//FRIDO ENTRY POINT - parsing
 	p_god->map = create_sample_map(p_god);;
 	game_function(p_god);

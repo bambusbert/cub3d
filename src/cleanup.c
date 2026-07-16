@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 15:11:50 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:05:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,40 +56,32 @@ void free_textures(t_god *god)
 	free(god->sprite_wall_N);
 }
 
-//TODO synchronize close_window and error_exit
-int	close_window(t_god	*god)
+static void	perform_cleanup(t_god *god)
 {
-	//destroy_sprites(god);
+	if (!god)
+		return ;
 	destroy_images(god);
 	free_textures(god);
-	if (god->mlx_win)
-		mlx_destroy_window(god->mlx, god->mlx_win);
 	if (god->mlx)
 	{
-		mlx_do_key_autorepeaton(god->mlx);
+		mlx_do_key_autorepeaton(god->mlx); 
+		if (god->mlx_win)
+			mlx_destroy_window(god->mlx, god->mlx_win);
 		mlx_destroy_display(god->mlx);
 		free(god->mlx);
 	}
-	// if (god->count_collectible == 0)
-	// 	ft_printf("Moves: %u\n", map->moves + 1);
 	free_god_struct(god);
-	
+}
+
+void	close_window(t_god *god)
+{
+	perform_cleanup(god);
 	exit(0);
 }
 
-void	error_exit(char *msg, t_god *p_god)
+void	error_exit(char *msg, t_god *god)
 {
 	ft_putstr_fd(msg, 2);
-	if (p_god->mlx)
-	{
-		//destroy_sprites(p_god);
-		destroy_images(p_god);
-		free_textures(p_god);
-		if (p_god->mlx_win)
-			mlx_destroy_window(p_god->mlx, p_god->mlx_win);
-		mlx_destroy_display(p_god->mlx);
-		free(p_god->mlx);
-	}
-	free_god_struct(p_god);
+	perform_cleanup(god);
 	exit(1);
 }

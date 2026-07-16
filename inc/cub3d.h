@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 14:42:11 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:02:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ enum				e_direction
 
 typedef struct s_point
 {
-	int x;
-	int y;	
-}	t_point;
+	int				x;
+	int				y;
+}					t_point;
 
 typedef struct s_texture
 {
@@ -107,7 +107,7 @@ typedef struct s_god
 	int				img_line_length;
 	int				img_endian;
 
-	char				**map;
+	char			**map;
 	unsigned int rows; // frido
 	unsigned int cols; // frido
 	unsigned int	pixels_per_x;
@@ -160,9 +160,12 @@ typedef struct s_dda
 	int				wall_len;
 }					t_dda;
 
+//cub3d.c
+void				render(t_god *god);
+
 // debug.c
 void				print_keys(t_god *god);
-char					**create_sample_map(t_god *p_god);
+char				**create_sample_map(t_god *p_god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 
@@ -177,21 +180,27 @@ int					key_up(int keycode, void *param);
 // helper.c
 void				dda_single_ray(t_god *god, t_dda *dda, float beam_angle,
 						int x);
-void	ft_draw_line(t_god *god, t_point p1, t_point p2, int color);
 void				visualize_2d_beam(t_god *god, t_dda *dda);
+void				normalize_angle(float *angle);
 
-// draw.c
+// draw_main.c
 void				dda_wrapper(t_god *god);
 void				draw_2d_map(t_god *god);
 void				draw_vertical(t_god *god, t_dda *dda, float wall_len,
 						int x);
+
+// draw_helper.c
+void				draw_square(t_god *god, int row, int col);
 void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
+void				ft_draw_line(t_god *god, t_point p1, t_point p2, int color);
 
 // movement.c
 int					position_manager(t_god *god);
 
 // libft
 void				ft_bzero(void *s, size_t n);
+void				*ft_calloc(size_t nmemb, size_t size);
+size_t				ft_putstr_fd(char *s, int fd);
 
 // dda_init.c
 void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
@@ -199,13 +208,10 @@ void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 // init_textures.c
 void				init_textures(t_god *p_god);
 
-// unsorted
-void				*ft_calloc(size_t nmemb, size_t size);
+//cleanup.c
+void					close_window(t_god *god);
 void				error_exit(char *msg, t_god *p_god);
-size_t				ft_putstr_fd(char *s, int fd);
-int					close_window(t_god *god);
-void				destroy_sprites(t_god *p_god);
-void				normalize_angle(float *angle);
-void				render(t_god *god);
+
+// unsorted
 
 #endif
