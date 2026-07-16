@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 19:47:28 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:08:14 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,28 +115,17 @@ void print_single_texel(t_god *god, int x, int y, float tex_x, float tex_y, t_te
     my_mlx_pixel_put(god, x, y, *(unsigned int *)color);
 }
 
-// void print_single_texel(t_god *god, int x, int y, float tex_x, float tex_y, t_texture *tex)
-// {
-// 	char* color;
-// 	// int hheight = tex->height - 1;
-// 	// int wwidth = tex->width - 1;
-	
-// 	//int xp;
-// 	//int yp;
-// 	//color = tex->img_addr + (int) tex->width * tex_x;
-	
-// 	//x-Anteil - wie weit nach rechts in der texture:
-// 	//xp = (int)(tex->width * tex_x);
-
-// 	//y-Anteil - wie weit nach unten in der texture::
-// 	//yp = (int)(tex->height * tex_y);
-	
-// 	//my_mlx_pixel_put(god, x, y, COLOR_ERROR);
-	
-// 	color = tex->img_addr + ((int)(tex->height * tex_y) * tex->img_line_length + (int)(tex->width * tex_x) * (tex->img_bits_per_pixel / 8));
-	
-// 	my_mlx_pixel_put(god, x, y, *(unsigned int *)color);
-// }
+static t_texture *set_tex(t_god *god, t_dda *dda)
+{
+	if (dda->which_wall_hit == NORTH)
+		return god->sprite_wall_N;
+	else if (dda->which_wall_hit == EAST)
+		return god->sprite_wall_E;
+	else if (dda->which_wall_hit == SOUTH)
+		return god->sprite_wall_S;
+	else if (dda->which_wall_hit == WEST)
+		return god->sprite_wall_W;
+}
 
 void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda)
 {
@@ -149,14 +138,9 @@ void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda)
 		wall_x = fmod(dda->hit_x, 1);
 	else
 		wall_x = fmod(dda->hit_y, 1);
-	if (dda->which_wall_hit == NORTH)
-		tex = god->sprite_wall_N;
-	else if (dda->which_wall_hit == EAST)
-		tex = god->sprite_wall_E;
-	else if (dda->which_wall_hit == SOUTH)
-		tex = god->sprite_wall_S;
-	else if (dda->which_wall_hit == WEST)
-		tex = god->sprite_wall_W;
+	if (dda->which_wall_hit == WEST || dda->which_wall_hit == SOUTH)
+		wall_x = 1 - wall_x;
+	tex = set_tex (god, dda);
 	step = 1.0 / (y2 - y1);
 	wall_y = 0;
 	while (y1 <= y2)
@@ -189,14 +173,6 @@ void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 	if (wall_end >= WINDOW_SIZE_Y || wall_end < 0)
 		wall_end = WINDOW_SIZE_Y - 1;
 	ft_draw_line(god, x, 0, x, wall_start - 1, COLOR_CEILING);
-	// if (dda->horizontal_wall_hit)
-	// 	ft_draw_line(god, x, wall_start, x, wall_end, (COLOR_WALL / 2));
-	// else
-	// 	ft_draw_line(god, x, wall_start, x, wall_end, COLOR_WALL);
-
-	
-	//ft_draw_line(god, x, wall_start, x, wall_end, return_wall_color(dda->which_wall_hit));
 	draw_wall_texture_slice(god, x, wall_start, wall_end, dda);
 	ft_draw_line(god, x, wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
-	//rand *= 1.00001;
 }
