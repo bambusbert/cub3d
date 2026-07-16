@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 14:46:24 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:08:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void render(t_god *god)
 {
 	static int frame_count = 0;
 	frame_count++;
-	//possible FPS counter here
+	//possible FPS counter here, gettimeofday is allowed
 	printf("Frame %d rendered\n", frame_count);
 	ft_bzero(god->img_addr, WINDOW_SIZE_Y * god->img_line_length);
 	if (god->debug_mode)
@@ -66,14 +66,10 @@ int	game_loop(t_god *god)
 	
 	ret_rot = 0;
 	ret_pos = 0;
-	// if (god->debug_mode)
-	// 	print_keys(god);
 	ret_rot = rotation_manager(god);
 	ret_pos = position_manager(god);
 	if (ret_rot || ret_pos)
 		render(god);
-	//alternative rendering strat: render every time
-	//render(god);
 	return 1;
 }
 
@@ -87,12 +83,8 @@ void	game_function(t_god *god)
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
 	mlx_hook(god->mlx_win, CLOSING_EVENT, 0, (int (*)(void))close_window, god);
-
-	//mlx_hook(god->mlx_win, 3, 0, key_hook, god);
-	//mlx_key_hook(god->mlx_win, key_hook, god);
 	mlx_hook(god->mlx_win, KEYDOWN_EVENT, 1L<<0, (int (*)(void))key_press, god);
 	mlx_hook(god->mlx_win, KEYUP_EVENT, 1L<<1, (int (*)(void))key_up, god);
-	
 	init_god(god);
 	mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
