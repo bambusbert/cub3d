@@ -6,11 +6,28 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 16:00:07 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:09:06 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+//360 degrees equals 2 pi (6.283)
+void update_player_angle (t_god *god, int direction)
+{
+	if (direction == LEFT)
+		god->player_angle -= SENSITIVITY;
+	else if (direction == RIGHT)
+		god->player_angle += SENSITIVITY;
+	//we can't use modulo operator for float numbers
+	normalize_angle(&god->player_angle);
+	//printf("Player angle: %.3f\n", god->player_angle);
+	//update player_angle_min and player_angle_max
+	god->player_angle_min = god->player_angle - ANGLE_OFFSET;
+	normalize_angle(&god->player_angle_min);
+	god->player_angle_max = god->player_angle + ANGLE_OFFSET;
+	normalize_angle(&god->player_angle_max);
+}
 
 static int	move_possible(t_god *god, float dx, float dy)
 {
@@ -71,13 +88,13 @@ int position_manager(t_god *god)
     
     moved = 0;
     if (god->key_w && !god->key_s)
-        moved |= move_vertical(god, 1);
+        moved |= move_vertical(god, FORWARD);
     if (god->key_s && !god->key_w)
-        moved |= move_vertical(god, -1);
+        moved |= move_vertical(god, BACK);
     if (god->key_d && !god->key_a)
-        moved |= move_horizontal(god, 1);
+        moved |= move_horizontal(god, RIGHT);
     if (god->key_a && !god->key_d)
-        moved |= move_horizontal(god, -1);
+        moved |= move_horizontal(god, LEFT);
         
     return (moved);
 }

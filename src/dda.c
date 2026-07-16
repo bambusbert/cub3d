@@ -6,14 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 19:36:35 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:15:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
  *	it would be very inefficient if we just drew pixel by pixel
  *	and check after each and every drawn pixel if we hit a wall.
- *	a wall can only be at the grid lines, not inbetween (that 
+ *	a wall can only be at the grid lines, not inbetween (that
  *	means if either x or y is an integer).
  *
  *	Therefore, it is enough to check whether the next grid line
@@ -99,39 +99,39 @@ void	calc_distances(float angle_diff, t_dda *dda)
 	if (dda->horizontal_wall_hit)
 	{
 		if (dda->ray_dir_x == 0)
-            dda->ray_dir_x = 0.0000001;
+			dda->ray_dir_x = 0.0000001;
 		dda->wall_dist = (dda->next_x - dda->delta_x) * cos(angle_diff);
 		dda->beam_dist = dda->next_x - dda->delta_x;
-    }
+	}
 	else
 	{
 		if (dda->ray_dir_y == 0)
-            dda->ray_dir_y = 0.0000001;
+			dda->ray_dir_y = 0.0000001;
 		dda->wall_dist = (dda->next_y - dda->delta_y) * cos(angle_diff);
 		dda->beam_dist = dda->next_y - dda->delta_y;
-    }
-    if (dda->wall_dist < 0.0001)
+	}
+	if (dda->wall_dist < 0.0001)
 	{
-    	dda->wall_dist = 0.0001;
+		dda->wall_dist = 0.0001;
 	}
 	if (dda->beam_dist < 0.0001)
 		dda->beam_dist = 0.0001;
 }
 
-//dPerp = dEuclidian * cos(ray_angle - player_angle)
-void	dda_single_ray(t_god *god, t_dda* dda, float beam_angle, int x)
+// dPerp = dEuclidian * cos(ray_angle - player_angle)
+void	dda_single_ray(t_god *god, t_dda *dda, float beam_angle, int x)
 {
 	int		wall_height;
 	float	angle_diff;
 
 	dda_loop(god, dda);
-	//these angles should be normalized here
+	// these angles should be normalized here
 	angle_diff = beam_angle - god->player_angle;
 	calc_distances(angle_diff, dda);
 	wall_height = WINDOW_SIZE_Y / dda->wall_dist;
-	//if (god->debug_mode)
+	// if (god->debug_mode)
 	visualize_2d_beam(god, dda);
-	if(!god->debug_mode)
+	if (!god->debug_mode)
 		draw_vertical(god, dda, wall_height, x);
 }
 
@@ -142,7 +142,8 @@ void	dda_wrapper(t_god *god)
 	float	angle_step;
 	int		x;
 
-	// Divide the total FOV by the screen width to get the angle per pixel column
+	// Divide the total FOV by the screen width to get the angle 
+	// per pixel column
 	angle_step = ANGLE_OFFSET * 2 / WINDOW_SIZE_X;
 	angle_to_draw = god->player_angle_min;
 	x = -1;

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 14:47:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 14:48:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:20:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,37 @@ void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
  */
 void	ft_draw_line(t_god *god, t_point p1, t_point p2, int color)
 {
-	float	step;
-	float	x;
-	float	y;
-	float	delta_x;
-	float	delta_y;
-	int		i;
+	float		step;
+	t_fpoint	p;
+	t_fpoint	delta;
+	int			i;
 
-	delta_x = (p2.x - p1.x);
-	delta_y = p2.y - p1.y;
-	if (abs((int)delta_x) >= abs((int)delta_y))
-		step = abs((int)delta_x);
+	delta.x = (p2.x - p1.x);
+	delta.y = p2.y - p1.y;
+	if (abs((int)delta.x) >= abs((int)delta.y))
+		step = abs((int)delta.x);
 	else
-		step = abs((int)delta_y);
-	delta_x = delta_x / step;
-	delta_y = delta_y / step;
-	x = p1.x;
-	y = p1.y;
+		step = abs((int)delta.y);
+	delta.x = delta.x / step;
+	delta.y = delta.y / step;
+	p.x = p1.x;
+	p.y = p1.y;
 	i = -1;
 	while (++i <= step)
 	{
-		my_mlx_pixel_put(god, (int)round(x), (int)round(y), color);
-		x += delta_x;
-		y += delta_y;
+		my_mlx_pixel_put(god, (int)round(p.x), (int)round(p.y), color);
+		p.x += delta.x;
+		p.y += delta.y;
 	}
 }
 
-void draw_square (t_god* god, int row, int col)
+void	draw_square(t_god *god, int row, int col)
 {
-	int cur_x;
-	int cur_y;
-	int start_x;
-	int start_y;
-	
+	int	cur_x;
+	int	cur_y;
+	int	start_x;
+	int	start_y;
+
 	start_x = col * god->pixels_per_x;
 	start_y = row * god->pixels_per_y;
 	cur_x = -1;

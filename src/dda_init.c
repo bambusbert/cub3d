@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 12:45:32 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 14:49:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:14:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ static void	init_dda_step_and_next(t_god *god, t_dda *dda)
 {
 	if (dda->ray_dir_x < 0)
 	{
-		dda->step_x = -1; // Looking Left
+		dda->step_x = -1;
 		dda->next_x = (god->player_x - dda->player_x_int) * dda->delta_x;
 	}
 	else
 	{
-		dda->step_x = 1; // Looking Right
+		dda->step_x = 1;
 		dda->next_x = (dda->player_x_int + 1.0 - god->player_x) * dda->delta_x;
 	}
 	if (dda->ray_dir_y < 0)
 	{
-		dda->step_y = -1; // Looking Up
+		dda->step_y = -1;
 		dda->next_y = (god->player_y - dda->player_y_int) * dda->delta_y;
 	}
 	else
 	{
-		dda->step_y = 1; // Looking Down
+		dda->step_y = 1;
 		dda->next_y = (dda->player_y_int + 1.0 - god->player_y) * dda->delta_y;
 	}
 }
 
-void init_dda_struct(t_dda *dda, t_god *god, float beam_angle)
+void	init_dda_struct(t_dda *dda, t_god *god, float beam_angle)
 {
 	dda->ray_dir_x = cos(beam_angle);
 	dda->ray_dir_y = sin(beam_angle);

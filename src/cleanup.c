@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 15:05:12 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:12:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,18 @@ void	free_god_struct(t_god *god)
 	free(god);
 }
 
-void	destroy_images (t_god *god)
+void	destroy_images(t_god *god)
 {
 	if (god->img)
 		mlx_destroy_image(god->mlx, god->img);
 	if (god->sprite_wall_E->img)
 		mlx_destroy_image(god->mlx, god->sprite_wall_E->img);
 	if (god->sprite_wall_W->img)
-		mlx_destroy_image(god->mlx, god->sprite_wall_W->img);	
+		mlx_destroy_image(god->mlx, god->sprite_wall_W->img);
 	if (god->sprite_wall_N->img)
 		mlx_destroy_image(god->mlx, god->sprite_wall_N->img);
 	if (god->sprite_wall_S->img)
-		mlx_destroy_image(god->mlx, god->sprite_wall_S->img);					
-}
-
-void free_textures(t_god *god)
-{
-	free(god->sprite_wall_E);
-	free(god->sprite_wall_W);
-	free(god->sprite_wall_S);
-	free(god->sprite_wall_N);
+		mlx_destroy_image(god->mlx, god->sprite_wall_S->img);
 }
 
 static void	perform_cleanup(t_god *god)
@@ -61,10 +53,13 @@ static void	perform_cleanup(t_god *god)
 	if (!god)
 		return ;
 	destroy_images(god);
-	free_textures(god);
+	free(god->sprite_wall_E);
+	free(god->sprite_wall_W);
+	free(god->sprite_wall_S);
+	free(god->sprite_wall_N);
 	if (god->mlx)
 	{
-		mlx_do_key_autorepeaton(god->mlx); 
+		mlx_do_key_autorepeaton(god->mlx);
 		if (god->mlx_win)
 			mlx_destroy_window(god->mlx, god->mlx_win);
 		mlx_destroy_display(god->mlx);
