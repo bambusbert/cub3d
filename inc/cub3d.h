@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 19:53:44 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:35:55 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ enum				e_direction
 	WEST
 };
 
+typedef struct s_point
+{
+	int x;
+	int y;	
+}	t_point;
+
 typedef struct s_texture
 {
 	void			*img;
@@ -149,6 +155,9 @@ typedef struct s_dda
 	float			beam_dist;
 	float			hit_x;
 	float			hit_y;
+	int				wall_start;
+	int				wall_end;
+	int				wall_len;
 }					t_dda;
 
 // debug.c

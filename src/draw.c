@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 14:14:26 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:34:03 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,30 +127,30 @@ static t_texture *set_tex(t_god *god, t_dda *dda)
 		return god->sprite_wall_W;
 }
 
-void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda, float wall_len)
+void draw_wall_texture_slice(t_god *god, int x, t_dda *dda)
 {
-	float wall_x; //aka tex_x
-	float wall_y; //aka tex_y
+	float tex_x; //aka wall_x
+	float tex_y; //aka wall_y
 	float step;
 	int unclamped_wall_start;
 	t_texture *tex;
 	
 	if (!dda->horizontal_wall_hit)
-		wall_x = fmod(dda->hit_x, 1);
+		tex_x = fmod(dda->hit_x, 1);
 	else
-		wall_x = fmod(dda->hit_y, 1);
+		tex_x = fmod(dda->hit_y, 1);
 	if (dda->which_wall_hit == WEST || dda->which_wall_hit == SOUTH)
-		wall_x = 1 - wall_x;
+		tex_x = 1 - tex_x;
 	tex = set_tex (god, dda);
-	step = 1.0 / wall_len;
+	step = 1.0 / dda->wall_len;
 	// If the wall goes off the top of the screen, we must start reading the texture further down.
-    unclamped_wall_start = (WINDOW_SIZE_Y / 2) - (wall_len / 2);
-    wall_y = (y1 - unclamped_wall_start) * step;
-	while (y1 <= y2)
+    unclamped_wall_start = (WINDOW_SIZE_Y / 2) - (dda->wall_len / 2);
+    tex_y = (dda->wall_start - unclamped_wall_start) * step;
+	while (dda->wall_start <= dda->wall_end)
 	{
-		print_single_texel(god, x, y1, wall_x, wall_y, tex);
-		wall_y += step;
-		y1++;
+		print_single_texel(god, x, dda->wall_start, tex_x, tex_y, tex);
+		tex_y += step;
+		dda->wall_start++;
 	}
 }
 
@@ -160,22 +160,21 @@ void draw_wall_texture_slice(t_god *god, int x, int y1, int y2, t_dda *dda, floa
 //1 of 4 different sprites are printed
 void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 {
-	int wall_start;
-	int wall_end;
 	int middle;
 
 	middle = WINDOW_SIZE_Y / 2;
-	wall_start = middle - wall_len / 2;
-	wall_end = middle + wall_len / 2;
-	if (wall_start < 0)
-		wall_start = 0;
-	if (wall_end >= WINDOW_SIZE_Y)
-		wall_end = WINDOW_SIZE_Y - 1;
-	if (wall_start < 0 || wall_start > WINDOW_SIZE_Y)
-		wall_start = 0;
-	if (wall_end >= WINDOW_SIZE_Y || wall_end < 0)
-		wall_end = WINDOW_SIZE_Y - 1;
-	ft_draw_line(god, x, 0, x, wall_start - 1, COLOR_CEILING);
-	draw_wall_texture_slice(god, x, wall_start, wall_end, dda, wall_len);
-	ft_draw_line(god, x, wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
+	dda->wall_start = middle - wall_len / 2;
+	dda->wall_end = middle + wall_len / 2;
+	if (dda->wall_start < 0)
+		dda->wall_start = 0;
+	if (dda->wall_end >= WINDOW_SIZE_Y)
+		dda->wall_end = WINDOW_SIZE_Y - 1;
+	if (dda->wall_start < 0 || dda->wall_start > WINDOW_SIZE_Y)
+		dda->wall_start = 0;
+	if (dda->wall_end >= WINDOW_SIZE_Y || dda->wall_end < 0)
+		dda->wall_end = WINDOW_SIZE_Y - 1;
+	ft_draw_line(god, x, 0, x, dda->wall_start - 1, COLOR_CEILING);
+	dda->wall_len = wall_len;
+	draw_wall_texture_slice(god, x, dda);
+	ft_draw_line(god, x, dda->wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
 }
