@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/15 18:37:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:43:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	visualize_2d_beam(t_god *god, t_dda *dda)
 	// ft_draw_line(god, start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y,
 	// 	COLOR_ORANGE);
 	if (god->debug_mode)
-		ft_draw_line(god, start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y,
+		ft_draw_line(god, (t_point){start_pixel_x, start_pixel_y},(t_point){end_pixel_x, end_pixel_y},
 		return_wall_color(dda->which_wall_hit));
 }

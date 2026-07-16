@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 14:35:55 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:42:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,7 @@ int					key_up(int keycode, void *param);
 // helper.c
 void				dda_single_ray(t_god *god, t_dda *dda, float beam_angle,
 						int x);
-void				ft_draw_line(t_god *god, int x1, int y1, int x2, int y2,
-						int color);
+void	ft_draw_line(t_god *god, t_point p1, t_point p2, int color);
 void				visualize_2d_beam(t_god *god, t_dda *dda);
 
 // draw.c

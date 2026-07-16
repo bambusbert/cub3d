@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 14:34:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:41:38 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
  *	4.	loop from i to step and increment by the values from 3.
  *		round to nearest pixel.
  */
-void	ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
+void	ft_draw_line(t_god *god, t_point p1, t_point p2, int color)
 {
 	float	step;
 	float	x;
@@ -42,16 +42,16 @@ void	ft_draw_line(t_god *god, int x1, int y1, int x2, int y2, int color)
 	float	delta_y;
 	int		i;
 
-	delta_x = (x2 - x1);
-	delta_y = y2 - y1;
+	delta_x = (p2.x - p1.x);
+	delta_y = p2.y - p1.y;
 	if (abs((int)delta_x) >= abs((int)delta_y))
 		step = abs((int)delta_x);
 	else
 		step = abs((int)delta_y);
 	delta_x = delta_x / step;
 	delta_y = delta_y / step;
-	x = x1;
-	y = y1;
+	x = p1.x;
+	y = p1.y;
 	i = -1;
 	while (++i <= step)
 	{
@@ -173,8 +173,12 @@ void draw_vertical(t_god *god, t_dda* dda, float wall_len, int x)
 		dda->wall_start = 0;
 	if (dda->wall_end >= WINDOW_SIZE_Y || dda->wall_end < 0)
 		dda->wall_end = WINDOW_SIZE_Y - 1;
-	ft_draw_line(god, x, 0, x, dda->wall_start - 1, COLOR_CEILING);
+	//ft_draw_line(god, x, 0, x, dda->wall_start - 1, COLOR_CEILING);
+	//p1: x / 0 | p2: x / dda->wall_start - 1
+	//ft_draw_line(god, x, 0, x, dda->wall_start - 1, COLOR_CEILING);
+	ft_draw_line(god, (t_point){x, 0}, (t_point){x, dda->wall_start - 1}, COLOR_CEILING);
 	dda->wall_len = wall_len;
 	draw_wall_texture_slice(god, x, dda);
-	ft_draw_line(god, x, dda->wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
+	//ft_draw_line(god, x, dda->wall_end + 1, x, WINDOW_SIZE_Y, COLOR_FLOOR);
+	ft_draw_line(god, (t_point){x, dda->wall_end + 1},(t_point){x, WINDOW_SIZE_Y}, COLOR_FLOOR);
 }
