@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 15:33:30 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:26:32 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	normalize_coordinate(t_god *god, float coord, int type)
 		return (-666);
 }
 
-// possible TODO change into normalize_angles function that handles
-// all 3 angle variables at once so we do not have 3 calls in update_player_angle
+// possible TODO change into normalize_angles function that handles all 
+//3 angle variables at once so we do not have 3 calls in update_player_angle
 void	normalize_angle(float *angle)
 {
 	if (*angle > 2 * PI)
@@ -62,8 +62,6 @@ void	visualize_2d_beam(t_god *god, t_dda *dda)
 	start_pixel_y = god->player_y * god->pixels_per_y;
 	end_pixel_x = dda->hit_x * god->pixels_per_x;
 	end_pixel_y = dda->hit_y * god->pixels_per_y;
-	// ft_draw_line(god, start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y,
-	// 	COLOR_ORANGE);
 	if (god->debug_mode && draw % 50 == 0)
 		ft_draw_line(god, (t_point){start_pixel_x, start_pixel_y},
 			(t_point){end_pixel_x, end_pixel_y},
