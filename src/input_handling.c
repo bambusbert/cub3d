@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:19:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/01 14:30:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:39:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_press(int keycode, void *param)
 	t_god	*god;
 
 	god = (t_god *)param;
-	//printf("%d\n", keycode);
+	// printf("%d\n", keycode);
 	if (keycode == KEY_W)
 		god->key_w = true;
 	else if (keycode == KEY_A)
@@ -42,7 +42,7 @@ int	key_press(int keycode, void *param)
 
 int	key_up(int keycode, void *param)
 {
-	t_god *god;
+	t_god	*god;
 
 	god = (t_god *)param;
 	if (keycode == KEY_W)
