@@ -1,5 +1,4 @@
-- implement textured walls
-- FPS counter?
+- FPS counter in HUD - BONUS
 - if FOV bigger: distorts the walls, wtf
 - change some variables on-the-fly with keys
 	- FOV
@@ -7,4 +6,4 @@
 	- rotation tick
 	- mouse rotation
 - separation of mandatory part and bonus
-- minimap: draw fewer beams
+- minimap: move to bonus and draw it in one corner of the visible image

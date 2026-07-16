@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 17:35:12 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 19:08:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
 # include <unistd.h>
-#include <sys/time.h>
 
 # define WALL_CHAR 1
 // TODO #define PLAYER_CHAR 2 and check for that and not hardcoded 2
@@ -72,6 +72,7 @@
 
 # define KEYDOWN_EVENT 2
 # define KEYUP_EVENT 3
+# define MOUSE_EVENT 6
 # define CLOSING_EVENT 17
 
 enum				e_direction
@@ -117,8 +118,8 @@ typedef struct s_god
 	int				img_endian;
 
 	char			**map;
-	unsigned int 	rows; // frido
-	unsigned int 	cols; // frido
+	unsigned int rows; // frido
+	unsigned int cols; // frido
 	unsigned int	pixels_per_x;
 	unsigned int	pixels_per_y;
 
@@ -126,9 +127,9 @@ typedef struct s_god
 	t_texture		*sprite_wall_E;
 	t_texture		*sprite_wall_N;
 	t_texture		*sprite_wall_W;
-	float 			player_x;             // frido
-	float 			player_y;             // frido
-	int				player_start_direction; // frido
+	float player_x;             // frido
+	float player_y;             // frido
+	int player_start_direction; // frido
 	float			player_angle;
 	float			player_angle_min;
 	float			player_angle_max;
@@ -172,6 +173,7 @@ void				print_keys(t_god *god);
 char				**create_sample_map(t_god *p_god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
+void				fps_counter(void);
 
 // cub3d.c
 void				render(t_god *god);
@@ -203,7 +205,7 @@ void				ft_draw_line(t_god *god, t_point p1, t_point p2, int color);
 
 // movement.c
 int					position_manager(t_god *god);
-void				update_player_angle (t_god *god, int direction);
+void				update_player_angle(t_god *god, int direction);
 
 // libft
 void				ft_bzero(void *s, size_t n);

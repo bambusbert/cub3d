@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 16:15:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 18:15:46 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,43 @@ int return_wall_color(int which_wall_hit)
     if (which_wall_hit == WEST)
         return COLOR_WHITE;
     return COLOR_ERROR;
+}
+
+static long long	return_usecs_since_1970(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) == -1)
+	{
+		// smth went wrong
+		return (-1);
+	}
+	return (tv.tv_sec * 1000000 + tv.tv_usec);
+}
+
+//atm bug FPS 0 at the very first frame
+//TODO display FPS (in bonus)
+void	fps_counter(void)
+{
+	static int			frame_count = 0;
+	static long long	time_last_frame = 0;
+	long long			delta_time_usec;
+	float				delta_time_sec;
+	long long			current_time;
+	float				fps;
+
+	if (time_last_frame == 0)
+		time_last_frame = return_usecs_since_1970();
+	frame_count++;
+	current_time = return_usecs_since_1970();
+	delta_time_usec = current_time - time_last_frame;
+	delta_time_sec = (float)delta_time_usec / 1000000;
+	if (delta_time_usec / 1000 != 0)
+		fps = (float)1 / (delta_time_sec);
+	else
+		delta_time_usec = 1;
+	printf("%.1f FPS | Frame %d\n", fps, frame_count);
+	time_last_frame = return_usecs_since_1970();
 }
 	// TODO 3/4 is a placeholder, that's the position of the player in the sample map
 

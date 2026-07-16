@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 18:08:30 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/16 19:10:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,43 +21,6 @@ int	rotation_manager(t_god *god)
 	if (god->key_right)
 		return (update_player_angle(god, RIGHT), 1);
 	return (0);
-}
-
-static long long	return_usecs_since_1970(void)
-{
-	struct timeval	tv;
-
-	if (gettimeofday(&tv, NULL) == -1)
-	{
-		// smth went wrong
-		return (-1);
-	}
-	return (tv.tv_sec * 1000000 + tv.tv_usec);
-}
-
-//atm bug FPS 0 at the very first frame
-//TODO display FPS (in bonus)
-static void	fps_counter(void)
-{
-	static int			frame_count = 0;
-	static long long	time_last_frame = 0;
-	long long			delta_time_usec;
-	float				delta_time_sec;
-	long long			current_time;
-	float				fps;
-
-	if (time_last_frame == 0)
-		time_last_frame = return_usecs_since_1970();
-	frame_count++;
-	current_time = return_usecs_since_1970();
-	delta_time_usec = current_time - time_last_frame;
-	delta_time_sec = (float)delta_time_usec / 1000000;
-	if (delta_time_usec / 1000 != 0)
-		fps = (float)1 / (delta_time_sec);
-	else
-		delta_time_usec = 1;
-	printf("%.1f FPS | Frame %d\n", fps, frame_count);
-	time_last_frame = return_usecs_since_1970();
 }
 
 // if i want to implement an FPS counter, i need to be aware that with the
@@ -93,6 +56,15 @@ int	game_loop(t_god *god)
 	return (1);
 }
 
+int mouse_function(void* param)
+{
+	t_god *god;
+	
+	god = (t_god*) param;
+	printf("Hello from mouse function\n");
+	return 0;
+}
+
 void	game_function(t_god *god)
 {
 	god->mlx = mlx_init();
@@ -107,6 +79,10 @@ void	game_function(t_god *god)
 	mlx_hook(god->mlx_win, KEYDOWN_EVENT, 1L << 0, (int (*)(void))key_press,
 		god);
 	mlx_hook(god->mlx_win, KEYUP_EVENT, 1L << 1, (int (*)(void))key_up, god);
+	
+	//mlx_hook(god->mlx_win, MOUSE_EVENT, 1L << 6, (int (*)(void))mouse_function, god);
+	
+	mlx_mouse_hook(god->mlx_win, (int (*)(void))mouse_function, god);
 	init_god(god);
 	mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
