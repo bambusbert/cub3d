@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/15 14:35:56 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 14:43:32 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:33:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	init_texture(t_god *god, t_texture *tex, char *path)
 	tex->img = mlx_xpm_file_to_image(god->mlx, path, &tex->width, &tex->height);
 	if (!(tex->img))
 		error_exit("Error\nerror in init_texture\n", god);
-	tex->img_addr = mlx_get_data_addr(tex->img, &tex->img_bits_per_pixel,
-			&tex->img_line_length, &tex->img_endian);
+	tex->img_addr = mlx_get_data_addr(tex->img, &tex->img_bpp,
+			&tex->img_ll, &tex->img_endian);
 }
 
 void	init_textures(t_god *god)

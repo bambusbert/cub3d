@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 17:05:08 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:33:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdbool.h>
-# include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
 
 # define WALL_CHAR 1
-// TODO #define PLAYER_CHAR 2 and check for that and not hardcoded 2
+# define PLAYER_CHAR 2	//TODO use that
 # define MAX_DIST_TO_WALL 0.2
 
 # define SPRITE_WALL_N "./sprites/wall_n.xpm"
@@ -46,8 +45,6 @@
 # define WSIZE_Y 600
 # define XCOORD 1
 # define YCOORD 2
-# define TILE_SIZE_X 32
-# define TILE_SIZE_Y 32
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -62,15 +59,17 @@
 # define COLOR_RED 0xFF0000
 # define COLOR_YELLOW 0xFFFF00
 # define COLOR_WHITE 0xFFFFFF
+# define COLOR_PIGGYPINK 0xFF77BA
+# define COLOR_GREY 0x555555
 # define COLOR_ERROR 0xDC3545
-# define COLOR_CEILING 0x555555
-# define COLOR_FLOOR 0xFF77BA
-# define COLOR_WALL COLOR_BLUE
 
-# define KEYDOWN_EVENT 2
-# define KEYUP_EVENT 3
-# define MOUSE_EVENT 6
-# define CLOSING_EVENT 17
+# define COLOR_CEILING COLOR_GREY
+# define COLOR_FLOOR COLOR_PIGGYPINK
+
+# define KEYDOWN_EV 2
+# define KEYUP_EV 3
+# define MOUSE_EV 6
+# define CLOSING_EV 17
 
 // BONUS
 # define MINIMAP_FACTOR 5
@@ -102,8 +101,8 @@ typedef struct s_texture
 	char			*img_addr;
 	int				width;
 	int				height;
-	int				img_bits_per_pixel;
-	int				img_line_length;
+	int				img_bpp;
+	int				img_ll;
 	int				img_endian;
 }					t_texture;
 
@@ -114,8 +113,8 @@ typedef struct s_god
 	// img stuff
 	void			*img;
 	char			*img_addr;
-	int				img_bits_per_pixel;
-	int				img_line_length;
+	int				img_bpp;
+	int				img_ll;
 	int				img_endian;
 
 	char			**map;
@@ -176,7 +175,7 @@ void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 void				fps_counter(void);
 int					mouse_function(void *param);
-int	mouse_move_function(int x, int y, void *param); // das in bonus
+int	mouse_move_function(int x, int y, void *param); //TODO das in bonus
 
 // cub3d.c
 void				render(t_god *god);
@@ -192,8 +191,7 @@ int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
 // helper.c
-void				dda_single_ray(t_god *god, t_dda *dda, float beam_angle,
-						int x);
+void				dda_single_ray(t_god *god, t_dda *dda, float angle, int x);
 void				visualize_2d_beam(t_god *god, t_dda *dda);
 void				normalize_angle(float *angle);
 

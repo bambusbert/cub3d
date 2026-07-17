@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 16:37:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:33:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	print_single_texel(t_god *god, t_ipoint p, t_fpoint texp, t_texture *tex)
 		tex_x_int = 0;
 	if (tex_y_int < 0)
 		tex_y_int = 0;
-	color = tex->img_addr + (tex_y_int * tex->img_line_length + tex_x_int
-			* (tex->img_bits_per_pixel / 8));
+	color = tex->img_addr + (tex_y_int * tex->img_ll + tex_x_int
+			* (tex->img_bpp / 8));
 	my_mlx_pixel_put(god, p.x, p.y, *(unsigned int *)color);
 }
 

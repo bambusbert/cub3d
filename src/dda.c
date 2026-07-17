@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 16:25:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:12:26 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ void	calc_distances(float angle_diff, t_dda *dda)
 }
 
 // dPerp = dEuclidian * cos(ray_angle - player_angle)
-void	dda_single_ray(t_god *god, t_dda *dda, float beam_angle, int x)
+void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 {
 	int		wall_height;
 	float	angle_diff;
 
 	dda_loop(god, dda);
 	// these angles should be normalized here
-	angle_diff = beam_angle - god->player_angle;
+	angle_diff = angle - god->player_angle;
 	calc_distances(angle_diff, dda);
 	wall_height = WSIZE_Y / dda->wall_dist;
 	draw_vertical(god, dda, wall_height, x);

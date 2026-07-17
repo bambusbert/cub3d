@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 14:14:42 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:29:46 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char **create_sample_map(t_god *god)
 }
 
 //TODO das kommt weg, die variablen werden von frido bwefüllt.
+//finde PLAYER_CHARACTER in der map und setze player_x und player_y.
 void debug_init_player(t_god *god)
 {
     god->player_x = 3;
@@ -159,6 +160,7 @@ int	mouse_function(void *param)
 }
 
 //TODO min offset definen in bonus
+//TODO kann das void sein? mlx?
 int	mouse_move_function(int x, int y, void *param)
 {
 	static int	delta_x = 0;

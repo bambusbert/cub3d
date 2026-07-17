@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 14:47:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 16:37:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:33:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
 
 	if (x < 0 || x >= WSIZE_X || y < 0 || y >= WSIZE_Y)
 		return ;
-	dst = god->img_addr + (y * god->img_line_length + x
-			* (god->img_bits_per_pixel / 8));
+	dst = god->img_addr + (y * god->img_ll + x
+			* (god->img_bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
