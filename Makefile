@@ -1,5 +1,6 @@
 # Project name
 NAME = cub3d
+NAME_BONUS = cub3d_bonus
 
 # Suppress directory change
 MAKEFLAGS += --no-print-directory
@@ -40,7 +41,10 @@ SRC =	src/cub3d.c \
 		src/dda.c \
 		src/dda_init.c
 
+BONUS_SRC = src/bonus.c
+
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+BONUS_OBJS =$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(BONUS_SRC))
 HEAD = inc/cub3d.h
 
 # Rules
@@ -54,6 +58,10 @@ $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBS) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)✅ $(NAME) Compiled successfully!"
 
+bonus: $(LIBFT) $(BONUS_OBJS)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(BONUS_OBJS) $(LIBS) $(MLX_FLAGS) -o $(NAME_BONUS)
+	@echo "$(GREEN)✅ $(NAME_BONUS) Compiled successfully!"
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEAD)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -65,12 +73,12 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_PATH) fclean
-	@rm -f $(NAME)
-	@echo "$(RED)🧹 $(NAME) removed!"
+	@rm -f $(NAME) $(NAME_BONUS)
+	@echo "$(RED)🧹 Executable(s) removed!"
 
 re: fclean all
 
 debug: CFLAGS += -g
 debug: re
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug bonus

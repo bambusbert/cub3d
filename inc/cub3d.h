@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 13:55:31 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 14:13:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct s_dda
 
 // debug.c - das kommt alles weg
 void				print_keys(t_god *god);
-char				**create_sample_map(t_god *p_god);
+char				**create_sample_map(t_god *god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 void				fps_counter(void);
@@ -181,7 +181,6 @@ void				render(t_god *god);
 
 // init.c
 void				init_god(t_god *god);
-void				initialize_map(t_god *p_god);
 
 // input_handling.c
 int					key_press(int keycode, void *param);
@@ -217,11 +216,11 @@ size_t				ft_putstr_fd(char *s, int fd);
 void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 
 // init_textures.c
-void				init_textures(t_god *p_god);
+void				init_textures(t_god *god);
 
 // cleanup.c
 void				close_window(t_god *god);
-void				error_exit(char *msg, t_god *p_god);
+void				error_exit(char *msg, t_god *god);
 
 // unsorted
 

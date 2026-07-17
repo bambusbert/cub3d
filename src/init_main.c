@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:22:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 12:49:02 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 14:13:13 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	init_god(t_god *god)
 	god->debug_mode = DEBUG_MODE;
 }
 
-// TODO ditch that function if we don't do other stuff in here
-void	initialize_map(t_god *p_god)
-{
-	init_textures(p_god);
-}
+// // TODO ditch that function if we don't do other stuff in here
+// void	initialize_map(t_god *god)
+// {
+// 	init_textures(god);
+// }

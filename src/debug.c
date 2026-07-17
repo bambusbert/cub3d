@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 12:53:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 14:14:42 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	print_keys(t_god *god)
     printf("Pixels per y: %d\n", god->pixels_per_y);
 }
 
-char **create_sample_map(t_god *p_god)
+char **create_sample_map(t_god *god)
 {
     int rows = 30;
     int cols = 20;
     
-    p_god->rows = rows;
-    p_god->cols = cols;
+    god->rows = rows;
+    god->cols = cols;
     
     // Player currently is 2
     char static_map[30][20] = {
@@ -191,13 +191,13 @@ int	mouse_move_function(int x, int y, void *param)
 
 	// TODO 3/4 is a placeholder, that's the position of the player in the sample map
 
-// int **create_sample_map(t_god *p_god)
+// int **create_sample_map(t_god *god)
 // {
 //     int rows = 30;
 //     int cols = 20;
 	
-// 	p_god->rows = rows;
-// 	p_god->cols = cols;
+// 	god->rows = rows;
+// 	god->cols = cols;
 // 	//Player currently is 2
 //     int static_map[30][20] = {
 //         {1, 1, 1, 1, 1, 1},

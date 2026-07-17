@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 12:50:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 14:13:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	game_function(t_god *god)
 	god->mlx = mlx_init();
 	if (!god->mlx)
 		error_exit("Error\nMLX init failed\n", god);
-	initialize_map(god);
+	init_textures(god);
 	god->mlx_win = mlx_new_window(god->mlx, WSIZE_X, WSIZE_Y, "cub3d");
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
@@ -84,14 +84,14 @@ void	game_function(t_god *god)
 // TODO argument check (one arg? correct file ending?)
 int	main(int argc, char **argv)
 {
-	t_god	*p_god;
+	t_god	*god;
 
 	(void)argc;
 	(void)argv;
-	p_god = ft_calloc(1, sizeof(t_god));
-	if (!p_god)
+	god = ft_calloc(1, sizeof(t_god));
+	if (!god)
 		return (printf("Error\nfirst malloc failed omg\n"), 1);
 	// FRIDO ENTRY POINT - parsing
-	p_god->map = create_sample_map(p_god);
-	game_function(p_god);
+	god->map = create_sample_map(god);
+	game_function(god);
 }
