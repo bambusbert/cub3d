@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 14:47:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 12:49:02 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:18:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_square(t_god *god, int row, int col)
 		cur_y = -1;
 		while (++cur_y < (int)god->pixels_per_y)
 		{
-			my_mlx_pixel_put(god, cur_x + start_x, cur_y + start_y, COLOR_BLUE);
+			my_mlx_pixel_put(god, cur_x / MINIMAP_FACTOR + start_x / MINIMAP_FACTOR, cur_y / MINIMAP_FACTOR + start_y / MINIMAP_FACTOR, COLOR_BLUE);
 		}
 	}
 }

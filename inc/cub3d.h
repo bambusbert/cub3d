@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 14:33:05 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:27:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 # define SPRITE_WALL_S "./sprites/wall_s.xpm"
 # define SPRITE_WALL_W "./sprites/wall_w.xpm"
 # define SPRITE_WALL_E "./sprites/wall_e.xpm"
-
-// if that is set to 1 than the minimap gets drawn instead of 3d view
-# define DEBUG_MODE 1
 
 # define PI 3.14159265
 # define LEFT -1
@@ -74,6 +71,10 @@
 # define KEYUP_EVENT 3
 # define MOUSE_EVENT 6
 # define CLOSING_EVENT 17
+
+//BONUS
+# define MINIMAP_FACTOR 5
+# define MINIMAP_BEAMS_DRAWN 120 //each nth ray is actually drawn
 
 enum				e_direction
 {
@@ -133,7 +134,7 @@ typedef struct s_god
 	float			player_angle;
 	float			player_angle_min;
 	float			player_angle_max;
-	bool			debug_mode;
+	//bool			debug_mode;
 	bool			key_w;
 	bool			key_a;
 	bool			key_s;

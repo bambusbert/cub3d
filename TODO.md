@@ -6,4 +6,5 @@
 	- rotation tick
 	- mouse rotation
 - separation of mandatory part and bonus
-- minimap: move to bonus and draw it in one corner of the visible image
+- minimap:	-move to bonus
+-			-fix bug that lower wall is not displayer correctly in the beginning

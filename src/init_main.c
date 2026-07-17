@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:22:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 14:13:13 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:25:58 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_god(t_god *god)
 	init_angles(god);
 	god->pixels_per_x = roundf(WSIZE_X / god->cols);
 	god->pixels_per_y = roundf(WSIZE_Y / god->rows);
-	god->debug_mode = DEBUG_MODE;
+	//god->debug_mode = DEBUG_MODE;
 }
 
 // // TODO ditch that function if we don't do other stuff in here

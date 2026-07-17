@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 14:48:14 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:25:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ void	render(t_god *god)
 {
 	//fps_counter();
 	ft_bzero(god->img_addr, WSIZE_Y * god->img_line_length);
-	if (god->debug_mode)
-		draw_2d_map(god);
 	dda_wrapper(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
+	draw_2d_map(god);
 }
 
 // this is the entry for the raycasting logic. will get executed once per frame
