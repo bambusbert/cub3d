@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 14:47:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 16:18:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:37:38 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
  *	4.	loop from i to step and increment by the values from 3.
  *		round to nearest pixel.
  */
-void	ft_draw_line(t_god *god, t_point p1, t_point p2, int color)
+void	ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2, int color)
 {
 	float		step;
 	t_fpoint	p;

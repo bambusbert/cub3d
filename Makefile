@@ -29,6 +29,7 @@ OBJ_DIR = obj
 
 # Source files
 SRC =	src/cub3d.c \
+		src/check_input.c \
 		src/cleanup.c \
 		src/input_handling.c \
 		src/debug.c \

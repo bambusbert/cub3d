@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 12:49:02 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:37:38 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_2d_map(t_god *god)
 	}
 }
 
-void	print_single_texel(t_god *god, t_point p, t_fpoint texp, t_texture *tex)
+void	print_single_texel(t_god *god, t_ipoint p, t_fpoint texp, t_texture *tex)
 {
 	char	*color;
 	int		tex_x_int;
@@ -86,7 +86,7 @@ void	draw_wall_texture_slice(t_god *god, int x, t_dda *dda)
 	tex_y = (dda->wall_start - unclamped_wall_start) * step;
 	while (dda->wall_start <= dda->wall_end)
 	{
-		print_single_texel(god, (t_point){x, dda->wall_start}, (t_fpoint){tex_x,
+		print_single_texel(god, (t_ipoint){x, dda->wall_start}, (t_fpoint){tex_x,
 			tex_y}, tex);
 		tex_y += step;
 		dda->wall_start++;
@@ -112,10 +112,10 @@ void	draw_vertical(t_god *god, t_dda *dda, float wall_len, int x)
 		dda->wall_start = 0;
 	if (dda->wall_end >= WSIZE_Y || dda->wall_end < 0)
 		dda->wall_end = WSIZE_Y - 1;
-	ft_draw_line(god, (t_point){x, 0}, (t_point){x, dda->wall_start - 1},
+	ft_draw_line(god, (t_ipoint){x, 0}, (t_ipoint){x, dda->wall_start - 1},
 		COLOR_CEILING);
 	dda->wall_len = wall_len;
 	draw_wall_texture_slice(god, x, dda);
-	ft_draw_line(god, (t_point){x, dda->wall_end + 1}, (t_point){x,
+	ft_draw_line(god, (t_ipoint){x, dda->wall_end + 1}, (t_ipoint){x,
 		WSIZE_Y}, COLOR_FLOOR);
 }

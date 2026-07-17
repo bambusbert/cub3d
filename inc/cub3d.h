@@ -6,13 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 16:27:44 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:05:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
 # include <stdbool.h>
@@ -52,7 +53,6 @@
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
-# define KEY_T 116
 # define KEY_D 100
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -72,9 +72,9 @@
 # define MOUSE_EVENT 6
 # define CLOSING_EVENT 17
 
-//BONUS
+// BONUS
 # define MINIMAP_FACTOR 5
-# define MINIMAP_BEAMS_DRAWN 120 //each nth ray is actually drawn
+# define MINIMAP_BEAMS_DRAWN 70 // each nth ray is actually drawn
 
 enum				e_direction
 {
@@ -84,11 +84,11 @@ enum				e_direction
 	WEST
 };
 
-typedef struct s_point
+typedef struct s_ipoint
 {
 	int				x;
 	int				y;
-}					t_point;
+}					t_ipoint;
 
 typedef struct s_fpoint
 {
@@ -134,7 +134,7 @@ typedef struct s_god
 	float			player_angle;
 	float			player_angle_min;
 	float			player_angle_max;
-	//bool			debug_mode;
+	// bool			debug_mode;
 	bool			key_w;
 	bool			key_a;
 	bool			key_s;
@@ -176,9 +176,13 @@ void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 void				fps_counter(void);
 int					mouse_function(void *param);
-int					mouse_move_function(int x, int y, void *param);	//das in bonus
+int	mouse_move_function(int x, int y, void *param); // das in bonus
+
 // cub3d.c
 void				render(t_god *god);
+
+// check_input.c
+void				check_input(int argc, char **argv);
 
 // init.c
 void				init_god(t_god *god);
@@ -202,7 +206,8 @@ void				draw_vertical(t_god *god, t_dda *dda, float wall_len,
 // draw_helper.c
 void				draw_square(t_god *god, int row, int col);
 void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
-void				ft_draw_line(t_god *god, t_point p1, t_point p2, int color);
+void				ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2,
+						int color);
 
 // movement.c
 int					position_manager(t_god *god);
@@ -212,6 +217,9 @@ void				update_player_angle(t_god *god, int direction);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t nmemb, size_t size);
 size_t				ft_putstr_fd(char *s, int fd);
+size_t				ft_strlen(const char *str);
+char				*ft_strrchr(const char *s, int c);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // dda_init.c
 void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);

@@ -1,10 +1,6 @@
 - FPS counter in HUD - BONUS
 - if FOV bigger: distorts the walls, wtf
-- change some variables on-the-fly with keys
-	- FOV
-	- speed
-	- rotation tick
-	- mouse rotation
 - separation of mandatory part and bonus
 - minimap:	-move to bonus
--			-fix bug that lower wall is not displayer correctly in the beginning
+			-fix bug that lower wall is not displayer correctly in the beginning
+			- change beam length to fixed
