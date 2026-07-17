@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 16:25:43 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:49:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	draw_wall_texture_slice(t_god *god, int x, t_dda *dda)
 		tex_x = 1 - tex_x;
 	tex = set_tex(god, dda);
 	step = 1.0 / dda->wall_len;
-	unclamped_wall_start = (WINDOW_SIZE_Y / 2) - (dda->wall_len / 2);
+	unclamped_wall_start = (WSIZE_Y / 2) - (dda->wall_len / 2);
 	tex_y = (dda->wall_start - unclamped_wall_start) * step;
 	while (dda->wall_start <= dda->wall_end)
 	{
@@ -101,21 +101,21 @@ void	draw_vertical(t_god *god, t_dda *dda, float wall_len, int x)
 {
 	int	middle;
 
-	middle = WINDOW_SIZE_Y / 2;
+	middle = WSIZE_Y / 2;
 	dda->wall_start = middle - wall_len / 2;
 	dda->wall_end = middle + wall_len / 2;
 	if (dda->wall_start < 0)
 		dda->wall_start = 0;
-	if (dda->wall_end >= WINDOW_SIZE_Y)
-		dda->wall_end = WINDOW_SIZE_Y - 1;
-	if (dda->wall_start < 0 || dda->wall_start > WINDOW_SIZE_Y)
+	if (dda->wall_end >= WSIZE_Y)
+		dda->wall_end = WSIZE_Y - 1;
+	if (dda->wall_start < 0 || dda->wall_start > WSIZE_Y)
 		dda->wall_start = 0;
-	if (dda->wall_end >= WINDOW_SIZE_Y || dda->wall_end < 0)
-		dda->wall_end = WINDOW_SIZE_Y - 1;
+	if (dda->wall_end >= WSIZE_Y || dda->wall_end < 0)
+		dda->wall_end = WSIZE_Y - 1;
 	ft_draw_line(god, (t_point){x, 0}, (t_point){x, dda->wall_start - 1},
 		COLOR_CEILING);
 	dda->wall_len = wall_len;
 	draw_wall_texture_slice(god, x, dda);
 	ft_draw_line(god, (t_point){x, dda->wall_end + 1}, (t_point){x,
-		WINDOW_SIZE_Y}, COLOR_FLOOR);
+		WSIZE_Y}, COLOR_FLOOR);
 }

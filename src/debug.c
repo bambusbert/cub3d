@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 18:15:46 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:53:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,47 @@ void	fps_counter(void)
 	printf("%.1f FPS | Frame %d\n", fps, frame_count);
 	time_last_frame = return_usecs_since_1970();
 }
+
+int	mouse_function(void *param)
+{
+	t_god	*god;
+
+	god = (t_god *)param;
+	printf("Hello from mouse function\n");
+	return (0);
+}
+
+//TODO min offset definen in bonus
+int	mouse_move_function(int x, int y, void *param)
+{
+	static int	delta_x = 0;
+	int			min_offset;
+	t_god		*god;
+
+	min_offset = 10;
+	god = (t_god *)param;
+	mlx_mouse_hide(god->mlx, god->mlx_win);
+	if (x > WSIZE_X / 2)
+		delta_x++;
+	else if (x < WSIZE_X / 2)
+		delta_x--;
+	if (delta_x >= min_offset)
+	{
+		update_player_angle(god, RIGHT);
+		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
+		render(god);
+		delta_x = 0;
+	}
+	else if (delta_x <= min_offset * -1)
+	{
+		update_player_angle(god, LEFT);
+		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
+		render(god);
+		delta_x = 0;
+	}
+	return (0);
+}
+
 	// TODO 3/4 is a placeholder, that's the position of the player in the sample map
 
 // int **create_sample_map(t_god *p_god)

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 18:27:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:49:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	dda_single_ray(t_god *god, t_dda *dda, float beam_angle, int x)
 	// these angles should be normalized here
 	angle_diff = beam_angle - god->player_angle;
 	calc_distances(angle_diff, dda);
-	wall_height = WINDOW_SIZE_Y / dda->wall_dist;
+	wall_height = WSIZE_Y / dda->wall_dist;
 	// if (god->debug_mode)
 	visualize_2d_beam(god, dda);
 	if (!god->debug_mode)
@@ -144,10 +144,10 @@ void	dda_wrapper(t_god *god)
 
 	// Divide the total FOV by the screen width to get the angle 
 	// per pixel column
-	angle_step = ANGLE_OFFSET * 2 / WINDOW_SIZE_X;
+	angle_step = ANGLE_OFFSET * 2 / WSIZE_X;
 	angle_to_draw = god->player_angle_min;
 	x = -1;
-	while (++x < WINDOW_SIZE_X)
+	while (++x < WSIZE_X)
 	{
 		normalize_angle(&angle_to_draw);
 		init_dda_struct(&dda, god, angle_to_draw);

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 14:47:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 16:20:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:49:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= WINDOW_SIZE_X || y < 0 || y >= WINDOW_SIZE_Y)
+	if (x < 0 || x >= WSIZE_X || y < 0 || y >= WSIZE_Y)
 		return ;
 	dst = god->img_addr + (y * god->img_line_length + x
 			* (god->img_bits_per_pixel / 8));

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 19:08:49 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 13:55:31 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define SENSITIVITY 0.015
 # define MOVE_TICK 0.025
 
-# define WINDOW_SIZE_X 800
-# define WINDOW_SIZE_Y 600
+# define WSIZE_X 800
+# define WSIZE_Y 600
 # define XCOORD 1
 # define YCOORD 2
 # define TILE_SIZE_X 32
@@ -174,7 +174,8 @@ char				**create_sample_map(t_god *p_god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 void				fps_counter(void);
-
+int					mouse_function(void *param);
+int					mouse_move_function(int x, int y, void *param);	//das in bonus
 // cub3d.c
 void				render(t_god *god);
 

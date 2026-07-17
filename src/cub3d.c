@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 19:10:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:50:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	rotation_manager(t_god *god)
 void	render(t_god *god)
 {
 	fps_counter();
-	ft_bzero(god->img_addr, WINDOW_SIZE_Y * god->img_line_length);
+	ft_bzero(god->img_addr, WSIZE_Y * god->img_line_length);
 	if (god->debug_mode)
 		draw_2d_map(god);
 	dda_wrapper(god);
@@ -56,33 +56,24 @@ int	game_loop(t_god *god)
 	return (1);
 }
 
-int mouse_function(void* param)
-{
-	t_god *god;
-	
-	god = (t_god*) param;
-	printf("Hello from mouse function\n");
-	return 0;
-}
-
 void	game_function(t_god *god)
 {
 	god->mlx = mlx_init();
 	if (!god->mlx)
 		error_exit("Error\nMLX init failed\n", god);
 	initialize_map(god);
-	god->mlx_win = mlx_new_window(god->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y,
-			"cub3d");
+	god->mlx_win = mlx_new_window(god->mlx, WSIZE_X, WSIZE_Y, "cub3d");
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
 	mlx_hook(god->mlx_win, CLOSING_EVENT, 0, (int (*)(void))close_window, god);
 	mlx_hook(god->mlx_win, KEYDOWN_EVENT, 1L << 0, (int (*)(void))key_press,
 		god);
 	mlx_hook(god->mlx_win, KEYUP_EVENT, 1L << 1, (int (*)(void))key_up, god);
-	
-	//mlx_hook(god->mlx_win, MOUSE_EVENT, 1L << 6, (int (*)(void))mouse_function, god);
-	
-	mlx_mouse_hook(god->mlx_win, (int (*)(void))mouse_function, god);
+	// this works on mouse click
+	//mlx_mouse_hook(god->mlx_win, (int (*)(void))mouse_function, god);
+	// this on mouse move
+	mlx_hook(god->mlx_win, MOUSE_EVENT, 1L << 6,
+		(int (*)(void))mouse_move_function, god);
 	init_god(god);
 	mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
