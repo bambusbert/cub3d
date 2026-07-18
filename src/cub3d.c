@@ -6,21 +6,20 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 13:30:08 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/18 14:00:38 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	rotation_manager(t_god *god)
+void	rotation_manager(t_god *god)
 {
 	if (god->key_left && god->key_right)
-		return (0);
+		return ;
 	if (god->key_left)
-		return (update_player_angle(god, LEFT), 1);
+		return (update_player_angle(god, LEFT));
 	if (god->key_right)
-		return (update_player_angle(god, RIGHT), 1);
-	return (0);
+		return (update_player_angle(god, RIGHT));
 }
 
 // if i want to implement an FPS counter, i need to be aware that with the
@@ -30,7 +29,7 @@ int	rotation_manager(t_god *god)
 // TODO remove the frame count var & printf
 void	render(t_god *god)
 {
-	// fps_counter();
+	fps_counter();
 	ft_bzero(god->img_addr, WSIZE_Y * god->img_ll);
 	dda_wrapper(god);
 	draw_2d_map(god);
@@ -43,15 +42,9 @@ void	render(t_god *god)
 // only on any key press?
 int	game_loop(t_god *god)
 {
-	int	ret_rot;
-	int	ret_pos;
-
-	ret_rot = 0;
-	ret_pos = 0;
-	ret_rot = rotation_manager(god);
-	ret_pos = position_manager(god);
-	//if (ret_rot || ret_pos)
-		render(god);
+	rotation_manager(god);
+	position_manager(god);
+	render(god);
 	return (1);
 }
 

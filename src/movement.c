@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 16:28:59 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/18 13:59:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,30 @@ static int	move_horizontal(t_god *god, int dir)
 // we can't change the players position each time bc the game would be way
 // too fast like that. should we implement some kind of tick? static var?
 // or is there some mlx magic we can use
-int	position_manager(t_god *god)
+void	position_manager(t_god *god)
 {
-	int	moved;
-
-	moved = 0;
 	if (god->key_w && !god->key_s)
-		moved |= move_vertical(god, FORWARD);
+		move_vertical(god, FORWARD);
 	if (god->key_s && !god->key_w)
-		moved |= move_vertical(god, BACK);
+		move_vertical(god, BACK);
 	if (god->key_d && !god->key_a)
-		moved |= move_horizontal(god, RIGHT);
+		move_horizontal(god, RIGHT);
 	if (god->key_a && !god->key_d)
-		moved |= move_horizontal(god, LEFT);
-	return (moved);
+		move_horizontal(god, LEFT);
 }
+
+// void	position_manager(t_god *god)
+// {
+// 	int	moved;
+
+// 	moved = 0;
+// 	if (god->key_w && !god->key_s)
+// 		moved |= move_vertical(god, FORWARD);
+// 	if (god->key_s && !god->key_w)
+// 		moved |= move_vertical(god, BACK);
+// 	if (god->key_d && !god->key_a)
+// 		moved |= move_horizontal(god, RIGHT);
+// 	if (god->key_a && !god->key_d)
+// 		moved |= move_horizontal(god, LEFT);
+// 	return (moved);
+// }

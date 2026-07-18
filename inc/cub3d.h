@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 13:55:50 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/18 13:59:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void				ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2,
 						int color);
 
 // movement.c
-int					position_manager(t_god *god);
+void					position_manager(t_god *god);
 void				update_player_angle(t_god *god, int direction);
 
 // libft
