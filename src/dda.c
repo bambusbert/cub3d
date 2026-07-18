@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 17:12:26 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/18 13:55:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	calc_distances(float angle_diff, t_dda *dda)
 }
 
 // dPerp = dEuclidian * cos(ray_angle - player_angle)
-void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
+void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x, bool draw)
 {
 	int		wall_height;
 	float	angle_diff;
@@ -130,7 +130,7 @@ void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 	calc_distances(angle_diff, dda);
 	wall_height = WSIZE_Y / dda->wall_dist;
 	draw_vertical(god, dda, wall_height, x);
-	visualize_2d_beam(god, dda);
+	dda_2d_beam(god, dda, draw);
 }
 
 void	dda_wrapper(t_god *god)
@@ -139,6 +139,7 @@ void	dda_wrapper(t_god *god)
 	float	angle_to_draw;
 	float	angle_step;
 	int		x;
+	bool	draw;
 
 	// Divide the total FOV by the screen width to get the angle 
 	// per pixel column
@@ -147,9 +148,12 @@ void	dda_wrapper(t_god *god)
 	x = -1;
 	while (++x < WSIZE_X)
 	{
+		draw = false;
+		if (x % MINIMAP_BEAMS_DRAWN == 0)
+			draw = true;
 		normalize_angle(&angle_to_draw);
 		init_dda_struct(&dda, god, angle_to_draw);
-		dda_single_ray(god, &dda, angle_to_draw, x);
+		dda_single_ray(god, &dda, angle_to_draw, x, draw);
 		angle_to_draw += angle_step;
 	}
 }

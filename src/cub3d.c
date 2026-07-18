@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 17:33:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/18 13:30:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	game_loop(t_god *god)
 	ret_pos = 0;
 	ret_rot = rotation_manager(god);
 	ret_pos = position_manager(god);
-	if (ret_rot || ret_pos)
+	//if (ret_rot || ret_pos)
 		render(god);
 	return (1);
 }

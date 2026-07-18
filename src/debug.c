@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 17:29:46 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/18 13:21:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_keys(t_god *god)
 {
-	//static long long x = 0;
+	// static long long x = 0;
 	// if (x++ % 5 != 0)     //only print each 50th function call
 	// 	return ;
 	printf("Key: W | Status: %d\n", god->key_w);
@@ -26,107 +26,108 @@ void	print_keys(t_god *god)
 	printf("Player x coordinate: %.2f\n", god->player_x);
 	printf("Player y coordinate: %.2f\n", god->player_y);
 	printf("Player Angle: %.3f\n", god->player_angle);
-    printf("Player Angle min: %.3f\n", god->player_angle_min);
-    printf("Player Angle max: %.3f\n", god->player_angle_max);
-    printf("Pixels per x: %d\n", god->pixels_per_x);
-    printf("Pixels per y: %d\n", god->pixels_per_y);
+	printf("Player Angle min: %.3f\n", god->player_angle_min);
+	printf("Player Angle max: %.3f\n", god->player_angle_max);
+	printf("Pixels per x: %d\n", god->pixels_per_x);
+	printf("Pixels per y: %d\n", god->pixels_per_y);
 }
 
-char **create_sample_map(t_god *god)
+char	**create_sample_map(t_god *god)
 {
-    int rows = 30;
-    int cols = 20;
-    
-    god->rows = rows;
-    god->cols = cols;
-    
-    // Player currently is 2
-    char static_map[30][20] = {
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-    };
-    
-    char **map = (char**)ft_calloc(rows + 1, sizeof(char*));
-    if (!map)
-        return NULL;
-        
-    for (int i = 0; i < rows; i++)
-    {
-        map[i] = (char*)ft_calloc(cols, sizeof(char));
-        if (!map[i])
-            return NULL; 
-            
-        for (int j = 0; j < cols; j++)
-            map[i][j] = static_map[i][j];
-    }
-    
-    return map;
+	int		rows;
+	int		cols;
+	char	**map;
+
+	rows = 30;
+	cols = 20;
+	god->rows = rows;
+	god->cols = cols;
+	// Player currently is 2
+	char static_map[30][20] = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+		1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 1}, {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0,
+		0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 1,
+		1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0, 1},
+								{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+									0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 1, 1, 1, 1,
+									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+	map = (char **)ft_calloc(rows + 1, sizeof(char *));
+	if (!map)
+		return (NULL);
+	for (int i = 0; i < rows; i++)
+	{
+		map[i] = (char *)ft_calloc(cols, sizeof(char));
+		if (!map[i])
+			return (NULL);
+		for (int j = 0; j < cols; j++)
+			map[i][j] = static_map[i][j];
+	}
+	return (map);
 }
 
-//TODO das kommt weg, die variablen werden von frido bwefüllt.
-//finde PLAYER_CHARACTER in der map und setze player_x und player_y.
-void debug_init_player(t_god *god)
+// TODO das kommt weg, die variablen werden von frido bwefüllt.
+// finde PLAYER_CHARACTER in der map und setze player_x und player_y.
+void	debug_init_player(t_god *god)
 {
-    god->player_x = 3;
-    god->player_y = 4;
-    god->player_start_direction = WEST;
+	god->player_x = 3;
+	god->player_y = 4;
+	god->player_start_direction = WEST;
 }
 
-int return_wall_color(int which_wall_hit)
+// TODO das kommt weg, überbleibsel aus untextured raycaster
+int	return_wall_color(int which_wall_hit)
 {
-    if (which_wall_hit == NORTH)
-        return COLOR_ORANGE;
-    if (which_wall_hit == EAST)
-        return COLOR_RED;
-    if (which_wall_hit == SOUTH)
-        return COLOR_YELLOW;
-    if (which_wall_hit == WEST)
-        return COLOR_WHITE;
-    return COLOR_ERROR;
+	if (which_wall_hit == NORTH)
+		return (COLOR_ORANGE);
+	if (which_wall_hit == EAST)
+		return (COLOR_RED);
+	if (which_wall_hit == SOUTH)
+		return (COLOR_YELLOW);
+	if (which_wall_hit == WEST)
+		return (COLOR_WHITE);
+	return (COLOR_ERROR);
 }
 
+// TODO kommt weg, für FPS counter.
+// wenn ich das noch brauche, gettimeofday error handling
 static long long	return_usecs_since_1970(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) == -1)
-	{
-		// smth went wrong
 		return (-1);
-	}
 	return (tv.tv_sec * 1000000 + tv.tv_usec);
 }
 
-//atm bug FPS 0 at the very first frame
-//TODO display FPS (in bonus)
+//TODO kommt weg
+// atm bug FPS 0 at the very first frame
 void	fps_counter(void)
 {
 	static int			frame_count = 0;
@@ -150,54 +151,80 @@ void	fps_counter(void)
 	time_last_frame = return_usecs_since_1970();
 }
 
-int	mouse_function(void *param)
-{
-	t_god	*god;
-
-	god = (t_god *)param;
-	printf("Hello from mouse function\n");
-	return (0);
-}
-
-//TODO min offset definen in bonus
-//TODO kann das void sein? mlx?
+// TODO min offset definen in bonus
+// TODO kann das void sein? mlx?
 int	mouse_move_function(int x, int y, void *param)
 {
-	static int	delta_x = 0;
-	int			min_offset;
+	static int	count = 0;
 	t_god		*god;
 
-	min_offset = 10;
+	if (count++ < 15)
+		return (0);
 	god = (t_god *)param;
 	mlx_mouse_hide(god->mlx, god->mlx_win);
 	if (x > WSIZE_X / 2)
-		delta_x++;
-	else if (x < WSIZE_X / 2)
-		delta_x--;
-	if (delta_x >= min_offset)
 	{
 		update_player_angle(god, RIGHT);
 		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
 		render(god);
-		delta_x = 0;
 	}
-	else if (delta_x <= min_offset * -1)
+	else if (x < WSIZE_X / 2)
 	{
 		update_player_angle(god, LEFT);
 		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
 		render(god);
-		delta_x = 0;
 	}
+	count = 0;
 	return (0);
 }
 
-	// TODO 3/4 is a placeholder, that's the position of the player in the sample map
+// int	mouse_function(void *param)
+// {
+// 	t_god	*god;
+
+// 	god = (t_god *)param;
+// 	printf("Hello from mouse function\n");
+// 	return (0);
+// }
+
+// int	mouse_move_function(int x, int y, void *param)
+// {
+// 	static int	delta_x = 0;
+// 	int			min_offset;
+// 	t_god		*god;
+
+// 	min_offset = 10;
+// 	god = (t_god *)param;
+// 	mlx_mouse_hide(god->mlx, god->mlx_win);
+// 	if (x > WSIZE_X / 2)
+// 		delta_x++;
+// 	else if (x < WSIZE_X / 2)
+// 		delta_x--;
+// 	if (delta_x >= min_offset)
+// 	{
+// 		update_player_angle(god, RIGHT);
+// 		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
+// 		render(god);
+// 		delta_x = 0;
+// 	}
+// 	else if (delta_x <= min_offset * -1)
+// 	{
+// 		update_player_angle(god, LEFT);
+// 		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
+// 		render(god);
+// 		delta_x = 0;
+// 	}
+// 	return (0);
+// }
+
+// TODO 3/4 is a placeholder,
+//that's the position of the player in the sample map
 
 // int **create_sample_map(t_god *god)
 // {
 //     int rows = 30;
 //     int cols = 20;
-	
+
 // 	god->rows = rows;
 // 	god->cols = cols;
 // 	//Player currently is 2
@@ -212,14 +239,14 @@ int	mouse_move_function(int x, int y, void *param)
 //     };
 //     int **map = (int**)ft_calloc(rows + 1, sizeof(int*));
 //     if (!map)
-//         return NULL;
+//         return (NULL);
 //     for (int i = 0; i < rows; i++)
 //     {
 //         map[i] = (int*)ft_calloc(cols, sizeof(int));
 //         if (!map[i])
-//             return NULL; 
+//             return (NULL);
 //         for (int j = 0; j < cols; j++)
 //             map[i][j] = static_map[i][j];
 //     }
-//     return map;
+//     return (map);
 // }
