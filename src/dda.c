@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 13:55:37 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:54:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
  * 			of ray and player angle) and finally draw the vertical
  * 			line.
  */
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 void	wall_was_hit(t_dda *dda)
 {

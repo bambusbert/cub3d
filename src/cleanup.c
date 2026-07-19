@@ -6,11 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 14:51:06 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:54:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 void	free_god_struct(t_god *god)
 {

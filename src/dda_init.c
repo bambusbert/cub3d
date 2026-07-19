@@ -6,11 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/01 12:45:32 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/16 16:14:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:54:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 static void	init_dda_step_and_next(t_god *god, t_dda *dda)
 {
