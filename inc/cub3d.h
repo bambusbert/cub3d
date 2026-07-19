@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:42:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:49:40 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_god
 {
 	void			*mlx;
 	void			*mlx_win;
-	long long		time_last_frame_usec;
+	long		time_last_frame_usec;
 	float			time_since_last_frame_sec;
 	// img stuff
 	void			*img;
@@ -181,7 +181,6 @@ void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 void	fps_counter(t_god *god);
 int					mouse_function(void *param);
-long long	return_usecs_since_1970(void);
 int	mouse_move_function(int x, int y, void *param); //TODO das in bonus
 
 // cub3d.c
@@ -231,6 +230,10 @@ void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 
 // init_textures.c
 void				init_textures(t_god *god);
+
+//time.c
+long				return_usecs_since_1970(void);
+void				update_time_since_last_frame(t_god *god);
 
 // cleanup.c
 void				close_window(t_god *god);

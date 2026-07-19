@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:16:08 by slambert          #+#    #+#             */
-/*   Updated: 2025/10/10 16:07:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:48:22 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int			sign_handler(const char *nptr);
 int	ft_atoi(const char *nptr)
 {
 	int			i;
-	long long	num;
+	long	num;
 	int			minus;
 
 	if (!nptr)

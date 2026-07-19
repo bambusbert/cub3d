@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:42:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:49:17 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ void	render(t_god *god)
 	draw_2d_map(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
 	god->time_last_frame_usec = return_usecs_since_1970();
-}
-
-void update_time_since_last_frame(t_god *god)
-{
-	long long cur_time_usec;
-
-	cur_time_usec = return_usecs_since_1970();
-	god->time_since_last_frame_sec = (float)(cur_time_usec - god->time_last_frame_usec) / 1000000;
 }
 
 int	game_loop(t_god *god)

@@ -40,7 +40,8 @@ SRC =	src/cub3d.c \
 		src/draw_helper.c \
 		src/movement.c \
 		src/dda.c \
-		src/dda_init.c
+		src/dda_init.c \
+		src/time.c
 
 BONUS_SRC = src/bonus.c
 
