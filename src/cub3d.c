@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 14:00:38 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:42:21 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,28 @@ void	rotation_manager(t_god *god)
 // OR is FPS considered how many times per second game_loop runs?
 // possible FPS counter here, gettimeofday is allowed
 // TODO remove the frame count var & printf
+// TODO frame cap? e.g. 60Hz
 void	render(t_god *god)
 {
-	fps_counter();
+	fps_counter(god);
 	ft_bzero(god->img_addr, WSIZE_Y * god->img_ll);
 	dda_wrapper(god);
 	draw_2d_map(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
+	god->time_last_frame_usec = return_usecs_since_1970();
 }
 
-// this is the entry for the raycasting logic. will get executed once per frame
-//(do we have fixed fps? or is it just a while(1) loop?)
-// theoretically i don't have to render on a fixed time interval but
-// only on any key press?
+void update_time_since_last_frame(t_god *god)
+{
+	long long cur_time_usec;
+
+	cur_time_usec = return_usecs_since_1970();
+	god->time_since_last_frame_sec = (float)(cur_time_usec - god->time_last_frame_usec) / 1000000;
+}
+
 int	game_loop(t_god *god)
 {
+	update_time_since_last_frame(god);
 	rotation_manager(god);
 	position_manager(god);
 	render(god);
@@ -57,13 +64,13 @@ void	game_function(t_god *god)
 	god->mlx_win = mlx_new_window(god->mlx, WSIZE_X, WSIZE_Y, "cub3d");
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
-	mlx_hook(god->mlx_win, CLOSING_EV, 0, (int (*)(void))close_window, god);
-	mlx_hook(god->mlx_win, KEYDOWN_EV, 1L << 0, (int (*)(void))key_press, god);
-	mlx_hook(god->mlx_win, KEYUP_EV, 1L << 1, (int (*)(void))key_up, god);
+	mlx_hook(god->mlx_win, CLOSING_EV, NO_EV_MASK, (int (*)(void))close_window, god);
+	mlx_hook(god->mlx_win, KEYDOWN_EV, KEY_PRESS_MASK, (int (*)(void))key_press, god);
+	mlx_hook(god->mlx_win, KEYUP_EV, KEY_RELEASE_MASK, (int (*)(void))key_up, god);
 	// this works on mouse click
 	// mlx_mouse_hook(god->mlx_win, (int (*)(void))mouse_function, god);
 	// this on mouse move
-	mlx_hook(god->mlx_win, MOUSE_EV, 1L << 6,
+	mlx_hook(god->mlx_win, MOUSE_EV, POINTER_MOTION_MASK,
 		(int (*)(void))mouse_move_function, god);
 	init_god(god);
 	mlx_do_key_autorepeatoff(god->mlx);

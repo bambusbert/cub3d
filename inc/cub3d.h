@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 13:59:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:42:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # define RIGHT 1
 # define FORWARD 1
 # define BACK -1
-//# define ANGLE_FRACTION 0.0175 // equals 1 degree
 # define ANGLE_OFFSET 0.5 // defines FOV / 2
-# define SENSITIVITY 0.015
-# define MOVE_TICK 0.025
+# define SENSITIVITY 100
+# define MOVE_TICK 150
+# define FPS_CAP 60	//TODO implement fps cap or remove
 
 # define WSIZE_X 800
 # define WSIZE_Y 600
@@ -70,6 +70,10 @@
 # define KEYUP_EV 3
 # define MOUSE_EV 6
 # define CLOSING_EV 17
+# define NO_EV_MASK 0
+# define KEY_PRESS_MASK 1L << 0
+# define KEY_RELEASE_MASK 1L << 1
+# define POINTER_MOTION_MASK 1L << 6
 
 // BONUS
 # define MINIMAP_FACTOR 5
@@ -110,6 +114,8 @@ typedef struct s_god
 {
 	void			*mlx;
 	void			*mlx_win;
+	long long		time_last_frame_usec;
+	float			time_since_last_frame_sec;
 	// img stuff
 	void			*img;
 	char			*img_addr;
@@ -168,13 +174,14 @@ typedef struct s_dda
 	int				wall_len;
 }					t_dda;
 
-// debug.c - das kommt alles weg
+// debug.c - das kommt alles weg oder in bonus
 void				print_keys(t_god *god);
 char				**create_sample_map(t_god *god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
-void				fps_counter(void);
+void	fps_counter(t_god *god);
 int					mouse_function(void *param);
+long long	return_usecs_since_1970(void);
 int	mouse_move_function(int x, int y, void *param); //TODO das in bonus
 
 // cub3d.c

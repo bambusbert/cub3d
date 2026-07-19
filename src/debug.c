@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 13:21:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:39:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int	return_wall_color(int which_wall_hit)
 
 // TODO kommt weg, für FPS counter.
 // wenn ich das noch brauche, gettimeofday error handling
-static long long	return_usecs_since_1970(void)
+//actually i need it for time based rendering
+long long	return_usecs_since_1970(void)
 {
 	struct timeval	tv;
 
@@ -127,8 +128,8 @@ static long long	return_usecs_since_1970(void)
 }
 
 //TODO kommt weg
-// atm bug FPS 0 at the very first frame
-void	fps_counter(void)
+// atm bug at the very first frame
+void	fps_counter(t_god *god)
 {
 	static int			frame_count = 0;
 	static long long	time_last_frame = 0;
@@ -147,12 +148,11 @@ void	fps_counter(void)
 		fps = (float)1 / (delta_time_sec);
 	else
 		delta_time_usec = 1;
-	printf("%.1f FPS | Frame %d\n", fps, frame_count);
+	printf("%.1f FPS | Frame %d | t_s_l_f: %f\n", fps, frame_count, god->time_since_last_frame_sec);
 	time_last_frame = return_usecs_since_1970();
 }
 
 // TODO min offset definen in bonus
-// TODO kann das void sein? mlx?
 int	mouse_move_function(int x, int y, void *param)
 {
 	static int	count = 0;

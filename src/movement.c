@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 13:59:44 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/19 14:36:35 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	update_player_angle(t_god *god, int direction)
 {
 	if (direction == LEFT)
-		god->player_angle -= SENSITIVITY;
+		god->player_angle -= SENSITIVITY * god->time_since_last_frame_sec;
 	else if (direction == RIGHT)
-		god->player_angle += SENSITIVITY;
+		god->player_angle += SENSITIVITY * god->time_since_last_frame_sec;
 	normalize_angle(&god->player_angle);
 	god->player_angle_min = god->player_angle - ANGLE_OFFSET;
 	normalize_angle(&god->player_angle_min);
@@ -53,8 +53,8 @@ static int	move_vertical(t_god *god, int dir)
 	float	dx;
 	float	dy;
 
-	dx = MOVE_TICK * cos(god->player_angle) * dir;
-	dy = MOVE_TICK * sin(god->player_angle) * dir;
+	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle) * dir;
+	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle) * dir;
 	if (!move_possible(god, dx, dy))
 		return (0);
 	god->player_x += dx;
@@ -67,8 +67,8 @@ static int	move_horizontal(t_god *god, int dir)
 	float	dx;
 	float	dy;
 
-	dx = MOVE_TICK * cos(god->player_angle + (PI / 2)) * dir;
-	dy = MOVE_TICK * sin(god->player_angle + (PI / 2)) * dir;
+	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle + (PI / 2)) * dir;
+	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle + (PI / 2)) * dir;
 	if (!move_possible(god, dx, dy))
 		return (0);
 	god->player_x += dx;
