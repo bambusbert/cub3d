@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 15:09:07 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 16:35:18 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define SPRITE_WALL_W "./sprites/wall_w.xpm"
 # define SPRITE_WALL_E "./sprites/wall_e.xpm"
 
-# define PI 3.14159265
+# define PI 3.14159265358979323846
 # define LEFT -1
 # define RIGHT 1
 # define FORWARD 1

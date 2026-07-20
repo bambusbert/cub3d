@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 14:40:20 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 15:27:51 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	dda_wrapper(t_god *god)
 	float	angle_to_draw;
 	float	angle_step;
 	int		x;
-	bool	draw;
 
 	// Divide the total FOV by the screen width to get the angle 
 	// per pixel column

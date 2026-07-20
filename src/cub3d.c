@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 14:54:20 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 16:48:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ void	rotation_manager(t_god *god)
 		return (update_player_angle(god, RIGHT));
 }
 
-// if i want to implement an FPS counter, i need to be aware that with the
-// current implementation i have 0 FPS if the player does not move or rotate
-// OR is FPS considered how many times per second game_loop runs?
-// possible FPS counter here, gettimeofday is allowed
-// TODO remove the frame count var & printf
 // TODO frame cap? e.g. 60Hz
 void	render(t_god *god)
 {
@@ -35,12 +30,12 @@ void	render(t_god *god)
 	draw_2d_map(god);
 	draw_minimap_beams(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
-}
+}löpw
 
 int	game_loop(t_god *god)
 {		
-	fps_counter(god);
 	update_time_since_last_frame(god);
+	fps_counter(god);
 	rotation_manager(god);
 	position_manager(god);
 	render(god);
@@ -65,7 +60,7 @@ void	game_function(t_god *god)
 	mlx_hook(god->mlx_win, MOUSE_EV, POINTER_MOTION_MASK,
 		(int (*)(void))mouse_move_function, god);
 	init_god(god);
-	mlx_do_key_autorepeatoff(god->mlx);
+	//mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
 	god->time_last_frame_usec = return_usecs_since_1970();
 	mlx_loop_hook(god->mlx, (int (*)(void))game_loop, god);

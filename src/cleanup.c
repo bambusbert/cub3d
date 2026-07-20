@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:54:29 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 15:20:38 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	perform_cleanup(t_god *god)
 	free(god->sprite_wall_N);
 	if (god->mlx)
 	{
-		mlx_do_key_autorepeaton(god->mlx);
+		//mlx_do_key_autorepeaton(god->mlx);
 		if (god->mlx_win)
 			mlx_destroy_window(god->mlx, god->mlx_win);
 		mlx_destroy_display(god->mlx);
