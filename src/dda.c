@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 15:27:51 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 17:40:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 	angle_diff = angle - god->player_angle;
 	calc_distances(angle_diff, dda);
 	wall_height = WSIZE_Y / dda->wall_dist;
-	draw_vertical(god, dda, wall_height, x);
 	dda_2d_beam(god, dda);
+	draw_vertical(god, dda, wall_height, x);
 }
 
 void	dda_wrapper(t_god *god)

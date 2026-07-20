@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 16:48:11 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 17:41:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	render(t_god *god)
 	draw_2d_map(god);
 	draw_minimap_beams(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
-}löpw
+}
 
 int	game_loop(t_god *god)
-{		
+{
 	update_time_since_last_frame(god);
 	fps_counter(god);
 	rotation_manager(god);
