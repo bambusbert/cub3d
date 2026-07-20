@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/18 13:56:26 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:39:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,11 @@ void	normalize_angle(float *angle)
 //		i think this has to do smth with the division by MINIMAP_FACTOR
 // TODO atm the whole beam is drawn. it would be better to only have a
 //		defined length for each beam
-void	dda_2d_beam(t_god *god, t_dda *dda, bool draw)
+void	dda_2d_beam(t_god *god, t_dda *dda)
 {
-	int	start_pixel_x;
-	int	start_pixel_y;
-	int	end_pixel_x;
-	int	end_pixel_y;
+
 
 	dda->hit_x = god->player_x + (dda->ray_dir_x * dda->beam_dist);
 	dda->hit_y = god->player_y + (dda->ray_dir_y * dda->beam_dist);
-	if (draw)
-	{
-		start_pixel_x = god->player_x * god->pixels_per_x;
-		start_pixel_y = god->player_y * god->pixels_per_y;
-		end_pixel_x = dda->hit_x * god->pixels_per_x;
-		end_pixel_y = dda->hit_y * god->pixels_per_y;
-		ft_draw_line(god, (t_ipoint){start_pixel_x / MINIMAP_FACTOR,
-			start_pixel_y / MINIMAP_FACTOR}, (t_ipoint){end_pixel_x
-			/ MINIMAP_FACTOR, end_pixel_y / MINIMAP_FACTOR}, COLOR_WHITE);
-	}
+
 }

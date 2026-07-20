@@ -1,4 +1,2 @@
 - separation of mandatory part and bonus
 - minimap:	-move to bonus
-			-fix bug that lower wall is not displayer correctly in the beginning
-			- change beam length to fixed

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 13:59:46 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:40:20 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	calc_distances(float angle_diff, t_dda *dda)
 }
 
 // dPerp = dEuclidian * cos(ray_angle - player_angle)
-void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x, bool draw)
+void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 {
 	int		wall_height;
 	float	angle_diff;
@@ -130,7 +130,7 @@ void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x, bool draw)
 	calc_distances(angle_diff, dda);
 	wall_height = WSIZE_Y / dda->wall_dist;
 	draw_vertical(god, dda, wall_height, x);
-	dda_2d_beam(god, dda, draw);
+	dda_2d_beam(god, dda);
 }
 
 void	dda_wrapper(t_god *god)
@@ -148,12 +148,9 @@ void	dda_wrapper(t_god *god)
 	x = -1;
 	while (++x < WSIZE_X)
 	{
-		draw = false;
-		if (x % MINIMAP_BEAMS_DRAWN == 0)
-			draw = true;
 		normalize_angle(&angle_to_draw);
 		init_dda_struct(&dda, god, angle_to_draw);
-		dda_single_ray(god, &dda, angle_to_draw, x, draw);
+		dda_single_ray(god, &dda, angle_to_draw, x);
 		angle_to_draw += angle_step;
 	}
 }

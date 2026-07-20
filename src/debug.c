@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 12:35:22 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:53:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,28 @@ int	mouse_move_function(int x, int y, void *param)
 	}
 	count = 0;
 	return (0);
+}
+
+static void draw_minimap_beam(t_god *god, float angle)
+{
+	int	start_pixel_x;
+	int	start_pixel_y;
+	int	end_pixel_x;
+	int	end_pixel_y;
+
+	start_pixel_x = god->player_x * god->pixels_per_x;
+	start_pixel_y = god->player_y * god->pixels_per_y;
+	end_pixel_x = start_pixel_x + cos(angle) * MINIMAP_BEAM_L;
+	end_pixel_y = start_pixel_y + sin(angle) * MINIMAP_BEAM_L;
+		ft_draw_line(god, (t_ipoint){start_pixel_x / MINIMAP_FACTOR,
+			start_pixel_y / MINIMAP_FACTOR}, (t_ipoint){end_pixel_x
+			/ MINIMAP_FACTOR, end_pixel_y / MINIMAP_FACTOR}, COLOR_WHITE);
+}
+
+void draw_minimap_beams(t_god *god)
+{
+	draw_minimap_beam(god, god->player_angle_min);
+	draw_minimap_beam(god, god->player_angle_max);
 }
 
 // int	mouse_function(void *param)

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 14:38:19 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:54:03 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@
 
 // BONUS
 # define MINIMAP_FACTOR 5
-# define MINIMAP_BEAMS_DRAWN 70 // each nth ray is actually drawn
-
+# define MINIMAP_BEAM_L 150
 enum				e_direction
 {
 	NORTH,
@@ -183,7 +182,7 @@ int					return_wall_color(int which_wall_hit);
 void	fps_counter(t_god *god);
 int					mouse_function(void *param);
 int	mouse_move_function(int x, int y, void *param); //TODO das in bonus
-
+void draw_minimap_beams(t_god *god);
 // cub3d.c
 void				render(t_god *god);
 
@@ -198,8 +197,8 @@ int					key_press(int keycode, void *param);
 int					key_up(int keycode, void *param);
 
 // helper.c
-void				dda_single_ray(t_god *god, t_dda *dda, float angle, int x, bool draw);
-void				dda_2d_beam(t_god *god, t_dda *dda, bool draw);
+void				dda_single_ray(t_god *god, t_dda *dda, float angle, int x);
+void				dda_2d_beam(t_god *god, t_dda *dda);
 void				normalize_angle(float *angle);
 
 // draw_main.c
