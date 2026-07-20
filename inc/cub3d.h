@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 14:54:03 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 15:09:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,10 +179,14 @@ void				print_keys(t_god *god);
 char				**create_sample_map(t_god *god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
-void	fps_counter(t_god *god);
-int					mouse_function(void *param);
+void				fps_counter(t_god *god);
+//int					mouse_function(void *param);
+
+
+//bonus.c
 int	mouse_move_function(int x, int y, void *param); //TODO das in bonus
 void draw_minimap_beams(t_god *god);
+
 // cub3d.c
 void				render(t_god *god);
 

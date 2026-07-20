@@ -41,8 +41,10 @@ SRC =	src/cub3d.c \
 		src/movement.c \
 		src/dda.c \
 		src/dda_init.c \
-		src/time.c
+		src/time.c \
+		src/bonus.c
 
+#TODO bonus
 BONUS_SRC = src/bonus.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
