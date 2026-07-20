@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:50:54 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 12:35:22 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,27 +114,40 @@ int	return_wall_color(int which_wall_hit)
 
 //TODO kommt weg
 // atm bug at the very first frame
+// void	fps_counter(t_god *god)
+// {
+// 	static int			frame_count = 0;
+// 	static long	long time_last_frame = 0;
+// 	long long			delta_time_usec;
+// 	float				delta_time_sec;
+// 	long long			current_time;
+// 	float				fps;
+
+// 	if (time_last_frame == 0)
+// 		time_last_frame = return_usecs_since_1970();
+// 	frame_count++;
+// 	current_time = return_usecs_since_1970();
+// 	delta_time_usec = current_time - time_last_frame;
+// 	delta_time_sec = (float)delta_time_usec / 1000000;
+// 	if (delta_time_usec / 1000 != 0)
+// 		fps = (float)1 / (delta_time_sec);
+// 	else
+// 		delta_time_usec = 1;
+// 	printf("%.1f FPS | Frame %d | t_s_l_f: %f\n", fps, frame_count, god->time_since_last_frame_sec);
+// 	time_last_frame = return_usecs_since_1970();
+// }
+
 void	fps_counter(t_god *god)
 {
 	static int			frame_count = 0;
-	static long	time_last_frame = 0;
-	long			delta_time_usec;
-	float				delta_time_sec;
-	long			current_time;
 	float				fps;
 
-	if (time_last_frame == 0)
-		time_last_frame = return_usecs_since_1970();
 	frame_count++;
-	current_time = return_usecs_since_1970();
-	delta_time_usec = current_time - time_last_frame;
-	delta_time_sec = (float)delta_time_usec / 1000000;
-	if (delta_time_usec / 1000 != 0)
-		fps = (float)1 / (delta_time_sec);
+	if (god->time_since_last_frame_sec != 0)
+		fps = (float)1 / (god->time_since_last_frame_sec);
 	else
-		delta_time_usec = 1;
+		fps = 1;
 	printf("%.1f FPS | Frame %d | t_s_l_f: %f\n", fps, frame_count, god->time_since_last_frame_sec);
-	time_last_frame = return_usecs_since_1970();
 }
 
 // TODO min offset definen in bonus

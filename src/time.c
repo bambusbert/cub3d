@@ -6,14 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 14:44:54 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:56:57 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 12:50:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 // TODO check gettimeofday error handling
-long	return_usecs_since_1970(void)
+long long	return_usecs_since_1970(void)
 {
 	struct timeval	tv;
 
@@ -24,9 +24,10 @@ long	return_usecs_since_1970(void)
 
 void	update_time_since_last_frame(t_god *god)
 {
-	long	cur_time_usec;
+	long long	cur_time_usec;
 
 	cur_time_usec = return_usecs_since_1970();
 	god->time_since_last_frame_sec = (float)(cur_time_usec
 			- god->time_last_frame_usec) / 1000000;
+	god->time_last_frame_usec = cur_time_usec;
 }

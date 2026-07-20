@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:49:40 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:38:19 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@
 # define FORWARD 1
 # define BACK -1
 # define ANGLE_OFFSET 0.5 // defines FOV / 2
-# define SENSITIVITY 100
-# define MOVE_TICK 150
+# define SENSITIVITY 4
+# define MOVE_TICK 8
+
 # define FPS_CAP 60	//TODO implement fps cap or remove
 
 # define WSIZE_X 800
@@ -114,7 +115,7 @@ typedef struct s_god
 {
 	void			*mlx;
 	void			*mlx_win;
-	long		time_last_frame_usec;
+	long long		time_last_frame_usec;
 	float			time_since_last_frame_sec;
 	// img stuff
 	void			*img;
@@ -232,7 +233,7 @@ void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 void				init_textures(t_god *god);
 
 //time.c
-long				return_usecs_since_1970(void);
+long long			return_usecs_since_1970(void);
 void				update_time_since_last_frame(t_god *god);
 
 // cleanup.c

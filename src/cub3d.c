@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:49:17 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:35:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,15 @@ void	rotation_manager(t_god *god)
 // TODO frame cap? e.g. 60Hz
 void	render(t_god *god)
 {
-	fps_counter(god);
 	ft_bzero(god->img_addr, WSIZE_Y * god->img_ll);
 	dda_wrapper(god);
 	draw_2d_map(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
-	god->time_last_frame_usec = return_usecs_since_1970();
 }
 
 int	game_loop(t_god *god)
-{
+{		
+	fps_counter(god);
 	update_time_since_last_frame(god);
 	rotation_manager(god);
 	position_manager(god);
@@ -62,11 +61,12 @@ void	game_function(t_god *god)
 	// this works on mouse click
 	// mlx_mouse_hook(god->mlx_win, (int (*)(void))mouse_function, god);
 	// this on mouse move
-	mlx_hook(god->mlx_win, MOUSE_EV, POINTER_MOTION_MASK,
-		(int (*)(void))mouse_move_function, god);
+	// mlx_hook(god->mlx_win, MOUSE_EV, POINTER_MOTION_MASK,
+	// 	(int (*)(void))mouse_move_function, god);
 	init_god(god);
 	mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
+	god->time_last_frame_usec = return_usecs_since_1970();
 	mlx_loop_hook(god->mlx, (int (*)(void))game_loop, god);
 	mlx_loop(god->mlx);
 }
