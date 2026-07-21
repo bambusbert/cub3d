@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 13:57:11 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 14:05:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,24 +114,21 @@ void	calc_distances(float angle_diff, t_dda *dda)
 		dda->beam_dist = dda->next_y - dda->delta_y;
 	}
 	if (dda->wall_dist < 0.0001)
-	{
 		dda->wall_dist = 0.0001;
-	}
 	if (dda->beam_dist < 0.0001)
 		dda->beam_dist = 0.0001;
 }
 
 void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 {
-	int		wall_height;
 	float	angle_diff;
 
 	dda_loop(god, dda);
 	angle_diff = angle - god->player_angle;
 	normalize_angle(&angle_diff);
 	calc_distances(angle_diff, dda);
-	wall_height = WSIZE_Y / dda->wall_dist;
-	draw_vertical(god, dda, wall_height, x);
+	dda->wall_len = WSIZE_Y / dda->wall_dist;
+	draw_vertical(god, dda, x);
 }
 
 void	dda_wrapper(t_god *god)
@@ -141,8 +138,6 @@ void	dda_wrapper(t_god *god)
 	float	angle_step;
 	int		x;
 
-	// Divide the total FOV by the screen width to get the angle 
-	// per pixel column
 	angle_step = ANGLE_OFFSET * 2 / WSIZE_X;
 	angle_to_draw = god->player_angle_min;
 	x = -1;

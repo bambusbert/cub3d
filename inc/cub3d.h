@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 13:56:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 14:03:25 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <unistd.h>
 
 # define WALL_CHAR 1
-# define PLAYER_CHAR 2	//TODO use that
+# define PLAYER_CHAR 2 // TODO use that
 # define MAX_DIST_TO_WALL 0.2
 
 # define SPRITE_WALL_N "./sprites/wall_n.xpm"
@@ -40,7 +40,7 @@
 # define SENSITIVITY 4
 # define MOVE_TICK 8
 
-# define FPS_CAP 60	//TODO implement fps cap or remove
+# define FPS_CAP 60 // TODO implement fps cap or remove
 
 # define WSIZE_X 800
 # define WSIZE_Y 600
@@ -123,7 +123,7 @@ typedef struct s_god
 	int				img_ll;
 	int				img_endian;
 
-	char			**map; //frido
+	char **map;        // frido
 	unsigned int rows; // frido
 	unsigned int cols; // frido
 	unsigned int	pixels_per_x;
@@ -165,7 +165,7 @@ typedef struct s_dda
 	bool			wall_hit;
 	bool			horizontal_wall_hit;
 	int				which_wall_hit;
-	float wall_dist; // WINDOW_SIZE_Y / distance is line height
+	float			wall_dist; // WINDOW_SIZE_Y / distance is line height
 	float			beam_dist;
 	float			hit_x;
 	float			hit_y;
@@ -180,12 +180,11 @@ char				**create_sample_map(t_god *god);
 void				debug_init_player(t_god *god);
 int					return_wall_color(int which_wall_hit);
 void				fps_counter(t_god *god);
-//int					mouse_function(void *param);
+// int					mouse_function(void *param);
 
-
-//bonus.c
-int	mouse_move_function(int x, int y, void *param); //TODO das in bonus
-void draw_minimap_beams(t_god *god);
+// bonus.c
+int	mouse_move_function(int x, int y, void *param); // TODO das in bonus
+void				draw_minimap_beams(t_god *god);
 
 // cub3d.c
 void				render(t_god *god);
@@ -207,8 +206,7 @@ void				normalize_angle(float *angle);
 // draw_main.c
 void				dda_wrapper(t_god *god);
 void				draw_2d_map(t_god *god);
-void				draw_vertical(t_god *god, t_dda *dda, float wall_len,
-						int x);
+void				draw_vertical(t_god *god, t_dda *dda, int x);
 
 // draw_helper.c
 void				draw_square(t_god *god, int row, int col);
@@ -217,7 +215,7 @@ void				ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2,
 						int color);
 
 // movement.c
-void					position_manager(t_god *god);
+void				position_manager(t_god *god);
 void				update_player_angle(t_god *god, int direction);
 
 // libft
@@ -234,7 +232,7 @@ void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 // init_textures.c
 void				init_textures(t_god *god);
 
-//time.c
+// time.c
 long long			return_usecs_since_1970(void);
 void				update_time_since_last_frame(t_god *god);
 
