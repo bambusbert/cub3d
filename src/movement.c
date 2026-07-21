@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:36:35 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 12:08:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	move_possible(t_god *god, float dx, float dy)
 	return (1);
 }
 
-static int	move_vertical(t_god *god, int dir)
+static void	move_vertical(t_god *god, int dir)
 {
 	float	dx;
 	float	dy;
@@ -56,13 +56,12 @@ static int	move_vertical(t_god *god, int dir)
 	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle) * dir;
 	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle) * dir;
 	if (!move_possible(god, dx, dy))
-		return (0);
+		return ;
 	god->player_x += dx;
 	god->player_y += dy;
-	return (1);
 }
 
-static int	move_horizontal(t_god *god, int dir)
+static void	move_horizontal(t_god *god, int dir)
 {
 	float	dx;
 	float	dy;
@@ -70,10 +69,9 @@ static int	move_horizontal(t_god *god, int dir)
 	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle + (PI / 2)) * dir;
 	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle + (PI / 2)) * dir;
 	if (!move_possible(god, dx, dy))
-		return (0);
+		return ;
 	god->player_x += dx;
 	god->player_y += dy;
-	return (1);
 }
 
 // we can't change the players position each time bc the game would be way

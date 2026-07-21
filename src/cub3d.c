@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 17:41:50 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 12:09:02 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rotation_manager(t_god *god)
 		return (update_player_angle(god, RIGHT));
 }
 
-// TODO frame cap? e.g. 60Hz
+// possible TODO frame cap? e.g. 60Hz. goal frametime = 1 / Hz
 void	render(t_god *god)
 {
 	ft_bzero(god->img_addr, WSIZE_Y * god->img_ll);
@@ -39,10 +39,10 @@ int	game_loop(t_god *god)
 	rotation_manager(god);
 	position_manager(god);
 	render(god);
-	return (1);
+	return (0);
 }
 
-void	game_function(t_god *god)
+void	init_mlx_stuff(t_god *god)
 {
 	god->mlx = mlx_init();
 	if (!god->mlx)
@@ -58,7 +58,7 @@ void	game_function(t_god *god)
 	// mlx_mouse_hook(god->mlx_win, (int (*)(void))mouse_function, god);
 	// this on mouse move
 	mlx_hook(god->mlx_win, MOUSE_EV, POINTER_MOTION_MASK,
-		(int (*)(void))mouse_move_function, god);
+		(int (*)(void))mouse_move_function, god); //TODO bonus
 	init_god(god);
 	//mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
@@ -80,5 +80,5 @@ int	main(int argc, char **argv)
 		return (printf("Error\ngod struct malloc fail\n"), 1);
 	// FRIDO ENTRY POINT - parsing
 	god->map = create_sample_map(god);
-	game_function(god);
+	init_mlx_stuff(god);
 }

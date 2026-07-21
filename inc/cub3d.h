@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 16:35:18 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 13:56:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_god
 	int				img_ll;
 	int				img_endian;
 
-	char			**map;
+	char			**map; //frido
 	unsigned int rows; // frido
 	unsigned int cols; // frido
 	unsigned int	pixels_per_x;
@@ -202,7 +202,6 @@ int					key_up(int keycode, void *param);
 
 // helper.c
 void				dda_single_ray(t_god *god, t_dda *dda, float angle, int x);
-void				dda_2d_beam(t_god *god, t_dda *dda);
 void				normalize_angle(float *angle);
 
 // draw_main.c

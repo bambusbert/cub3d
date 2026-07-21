@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 17:40:37 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 13:57:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,11 @@ void	dda_loop(t_god *god, t_dda *dda)
 		if (god->map[dda->map_y][dda->map_x] == 1)
 			wall_was_hit(dda);
 	}
+	dda->hit_x = god->player_x + (dda->ray_dir_x * dda->beam_dist);
+	dda->hit_y = god->player_y + (dda->ray_dir_y * dda->beam_dist);
 }
 
+// dPerp = dEuclidian * cos(ray_angle - player_angle)
 void	calc_distances(float angle_diff, t_dda *dda)
 {
 	if (dda->horizontal_wall_hit)
@@ -118,18 +121,16 @@ void	calc_distances(float angle_diff, t_dda *dda)
 		dda->beam_dist = 0.0001;
 }
 
-// dPerp = dEuclidian * cos(ray_angle - player_angle)
 void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 {
 	int		wall_height;
 	float	angle_diff;
 
 	dda_loop(god, dda);
-	// these angles should be normalized here
 	angle_diff = angle - god->player_angle;
+	normalize_angle(&angle_diff);
 	calc_distances(angle_diff, dda);
 	wall_height = WSIZE_Y / dda->wall_dist;
-	dda_2d_beam(god, dda);
 	draw_vertical(god, dda, wall_height, x);
 }
 
@@ -147,7 +148,7 @@ void	dda_wrapper(t_god *god)
 	x = -1;
 	while (++x < WSIZE_X)
 	{
-		normalize_angle(&angle_to_draw);
+		normalize_angle(&angle_to_draw);	//i think i dont need that
 		init_dda_struct(&dda, god, angle_to_draw);
 		dda_single_ray(god, &dda, angle_to_draw, x);
 		angle_to_draw += angle_step;

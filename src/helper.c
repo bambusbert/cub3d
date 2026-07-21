@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:58:18 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 14:39:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 13:56:15 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,10 @@ int	normalize_coordinate(t_god *god, float coord, int type)
 		return (-666);
 }
 
-// possible TODO change into normalize_angles function that handles all
-// 3 angle variables at once so we do not have 3 calls in update_player_angle
 void	normalize_angle(float *angle)
 {
 	if (*angle > 2 * PI)
 		*angle -= 2 * PI;
 	else if (*angle < 0)
 		*angle += 2 * PI;
-}
-
-// TODO this will be bonus
-// TODO bug where the outermost beams sometimes are not displayed completely.
-//		i think this has to do smth with the division by MINIMAP_FACTOR
-// TODO atm the whole beam is drawn. it would be better to only have a
-//		defined length for each beam
-void	dda_2d_beam(t_god *god, t_dda *dda)
-{
-
-
-	dda->hit_x = god->player_x + (dda->ray_dir_x * dda->beam_dist);
-	dda->hit_y = god->player_y + (dda->ray_dir_y * dda->beam_dist);
-
 }

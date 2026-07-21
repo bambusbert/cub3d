@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:20:57 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 15:08:14 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 12:05:05 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,7 @@ void	fps_counter(t_god *god)
 	float				fps;
 
 	frame_count++;
-	if (god->time_since_last_frame_sec != 0)
-		fps = (float)1 / (god->time_since_last_frame_sec);
-	else
-		fps = 1;
+	fps = (float) 1 / (god->time_since_last_frame_sec);
 	printf("%.1f FPS | Frame %d | t_s_l_f: %f\n", fps, frame_count, god->time_since_last_frame_sec);
 }
 

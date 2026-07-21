@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/20 17:25:34 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 11:16:30 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void	perform_cleanup(t_god *god)
 	free_god_struct(god);
 }
 
-//TODO eventuell gleich perform_cleanup hooken bei closing event?
 void	close_window(t_god *god)
 {
 	perform_cleanup(god);

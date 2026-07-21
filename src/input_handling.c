@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:19:13 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 16:29:10 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 11:17:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	key_press(int keycode, void *param)
 		god->key_right = true;
 	else if (keycode == KEY_ESC)
 		close_window(god);
-	return (1);
+	return (0);
 }
 
 int	key_up(int keycode, void *param)
@@ -51,5 +51,5 @@ int	key_up(int keycode, void *param)
 		god->key_left = false;
 	else if (keycode == KEY_RIGHT)
 		god->key_right = false;
-	return (1);
+	return (0);
 }
