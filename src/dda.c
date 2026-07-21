@@ -6,13 +6,13 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 14:05:37 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 15:44:07 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
  *	it would be very inefficient if we just drew pixel by pixel
- *	and check after each and every drawn pixel if we hit a wall.
+ *	and check after each drawn pixel if we hit a wall.
  *	a wall can only be at the grid lines, not inbetween (that
  *	means if either x or y is an integer).
  *
@@ -43,8 +43,7 @@
  * 			total distance. if the next block is a wall, we stop.
  * 			if not, we continue. if we hit a wall, save distance,
  * 			apply fisheye correction (multiply by the cos of delta
- * 			of ray and player angle) and finally draw the vertical
- * 			line.
+ * 			of ray and player angle) and start the drawing phase.
  */
 #include "../inc/cub3d.h"
 
@@ -92,8 +91,7 @@ void	dda_loop(t_god *god, t_dda *dda)
 		if (god->map[dda->map_y][dda->map_x] == 1)
 			wall_was_hit(dda);
 	}
-	dda->hit_x = god->player_x + (dda->ray_dir_x * dda->beam_dist);
-	dda->hit_y = god->player_y + (dda->ray_dir_y * dda->beam_dist);
+
 }
 
 // dPerp = dEuclidian * cos(ray_angle - player_angle)
@@ -103,15 +101,15 @@ void	calc_distances(float angle_diff, t_dda *dda)
 	{
 		if (dda->ray_dir_x == 0)
 			dda->ray_dir_x = 0.0000001;
-		dda->wall_dist = (dda->next_x - dda->delta_x) * cos(angle_diff);
 		dda->beam_dist = dda->next_x - dda->delta_x;
+		dda->wall_dist = dda->beam_dist * cos(angle_diff);
 	}
 	else
 	{
 		if (dda->ray_dir_y == 0)
 			dda->ray_dir_y = 0.0000001;
-		dda->wall_dist = (dda->next_y - dda->delta_y) * cos(angle_diff);
 		dda->beam_dist = dda->next_y - dda->delta_y;
+		dda->wall_dist = dda->beam_dist * cos(angle_diff);
 	}
 	if (dda->wall_dist < 0.0001)
 		dda->wall_dist = 0.0001;
@@ -127,6 +125,8 @@ void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 	angle_diff = angle - god->player_angle;
 	normalize_angle(&angle_diff);
 	calc_distances(angle_diff, dda);
+	dda->hit_x = god->player_x + (dda->ray_dir_x * dda->beam_dist);
+	dda->hit_y = god->player_y + (dda->ray_dir_y * dda->beam_dist);
 	dda->wall_len = WSIZE_Y / dda->wall_dist;
 	draw_vertical(god, dda, x);
 }
@@ -143,7 +143,6 @@ void	dda_wrapper(t_god *god)
 	x = -1;
 	while (++x < WSIZE_X)
 	{
-		normalize_angle(&angle_to_draw);	//i think i dont need that
 		init_dda_struct(&dda, god, angle_to_draw);
 		dda_single_ray(god, &dda, angle_to_draw, x);
 		angle_to_draw += angle_step;

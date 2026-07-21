@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 14:03:25 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/21 14:46:43 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ typedef struct s_god
 	float			player_angle;
 	float			player_angle_min;
 	float			player_angle_max;
-	// bool			debug_mode;
 	bool			key_w;
 	bool			key_a;
 	bool			key_s;
