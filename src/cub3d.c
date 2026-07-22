@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/22 14:26:24 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/22 14:37:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ void	init_mlx_stuff(t_god *god)
 	mlx_hook(god->mlx_win, CLOSING_EV, NO_EV_MASK, (int (*)(void))close_window, god);
 	mlx_hook(god->mlx_win, KEYDOWN_EV, KEY_PRESS_MASK, (int (*)(void))key_press, god);
 	mlx_hook(god->mlx_win, KEYUP_EV, KEY_RELEASE_MASK, (int (*)(void))key_up, god);
-	// this works on mouse click
-	// mlx_mouse_hook(god->mlx_win, (int (*)(void))mouse_function, god);
-	// this on mouse move
 	mlx_hook(god->mlx_win, MOUSE_EV, POINTER_MOTION_MASK,
 		(int (*)(void))mouse_move_function, god); //TODO bonus
 	init_god(god);
