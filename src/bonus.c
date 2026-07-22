@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 15:08:20 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 12:02:28 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/22 14:26:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,17 @@ int	mouse_move_function(int x, int y, void *param)
 	static int	count = 0;
 	t_god		*god;
 
-	if (count++ < 15)
+	if (count++ < 13)
 		return (0);
 	god = (t_god *)param;
-	mlx_mouse_hide(god->mlx, god->mlx_win);
 	if (x > WSIZE_X / 2)
 	{
 		update_player_angle(god, RIGHT);
-		render(god);
 		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
 	}
 	else if (x < WSIZE_X / 2)
 	{
 		update_player_angle(god, LEFT);
-		render(god);
 		mlx_mouse_move(god->mlx, god->mlx_win, WSIZE_X / 2, WSIZE_Y / 2);
 	}
 	count = 0;

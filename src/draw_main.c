@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 14:00:46 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/22 14:05:00 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	draw_2d_map(t_god *god)
 	}
 }
 
+//TODO move tex_x_int outside this function (it does not
+//change within a slice)
 void	print_single_texel(t_god *god, t_ipoint p, t_fpoint texp, t_texture *tex)
 {
 	char	*color;
@@ -65,7 +67,8 @@ static t_texture	*set_tex(t_god *god, t_dda *dda)
 }
 
 // If the wall goes off the top of the screen,
-//	we must start reading the texture further down.
+// we must start reading the texture further down.
+//tex_x and tex_y are relative (between 0 and 1)
 void	draw_wall_texture_slice(t_god *god, int x, t_dda *dda)
 {
 	float		step;

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/22 11:36:16 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/22 14:26:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	render(t_god *god)
 {
 	ft_bzero(god->img_addr, WSIZE_Y * god->img_ll);
 	dda_wrapper(god);
+	//TODO minimap in bonus
 	draw_2d_map(god);
 	draw_minimap_beams(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
@@ -64,6 +65,7 @@ void	init_mlx_stuff(t_god *god)
 	render(god);
 	god->time_last_frame_usec = return_usecs_since_1970();
 	mlx_loop_hook(god->mlx, (int (*)(void))game_loop, god);
+	mlx_mouse_hide(god->mlx, god->mlx_win);
 	mlx_loop(god->mlx);
 }
 
