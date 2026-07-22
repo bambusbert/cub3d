@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 14:46:43 by slambert         ###   ########.fr       */
+/*   Updated: 2026/07/22 12:01:18 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_god
 	long long		time_last_frame_usec;
 	float			time_since_last_frame_sec;
 	// img stuff
+	//TODO change that to be a t_texture
 	void			*img;
 	char			*img_addr;
 	int				img_bpp;
