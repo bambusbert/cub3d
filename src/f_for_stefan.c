@@ -48,12 +48,12 @@ char **f_for_stefan(char *s,int k, int x, int y)
     i = 0;
     for_stefan = ft_calloc(sizeof(char *), y + 1);
     if (!for_stefan)
-        return (NULL);
+        return (printf("Error\nAllocation."), NULL);
     while (i < y)
     {
         for_stefan[i] = ft_calloc(sizeof(char), x + 1);
         if (!for_stefan[i])
-            return (free_stefan(for_stefan));
+            return (printf("Error\nAllocation."), free_stefan(for_stefan));
         j = 0;
         while (j < x)
         {

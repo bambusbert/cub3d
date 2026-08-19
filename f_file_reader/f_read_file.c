@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:44:43 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/05 14:14:13 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/19 18:46:18 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*f_read_from_file(int fd)
 		{
 			r.buffer = f_resize(&r);
 			if (!r.buffer)
-				return (NULL);
+				return (printf("Error\nAllocation error."), NULL);
 		}
 		r.read_bytes = read(fd, &r.buffer[r.position], r.read_size);
 		if (r.read_bytes < 0)

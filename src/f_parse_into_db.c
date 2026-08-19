@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 13:23:03 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/05 17:51:34 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/19 18:47:29 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool f_extract_key_value(t_db *db, char *line, char **key, char **value)
     bool res;
     
     if (f_is_key(line, key) == false)
-        return (ft_printf("false key\n"), false); //TODO printf contains wrong key
+        return (printf("Error\nWrong key."),false); //TODO printf contains wrong key
     line += ft_strlen(*key);
     line = f_skip_ws(line);
     *value = line;

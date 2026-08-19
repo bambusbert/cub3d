@@ -19,7 +19,7 @@ int main (int ac, char *av[])
     if (f_parse_into_db(&db1, file) == false)
         return(freeturn(file, &db1, 1));
     if (db1.hmap_size != 7)
-        return (printf("wrong file - something is not right\n"), freeturn(file, &db1, 1));
+        return (printf("Error\nToo many keys."), freeturn(file, &db1, 1));
     f_init_colors(fc);
     if (f_parse_colors(&db1, fc) == false)
         return(freeturn(file, &db1, 1));

@@ -2,7 +2,6 @@
 #include <fcntl.h>
 
 void f_init_rm(t_db *db, t_read_map *m);
-bool is_allowd(char c);
 bool f_map_to_file(t_read_map *m);
 void f_measure_map(t_read_map *m);
 void f_cut_nl(t_read_map *m);
@@ -21,13 +20,13 @@ bool f_parse_map(t_db *db)
         return (false);
     x = ft_itoa(m.xmax + 2);
     if (!x)
-        return (false);
+        return (printf("Error\nAllocation."), false);
     if (db_set(db, "x", x) == false)
         return (false);
     free(x);
     y = ft_itoa(m.y + 2);
     if (!y)
-        return (false);
+        return (printf("Error\nAllocation."),false);
     if (db_set(db, "y", y) == false)
         return (false);
     free(y);
@@ -47,20 +46,16 @@ bool f_map_to_file(t_read_map *m)
     bool ret;
     
     ret = true;
-    m->fd = open("map.map", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (m->fd < 0)
-        return (false); // todo message.
     while (m->map[m->i])
     {
         if (!is_allowed(m->map[m->i], m))
-            return (close(m->fd), false);
-        write(m->fd, &m->map[m->i], 1);
+            return (printf("Error\nWrong Sign."), close(m->fd), false);
         m->i++;
     }
     if (m->n + m->o + m->s + m->w > 1)
     {
         ret = false;
-        printf("to many players\n");
+        printf("Error\ntoo many players\n");
     }
     close(m->fd);
     return (ret);

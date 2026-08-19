@@ -14,11 +14,11 @@ uint32_t f_catch_num(char *s)
     while (s[i])
     {
         if (!ft_isdigit(s[i]))
-            return (600);
+            return (printf("Error\nNot a number."), 600);
         i++;
     }
     if (is_overflow(s) == false)
-        return (600);
+        return (printf("Error\nNumber out of range."),600);
     ret = f_atoll(s);
     return (ret);
 }
@@ -51,13 +51,13 @@ bool	is_overflow(char *arg)
 	if (arg[i] == '+' || arg[i] == '-')
 		neg = (arg[i++] == '-');
 	if (neg)
-		return (false); // limit = LIMIT_DOWN;
+		return (printf("Error\nNegative Number."), false);
 	else
 		limit = LIMIT_UP;
 	while (ft_isdigit(arg[i]))
 	{
 		if (check_digit(&num, neg, limit, arg[i]))
-			return (false);
+			return (printf("Error\nNumber too big."), false);
 		i++;
 	}
 	return (true);
