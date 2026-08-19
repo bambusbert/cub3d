@@ -91,7 +91,7 @@ void	dda_loop(t_god *god, t_dda *dda)
 			dda->wall_hit = true;	//why
 			break ;
 		}
-		if (god->map[dda->map_y][dda->map_x] == 1)
+		if (god->map[dda->map_y][dda->map_x] == WALL_CHAR)
 			wall_was_hit(dda);
 	}
 }
@@ -128,7 +128,6 @@ void	dda_single_ray(t_god *god, t_dda *dda, float angle, int x)
 
 	dda_loop(god, dda);
 	angle_diff = angle - god->player_angle;
-	//normalize_angle(&angle_diff); //not needed bc done in update_player_angle
 	calc_distances(angle_diff, dda);
 	dda->hit_x = god->player_x + (dda->ray_dir_x * dda->beam_dist);
 	dda->hit_y = god->player_y + (dda->ray_dir_y * dda->beam_dist);

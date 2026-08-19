@@ -47,6 +47,8 @@ bool for_fortnite_and_stefan(t_db *db, t_color *colors);
 // f_from_stefan.c
 bool f_from_stefan(t_db *db, char **map, t_color *colors);
 
+//HAT STEFAN EINGEFÜGT
+void	init_mlx_stuff(t_god *god);
 
 // structs
 
@@ -58,7 +60,7 @@ typedef struct s_color
 	uint32_t			b;
 }						t_color;
 
-typedef struct s_read_map	
+typedef struct s_read_map
 {
     int x;
     int y;

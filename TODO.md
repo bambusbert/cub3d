@@ -1,3 +1,2 @@
-- separation of mandatory part and bonus
-- minimap:	-move to bonus
 - check if i need aurorepeaton / -off
+- colors

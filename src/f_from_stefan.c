@@ -23,11 +23,11 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
     god->pathwallw = db_get(db, "EA");
 
 
-    
+
     printf("%c %i,%i,%i\n", colors[0].key, colors[0].r, colors[0].g, colors[0].b);
     printf("%c %i,%i,%i\n\n", colors[1].key, colors[1].r, colors[1].g, colors[1].b);
 
-    
+
     int i = 0;
     int j;
     while (god->map[i])
@@ -38,7 +38,6 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
             if (god->map[i][j] == 'N')
             {
                 god->map[i][j] = '2';
-                //god->player_angle = 0;
                 god->player_start_direction = NORTH;
                 break;
             }
@@ -46,21 +45,18 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
             {
                 god->map[i][j] = '2';
                 god->player_start_direction = EAST;
-                //god->player_angle = PI / 2;
                 break;
             }
             else if (god->map[i][j] == 'S')
             {
                 god->map[i][j] = '2';
                 god->player_start_direction = SOUTH;
-               // god->player_angle = PI;
                 break;
             }
             else if (god->map[i][j] == 'W')
             {
                 god->map[i][j] = '2';
                 god->player_start_direction = WEST;
-                //god->player_angle = 3 * PI / 2;
                 break;
             }
             j++;
@@ -87,6 +83,7 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
     }
     //exit(2);
 
+    //TODO set god->color_ceiling & god->color_floor
     printf("x%i\n\ny%i\n\n", j, i);
     printf("%f\n\n%f\n\n", god->player_x, god->player_y);
     god->db = db;

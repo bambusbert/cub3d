@@ -1,9 +1,11 @@
-NO ./sprites/wall_n.xpm
+C 0,0,1
+F 0,0,255
+
 SO ./sprites/wall_s.xpm
+NO ./sprites/wall_n.xpm
 WE ./sprites/wall_w.xpm
 EA ./sprites/wall_e.xpm
-F 0,0,255
-C 0,0,1
+
 
         1111111111111111111111111
         1S00000000110000000000001

@@ -25,7 +25,7 @@
 # include <unistd.h>
 
 # define WALL_CHAR 1
-# define PLAYER_CHAR 2 // TODO use that
+//# define PLAYER_CHAR 2
 # define MAX_DIST_TO_WALL 0.2
 
 # define SPRITE_WALL_N "./sprites/wall_n.xpm"
@@ -41,8 +41,6 @@
 # define ANGLE_OFFSET 0.5 // defines FOV / 2
 # define SENSITIVITY 4
 # define MOVE_TICK 8
-
-# define FPS_CAP 60 // TODO implement fps cap or remove
 
 # define WSIZE_X 800
 # define WSIZE_Y 600
@@ -126,9 +124,9 @@ typedef struct s_god
 	int				img_ll;
 	int				img_endian;
 
-	char **map;        // frido
-	unsigned int rows; // frido
-	unsigned int cols; // frido
+	char **map;
+	unsigned int rows;
+	unsigned int cols;
 	unsigned int	pixels_per_x;
 	unsigned int	pixels_per_y;
 
@@ -136,9 +134,9 @@ typedef struct s_god
 	t_texture		*sprite_wall_E;
 	t_texture		*sprite_wall_N;
 	t_texture		*sprite_wall_W;
-	float player_x;             // frido
-	float player_y;             // frido
-	int player_start_direction; // frido
+	float player_x;
+	float player_y;
+	int player_start_direction;
 	float			player_angle;
 	float			player_angle_min;
 	float			player_angle_max;
@@ -184,11 +182,11 @@ typedef struct s_dda
 }					t_dda;
 
 // debug.c - das kommt alles weg oder in bonus
-void				print_keys(t_god *god);
-char				**create_sample_map(t_god *god);
-void				debug_init_player(t_god *god);
-int					return_wall_color(int which_wall_hit);
-void				fps_counter(t_god *god);
+// void				print_keys(t_god *god);
+// char				**create_sample_map(t_god *god);
+// void				debug_init_player(t_god *god);
+// int					return_wall_color(int which_wall_hit);
+// void				fps_counter(t_god *god);
 // int					mouse_function(void *param);
 
 // bonus.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/19 16:41:41 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/19 18:30:29 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	draw_vertical(t_god *god, t_dda *dda, int x)
 		dda->wall_start = 0;
 	if (dda->wall_end >= WSIZE_Y || dda->wall_end < 0)
 		dda->wall_end = WSIZE_Y - 1;
+	//TODO change to actual god->color_ceiling and floor color
 	ft_draw_line(god, (t_ipoint){x, 0}, (t_ipoint){x, dda->wall_start - 1},
 		COLOR_CEILING);
 	draw_wall_texture_slice(god, x, dda);

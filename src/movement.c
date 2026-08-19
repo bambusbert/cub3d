@@ -79,6 +79,7 @@ static void	move_horizontal(t_god *god, int dir)
 // or is there some mlx magic we can use
 void	position_manager(t_god *god)
 {
+    printf("x: %f, y: %f\n", god->player_x, god->player_y);
 	if (god->key_w && !god->key_s)
 		move_vertical(god, FORWARD);
 	if (god->key_s && !god->key_w)
