@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/22 14:05:00 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/19 16:41:41 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_2d_map(t_god *god)
 		j = -1;
 		while (++j < (int)god->cols)
 		{
-			if (god->map[i][j] == 1)
+			if (god->map[i][j] == WALL_CHAR)
 				draw_square(god, i, j);
 		}
 	}

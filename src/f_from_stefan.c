@@ -8,8 +8,8 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
 	if (!god)
 		return (printf("Error\ngod struct malloc fail\n"), false);
 
-    //god->map = map;
-    god->map = create_sample_map(god);
+    god->map = map;
+    //god->map = create_sample_map(god);
     god->cols = (unsigned int) ft_atoi(db_get(db, "x"));
     god->rows  = (unsigned int) ft_atoi(db_get(db, "y"));
 
@@ -69,16 +69,23 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
             break;
         i++;
     }
-    god->player_x = j;
-    god->player_y = i;
+    god->player_x = (float) j;
+    god->player_y = (float) i;
 
     i = 0;
     while (map[i])
     {
-        printf("%s\n", map[i]);
+        j = 0;
+        while (map[i][j])
+        {
+            map[i][j] -= 48;
+            printf("%c\n", map[i][j] + 48);
+            j++;
+        }
+        //printf("%s\n", map[i]);
         i++;
     }
-    exit(2);
+    //exit(2);
 
     printf("x%i\n\ny%i\n\n", j, i);
     printf("%f\n\n%f\n\n", god->player_x, god->player_y);

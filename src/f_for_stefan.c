@@ -1,4 +1,4 @@
-#include "f_parsing.h"
+#include "../inc/f_parsing.h"
 
 char **free_stefan(char **stefan);
 char **f_for_stefan(char *s,int k, int x, int y);
@@ -18,9 +18,10 @@ bool for_fortnite_and_stefan(t_db *db, t_color *colors)
     y = f_atoll((char *)db_get(db, "y"));
     for_stefan = f_for_stefan((char *)s, 0, x, y);
     if (!for_stefan)
-        return (false);
+      return (false);
     ret = f_from_stefan(db, for_stefan, colors);
-    for_stefan = free_stefan(for_stefan);
+    //main2(1, "hallo");
+   for_stefan = free_stefan(for_stefan);
     return(ret);
 }
 

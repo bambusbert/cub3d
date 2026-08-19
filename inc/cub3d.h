@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/19 12:41:17 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/19 16:44:56 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,5 +247,5 @@ void				close_window(t_god *god);
 void				error_exit(char *msg, t_god *god);
 
 // unsorted
-
+bool	main2(int argc, char **argv);
 #endif
