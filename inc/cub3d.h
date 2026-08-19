@@ -6,12 +6,14 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/19 16:44:56 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/19 16:54:05 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include "../f_db/f_db.h"
 
 # include <fcntl.h>
 # include <math.h>
@@ -152,6 +154,7 @@ typedef struct s_god
 	const char 			*pathwallw;
 	int				color_ceiling;
 	int				color_floor;
+	t_db 			*db;
 }					t_god;
 
 typedef struct s_dda

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/21 11:16:30 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/19 17:00:12 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	perform_cleanup(t_god *god)
 {
 	if (!god)
 		return ;
+	free_db(god->db);
 	destroy_images(god);
 	free(god->sprite_wall_E);
 	free(god->sprite_wall_W);

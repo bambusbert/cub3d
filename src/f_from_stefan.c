@@ -89,6 +89,7 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
 
     printf("x%i\n\ny%i\n\n", j, i);
     printf("%f\n\n%f\n\n", god->player_x, god->player_y);
+    god->db = db;
     init_mlx_stuff(god);
     return (true);
 }
