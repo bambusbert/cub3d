@@ -3,20 +3,15 @@
 bool f_from_stefan(t_db *db, char **map, t_color *colors)
 {
     t_god *god;
+    
 
     god = ft_calloc(1, sizeof(t_god));
 	if (!god)
 		return (printf("Error\ngod struct malloc fail\n"), false);
-
+    god->db = db;
     god->map = map;
-    //god->map = create_sample_map(god);
     god->cols = (unsigned int) ft_atoi(db_get(db, "x"));
     god->rows  = (unsigned int) ft_atoi(db_get(db, "y"));
-
-    printf("cols: %i rows: %i,\n", god->cols, god->rows);
-
-   // exit(2);
-
     god->pathwalln = db_get(db, "NO");
     god->pathwalle = db_get(db, "SO");
     god->pathwalls = db_get(db, "WE");
@@ -87,11 +82,6 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
     //TODO set god->color_ceiling & god->color_floor
     god->color_ceiling = 0;
     god->color_floor = 0;
-
-    
-    printf("x%i\n\ny%i\n\n", j, i);
-    printf("%f\n\n%f\n\n", god->player_x, god->player_y);
-    god->db = db;
     init_mlx_stuff(god);
     return (true);
 }
