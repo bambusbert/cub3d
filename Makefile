@@ -28,7 +28,22 @@ SRC_DIR = src
 OBJ_DIR = obj
 
 # Source files
-SRC =	src/cub3d.c \
+SRC =	src/main.c \
+        src/f_commandline_input.c \
+		src/f_parse_into_db.c \
+		src/f_parse_colors.c \
+        src/f_atol.c \
+        src/f_is_allowed.c \
+        src/f_parse_map.c \
+        src/f_parse_map2.c \
+        src/f_for_stefan.c \
+        src/f_from_stefan.c \
+        ./f_file_reader/f_read_file.c \
+        ./f_db/f_db_hash.c  \
+        ./f_db/f_db_init.c  \
+        ./f_db/f_db_resize.c  \
+        ./f_db/f_db_set_get.c \
+		src/cub3d.c \
 		src/check_input.c \
 		src/cleanup.c \
 		src/input_handling.c \

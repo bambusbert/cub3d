@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/22 14:37:34 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/19 12:58:42 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,18 @@ void	init_mlx_stuff(t_god *god)
 }
 
 // TODO argument check (one arg? correct file ending?)
-int	main(int argc, char **argv)
-{
-	t_god	*god;
+// bool	main2(int argc, char **argv)
+// {
+// 	t_god	*god;
 
-	(void)argc;
-	(void)argv;
-	// check_input (argc, argv);
-	god = ft_calloc(1, sizeof(t_god));
-	if (!god)
-		return (printf("Error\ngod struct malloc fail\n"), 1);
-	// FRIDO ENTRY POINT - parsing
-	god->map = create_sample_map(god);
-	init_mlx_stuff(god);
-}
+// 	(void)argc;
+// 	(void)argv;
+// 	// check_input (argc, argv);
+// 	god = ft_calloc(1, sizeof(t_god));
+// 	if (!god)
+// 		return (printf("Error\ngod struct malloc fail\n"), false);
+// 	// FRIDO ENTRY POINT - parsing
+// 	god->map = create_sample_map(god);
+// 	init_mlx_stuff(god);
+// 	return (true);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/22 14:24:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/19 12:41:17 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,12 @@ typedef struct s_god
 	bool			key_d;
 	bool			key_left;
 	bool			key_right;
+	const char 			*pathwalln;
+	const char 			*pathwalle;
+	const char 			*pathwalls;
+	const char 			*pathwallw;
+	int				color_ceiling;
+	int				color_floor;
 }					t_god;
 
 typedef struct s_dda
