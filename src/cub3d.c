@@ -22,12 +22,10 @@ void	rotation_manager(t_god *god)
 		return (update_player_angle(god, RIGHT));
 }
 
-// possible TODO frame cap? e.g. 60Hz. goal frametime = 1 / Hz
 void	render(t_god *god)
 {
 	ft_bzero(god->img_addr, WSIZE_Y * god->img_ll);
 	dda_wrapper(god);
-	//TODO minimap in bonus
 	draw_2d_map(god);
 	draw_minimap_beams(god);
 	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
@@ -36,7 +34,6 @@ void	render(t_god *god)
 int	game_loop(t_god *god)
 {
 	update_time_since_last_frame(god);
-	//fps_counter(god);
 	rotation_manager(god);
 	position_manager(god);
 	render(god);
@@ -66,19 +63,18 @@ void	init_mlx_stuff(t_god *god)
 	mlx_loop(god->mlx);
 }
 
-// TODO argument check (one arg? correct file ending?)
-bool	main2(int argc, char **argv)
-{
-	t_god	*god;
+// bool	main2(int argc, char **argv)
+// {
+// 	t_god	*god;
 
-	(void)argc;
-	(void)argv;
-	// check_input (argc, argv);
-	god = ft_calloc(1, sizeof(t_god));
-	if (!god)
-		return (printf("Error\ngod struct malloc fail\n"), false);
-	// FRIDO ENTRY POINT - parsing
-	god->map = create_sample_map(god);
-	init_mlx_stuff(god);
-	return (true);
-}
+// 	(void)argc;
+// 	(void)argv;
+// 	// check_input (argc, argv);
+// 	god = ft_calloc(1, sizeof(t_god));
+// 	if (!god)
+// 		return (printf("Error\ngod struct malloc fail\n"), false);
+// 	// FRIDO ENTRY POINT - parsing
+// 	god->map = create_sample_map(god);
+// 	init_mlx_stuff(god);
+// 	return (true);
+// }
