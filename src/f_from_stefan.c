@@ -8,7 +8,8 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
 	if (!god)
 		return (printf("Error\ngod struct malloc fail\n"), false);
 
-    god->map = map;
+    //god->map = map;
+    god->map = create_sample_map(god);
     god->cols = (unsigned int) ft_atoi(db_get(db, "x"));
     god->rows  = (unsigned int) ft_atoi(db_get(db, "y"));
 
