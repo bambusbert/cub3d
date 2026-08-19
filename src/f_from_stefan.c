@@ -24,6 +24,7 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
 
 
 
+
     printf("%c %i,%i,%i\n", colors[0].key, colors[0].r, colors[0].g, colors[0].b);
     printf("%c %i,%i,%i\n\n", colors[1].key, colors[1].r, colors[1].g, colors[1].b);
 
@@ -65,8 +66,8 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
             break;
         i++;
     }
-    god->player_x = (float) j;
-    god->player_y = (float) i;
+    god->player_x = (float) j + 0.5;
+    god->player_y = (float) i + 0.5;
 
     i = 0;
     while (map[i])
@@ -84,6 +85,10 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
     //exit(2);
 
     //TODO set god->color_ceiling & god->color_floor
+    god->color_ceiling = 0;
+    god->color_floor = 0;
+
+    
     printf("x%i\n\ny%i\n\n", j, i);
     printf("%f\n\n%f\n\n", god->player_x, god->player_y);
     god->db = db;
