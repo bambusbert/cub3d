@@ -11,6 +11,11 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
     god->map = map;
     god->cols = (unsigned int) ft_atoi(db_get(db, "x"));
     god->rows  = (unsigned int) ft_atoi(db_get(db, "y"));
+
+    printf("cols: %i rows: %i,\n", god->cols, god->rows);
+
+   // exit(2);
+
     god->pathwalln = db_get(db, "NO");
     god->pathwalle = db_get(db, "SO");
     god->pathwalls = db_get(db, "WE");
@@ -31,33 +36,51 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
         {
             if (god->map[i][j] == 'N')
             {
-                god->player_angle = 0;
+                god->map[i][j] = '2';
+                //god->player_angle = 0;
+                god->player_start_direction = NORTH;
                 break;
             }
             else if (god->map[i][j] == 'E')
             {
-                god->player_angle = PI / 2;
+                god->map[i][j] = '2';
+                god->player_start_direction = EAST;
+                //god->player_angle = PI / 2;
                 break;
             }
             else if (god->map[i][j] == 'S')
             {
-                god->player_angle = PI;
+                god->map[i][j] = '2';
+                god->player_start_direction = SOUTH;
+               // god->player_angle = PI;
                 break;
             }
             else if (god->map[i][j] == 'W')
             {
-                god->player_angle = 3 * PI / 2;
+                god->map[i][j] = '2';
+                god->player_start_direction = WEST;
+                //god->player_angle = 3 * PI / 2;
                 break;
             }
             j++;
         }
+        if (god->map[i][j] == '2')
+            break;
         i++;
     }
-    god->player_x = i;
-    god->player_y = j;
+    god->player_x = j;
+    god->player_y = i;
 
-    printf("x%i\n\ny%i\n\n", i, j);
-    printf("%i\n\n%i\n\n", god->player_x, god->player_y);
+    i = 0;
+    while (map[i])
+    {
+        printf("%s\n", map[i]);
+        i++;
+    }
+    exit(2);
+
+    printf("x%i\n\ny%i\n\n", j, i);
+    printf("%f\n\n%f\n\n", god->player_x, god->player_y);
     init_mlx_stuff(god);
     return (true);
 }

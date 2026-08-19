@@ -1,11 +1,13 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./sprites/wall_n.xpm
+SO ./sprites/wall_s.xpm
+WE ./sprites/wall_w.xpm
+EA ./sprites/wall_e.xpm
 F 0,0,255
 C 0,0,1
 
-111
-1N1
-111
+1111111
+1000101
+10N0111
+1000111
+1111111
 
