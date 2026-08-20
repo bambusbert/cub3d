@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_colors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 15:12:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/19 18:48:41 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/20 17:57:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ bool f_extract_colors(t_db *db, t_color *colors)
             return (false);
         rgb = ft_split(val, ',');
         if (!rgb)
-            return (printf("Error\nAllocation."), false);
+            return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
         if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3] != NULL)
-            return (printf("Error\nColors wrong."), f_free_rgb(rgb), false);
+            return (ft_putstr_fd("Error\nColors wrong.\n", 2), f_free_rgb(rgb), false);
         colors[i].r = f_catch_num(rgb[0]);
         colors[i].g = f_catch_num(rgb[1]);
         colors[i].b = f_catch_num(rgb[2]);

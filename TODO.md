@@ -1,2 +1,7 @@
 - check if i need aurorepeaton / -off
-- colors
+
+
+
+
+VETSATESTA
+- nl_between_info.cub geht ned

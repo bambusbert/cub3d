@@ -54,9 +54,9 @@ bool f_test_map(t_db *db, t_read_map *m)
        return(free(m->buffer), false);
     m->pp = f_find_player(m->buffer);
     if (m->pp == -1)
-        return(printf("Error\nNo Player."), free(m->buffer), false);
+        return(ft_putstr_fd("Error\nNo Player.\n", 2), free(m->buffer), false);
     if (f_flood_that_shi(m->buffer, m->pp, m->xmax + 2, db, m) == false)
-        return(printf("Error\nMap wrong."), free(m->buffer), false);
+        return(ft_putstr_fd("Error\nMap wrong.\n", 2), free(m->buffer), false);
     free(m->buffer);
     return (true);
 }
@@ -90,7 +90,7 @@ bool f_allocate_test_map(t_read_map *m)
     m->mapsize = (m->xmax + 2) * (m->y + 2);
     m->buffer = ft_calloc(sizeof(char) ,(m->mapsize + 1));
     if (!m->buffer)
-        return (printf("Error\nAllocation."), false);
+        return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
     ft_memset(m->buffer, ' ', m->mapsize);
     m->i = 0;
     m->j = 1 + m->xmax + 2;

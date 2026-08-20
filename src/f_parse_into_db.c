@@ -6,16 +6,16 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 13:23:03 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/20 17:45:50 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/20 18:09:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "f_parsing.h"
 
-char *f_skip_ws(char *old_line);
 char *f_next_line(char *old_line);
 bool f_extract_key_value(t_db *db, char *line, char **key, char **value);
 bool f_is_key(char *line, char **key);
+char *f_skip_ws(char *old_line);
 
 bool f_parse_into_db(t_db *db, char *file)
 {
@@ -58,7 +58,7 @@ bool f_extract_key_value(t_db *db, char *line, char **key, char **value)
     bool res;
     
     if (f_is_key(line, key) == false)
-        return (printf("Error\nWrong key."),false); //TODO printf contains wrong key
+        return (ft_putstr_fd("Error\nWrong key.\n", 2),false); //TODO printf contains wrong key
     line += ft_strlen(*key);
     line = f_skip_ws(line);
     *value = line;

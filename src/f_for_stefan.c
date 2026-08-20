@@ -48,12 +48,12 @@ char **create_2d_arr(char *s,int k, int x, int y)
     i = 0;
     map = ft_calloc(sizeof(char *), y + 1);
     if (!map)
-        return (printf("Error\nAllocation."), NULL);
+        return (ft_putstr_fd("Error\nAllocation.\n", 2), NULL);
     while (i < y)
     {
         map[i] = ft_calloc(sizeof(char), x + 1);
         if (!map[i])
-            return (printf("Error\nAllocation."), free_2d_arr(map));
+            return (ft_putstr_fd("Error\nAllocation.\n", 2), free_2d_arr(map));
         j = 0;
         while (j < x)
         {

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 16:55:28 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 17:07:42 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/20 17:59:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	dir_check(char *path)
 	if (fd >= 0)
 	{
 		close(fd);
-		printf("Error\nPath is a directory\n");
+		ft_putstr_fd("Error\nPath is a directory\n", 2);
 		exit(1);
 	}
 }
@@ -31,13 +31,13 @@ static void	ending_check(char *path)
 
 	if (ft_strlen(path) <= 4)
 	{
-		printf("Error\nFile ending is not .cub\n");
+		ft_putstr_fd("Error\nFile ending is not .cub\n", 2);
 		exit(1);
 	}
 	ending = ft_strrchr(path, '.');
 	if (!ending || ft_strlen(ending) != 4 || ft_strncmp(ending, ".cub", 4))
 	{
-		printf("Error\nFile ending is not .cub\n");
+		ft_putstr_fd("Error\nFile ending is not .cub\n", 2);
 		exit(1);
 	}
 }
@@ -49,7 +49,7 @@ static int	read_check(char *path)
 	fd = open(path, O_RDONLY);
 	if (fd <= -1)
 	{
-		printf("Error\nError while opening file - not readable\n");
+		ft_putstr_fd("Error\nError while opening file - not readable\n", 2);
 		exit(1);
 	}
 	return fd;
@@ -61,7 +61,7 @@ void	check_input(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("Error\nwrong number of arguments\n");
+		ft_putstr_fd("Error\nwrong number of arguments\n", 2);
 		exit(1);
 	}
 	dir_check(argv[1]);

@@ -20,13 +20,13 @@ bool f_parse_map(t_db *db)
         return (false);
     x = ft_itoa(m.xmax + 2);
     if (!x)
-        return (printf("Error\nAllocation."), false);
+        return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
     if (db_set(db, "x", x) == false)
         return (false);
     free(x);
     y = ft_itoa(m.y + 2);
     if (!y)
-        return (printf("Error\nAllocation."),false);
+        return (ft_putstr_fd("Error\nAllocation.\n", 2),false);
     if (db_set(db, "y", y) == false)
         return (false);
     free(y);
@@ -49,13 +49,13 @@ bool f_map_to_file(t_read_map *m)
     while (m->map[m->i])
     {
         if (!is_allowed(m->map[m->i], m))
-            return (printf("Error\nWrong Sign."), close(m->fd), false);
+            return (ft_putstr_fd("Error\nWrong Sign.\n", 2), close(m->fd), false);
         m->i++;
     }
     if (m->n + m->o + m->s + m->w > 1)
     {
         ret = false;
-        printf("Error\ntoo many players\n");
+        ft_putstr_fd("Error\ntoo many players\n", 2);
     }
     close(m->fd);
     return (ret);

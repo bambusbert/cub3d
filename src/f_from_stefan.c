@@ -51,7 +51,7 @@ bool start_graphical_stuff(t_db *db, char **map, t_color *colors)
 
     god = ft_calloc(1, sizeof(t_god));
 	if (!god)
-		return (printf("Error\ngod struct malloc fail\n"), false);
+		return (ft_putstr_fd("Error\ngod struct malloc fail\n", 2), false);
     god->db = db;
     god->map = map;
     god->cols = (unsigned int) ft_atoi(db_get(db, "x"));

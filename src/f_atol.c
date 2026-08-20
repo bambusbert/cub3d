@@ -5,20 +5,22 @@
 int	check_digit(long long *num, int neg, long long limit, char c);
 bool	is_overflow(char *arg);
 
-uint32_t f_catch_num(char *s)
+uint32_t f_catch_num(char *s) // TODOOOOOO spazies nach number
 {
     int ret;
     int i;
 
     i = 0;
+	while (s[i] == ' ')
+		i++;
     while (s[i])
     {
         if (!ft_isdigit(s[i]))
-            return (printf("Error\nNot a number.\n"), 600);
+            return (ft_putstr_fd("Error\nNot a number.\n", 2), 600);
         i++;
     }
     if (is_overflow(s) == false)
-        return (printf("Error\nNumber out of range.\n"),600);
+        return (ft_putstr_fd("Error\nNumber out of range.\n", 2),600);
     ret = f_atoll(s);
     return (ret);
 }
@@ -51,13 +53,13 @@ bool	is_overflow(char *arg)
 	if (arg[i] == '+' || arg[i] == '-')
 		neg = (arg[i++] == '-');
 	if (neg)
-		return (printf("Error\nNegative Number."), false);
+		return (ft_putstr_fd("Error\nNegative Number.\n", 2), false);
 	else
 		limit = LIMIT_UP;
 	while (ft_isdigit(arg[i]))
 	{
 		if (check_digit(&num, neg, limit, arg[i]))
-			return (printf("Error\nNumber too big."), false);
+			return (ft_putstr_fd("Error\nNumber too big.\n", 2), false);
 		i++;
 	}
 	return (true);

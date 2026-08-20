@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_read_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:44:43 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/19 18:46:18 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/20 18:20:39 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	f_read_file(char **dest, char *filename)
 
 	fd = f_open_file(filename);
 	if (fd == -1)
-		return (printf("Error opening file.\n"), false);
+		return (ft_putstr_fd("Error\nerroropening file.\n", 2), false);
 	buffer = f_read_from_file(fd);
 	close(fd);
 	if (!buffer)
@@ -59,11 +59,11 @@ static char	*f_read_from_file(int fd)
 		{
 			r.buffer = f_resize(&r);
 			if (!r.buffer)
-				return (printf("Error\nAllocation error."), NULL);
+				return (ft_putstr_fd("Error\nAllocation error.\n", 2), NULL);
 		}
 		r.read_bytes = read(fd, &r.buffer[r.position], r.read_size);
 		if (r.read_bytes < 0)
-			return (free(r.buffer), printf("Read error.\n"), NULL);
+			return (free(r.buffer), ft_putstr_fd("Read error.\n", 2), NULL);
 		if (r.read_bytes == 0)
 			break ;
 		r.position += r.read_bytes;
