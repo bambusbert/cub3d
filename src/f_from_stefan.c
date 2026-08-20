@@ -1,9 +1,54 @@
 #include "../inc/f_parsing.h"
 
+enum e_direction f_define_player_direction(char c);
+
+void f_find_and_define_player(t_god *god, char **m, int i, int j)
+{
+    while (m[i])
+    {
+        j = 0;
+        while (m[i][j])
+        {
+            if (m[i][j] == 'N' || m[i][j] == 'E' || m[i][j] == 'S' || m[i][j] == 'W')
+            {
+                god->player_start_direction = f_define_player_direction(m[i][j]);
+                m[i][j] = '2';
+                god->player_x = (float) j + 0.5;
+                god->player_y = (float) i + 0.5;
+                return ;
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
+enum e_direction f_define_player_direction(char c)
+{
+    if (c == 'N')
+        return (NORTH);
+    else if (c == 'E')
+        return (EAST);
+    else if (c == 'S')
+        return (SOUTH);
+    else if (c == 'W')
+        return (WEST);
+    return NULL;
+}
+
+static void set_colors(t_god *god, t_color *colors)
+{
+    int color_temp;
+
+    color_temp = (((colors[0].r << 8) + colors[0].g ) << 8) + colors[0].b;
+    god->color_floor = color_temp;
+    color_temp = (((colors[1].r << 8) + colors[1].g ) << 8) + colors[1].b;
+    god->color_ceiling = color_temp;
+}
+
 bool f_from_stefan(t_db *db, char **map, t_color *colors)
 {
     t_god *god;
-    
 
     god = ft_calloc(1, sizeof(t_god));
 	if (!god)
@@ -16,72 +61,8 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
     god->pathwalle = db_get(db, "SO");
     god->pathwalls = db_get(db, "WE");
     god->pathwallw = db_get(db, "EA");
-
-
-
-
-    printf("%c %i,%i,%i\n", colors[0].key, colors[0].r, colors[0].g, colors[0].b);
-    printf("%c %i,%i,%i\n\n", colors[1].key, colors[1].r, colors[1].g, colors[1].b);
-
-
-    int i = 0;
-    int j;
-    while (god->map[i])
-    {
-        j = 0;
-        while (god->map[i][j])
-        {
-            if (god->map[i][j] == 'N')
-            {
-                god->map[i][j] = '2';
-                god->player_start_direction = NORTH;
-                break;
-            }
-            else if (god->map[i][j] == 'E')
-            {
-                god->map[i][j] = '2';
-                god->player_start_direction = EAST;
-                break;
-            }
-            else if (god->map[i][j] == 'S')
-            {
-                god->map[i][j] = '2';
-                god->player_start_direction = SOUTH;
-                break;
-            }
-            else if (god->map[i][j] == 'W')
-            {
-                god->map[i][j] = '2';
-                god->player_start_direction = WEST;
-                break;
-            }
-            j++;
-        }
-        if (god->map[i][j] == '2')
-            break;
-        i++;
-    }
-    god->player_x = (float) j + 0.5;
-    god->player_y = (float) i + 0.5;
-
-    i = 0;
-    while (map[i])
-    {
-        j = 0;
-        while (map[i][j])
-        {
-            map[i][j] -= 48;
-            printf("%c\n", map[i][j] + 48);
-            j++;
-        }
-        //printf("%s\n", map[i]);
-        i++;
-    }
-    //exit(2);
-
-    //TODO set god->color_ceiling & god->color_floor
-    god->color_ceiling = 0;
-    god->color_floor = 0;
+    f_find_and_define_player(god, map, 0, 0);
+    set_colors(god, colors);
     init_mlx_stuff(god);
     return (true);
 }

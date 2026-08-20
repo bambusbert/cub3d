@@ -36,7 +36,7 @@ SRC =	src/main.c \
         src/f_parse_map.c \
         src/f_parse_map2.c \
         src/f_for_stefan.c \
-        src/f_from_stefan2.c \
+        src/f_from_stefan.c \
         ./f_file_reader/f_read_file.c \
         ./f_db/f_db_hash.c  \
         ./f_db/f_db_init.c  \

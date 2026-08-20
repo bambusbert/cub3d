@@ -45,7 +45,7 @@ bool f_test_map(t_db *db, t_read_map *m);
 bool for_fortnite_and_stefan(t_db *db, t_color *colors);
 
 // f_from_stefan.c
-bool f_from_stefan2(t_db *db, char **map, t_color *colors);
+bool f_from_stefan(t_db *db, char **map, t_color *colors);
 
 //HAT STEFAN EINGEFÜGT
 void	init_mlx_stuff(t_god *god);
