@@ -72,7 +72,7 @@ void	draw_square(t_god *god, int row, int col)
 		cur_y = -1;
 		while (++cur_y < (int)god->pixels_per_y)
 		{
-			my_mlx_pixel_put(god, cur_x / MINIMAP_FACTOR + start_x / MINIMAP_FACTOR, cur_y / MINIMAP_FACTOR + start_y / MINIMAP_FACTOR, COLOR_BLUE);
+			my_mlx_pixel_put(god, cur_x / MINIMAP_FACTOR + start_x / MINIMAP_FACTOR, cur_y / MINIMAP_FACTOR + start_y / MINIMAP_FACTOR, ~god->color_ceiling);
 		}
 	}
 }

@@ -115,8 +115,8 @@ void	draw_vertical(t_god *god, t_dda *dda, int x)
 		dda->wall_end = WSIZE_Y - 1;
 	//TODO change to actual god->color_ceiling and floor color
 	ft_draw_line(god, (t_ipoint){x, 0}, (t_ipoint){x, dda->wall_start - 1},
-		COLOR_CEILING);
+		god->color_ceiling);
 	draw_wall_texture_slice(god, x, dda);
 	ft_draw_line(god, (t_ipoint){x, dda->wall_end + 1}, (t_ipoint){x,
-		WSIZE_Y}, COLOR_FLOOR);
+		WSIZE_Y}, god->color_floor);
 }

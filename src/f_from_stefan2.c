@@ -36,6 +36,16 @@ enum e_direction f_define_player_direction(char c)
     return NULL;
 }
 
+static void set_colors(t_god *god, t_color *colors)
+{
+    int color_temp;
+
+    color_temp = (((colors[0].r << 8) + colors[0].g ) << 8) + colors[0].b;
+    god->color_floor = color_temp;
+    color_temp = (((colors[1].r << 8) + colors[1].g ) << 8) + colors[1].b;
+    god->color_ceiling = color_temp;
+}
+
 bool f_from_stefan2(t_db *db, char **map, t_color *colors)
 {
     t_god *god;
@@ -80,8 +90,9 @@ bool f_from_stefan2(t_db *db, char **map, t_color *colors)
     //exit(2);
 
     //TODO set god->color_ceiling & god->color_floor
-    god->color_ceiling = 0;
-    god->color_floor = 0;
+    // god->color_ceiling = 0;
+    // god->color_floor = 0;
+    set_colors(god, colors);
     init_mlx_stuff(god);
     return (true);
 }
