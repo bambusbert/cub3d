@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/19 16:54:05 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/20 17:32:04 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define WALL_CHAR 1
+# define WALL_CHAR '1'
 //# define PLAYER_CHAR 2
 # define MAX_DIST_TO_WALL 0.2
 

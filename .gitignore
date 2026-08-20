@@ -6,6 +6,8 @@
 
 # Allow directories
 !*/
+Cub3D_tester/
+Cub3D_tester/**
 
 
 # Allowed files

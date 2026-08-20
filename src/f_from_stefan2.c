@@ -66,27 +66,27 @@ bool f_from_stefan2(t_db *db, char **map, t_color *colors)
 
     //return (true);
     ///TODO hier noch colors dann -48 loeschen oder in function
-    printf("%c %i,%i,%i\n", colors[0].key, colors[0].r, colors[0].g, colors[0].b);
-    printf("%c %i,%i,%i\n\n", colors[1].key, colors[1].r, colors[1].g, colors[1].b);
+    // printf("%c %i,%i,%i\n", colors[0].key, colors[0].r, colors[0].g, colors[0].b);
+    // printf("%c %i,%i,%i\n\n", colors[1].key, colors[1].r, colors[1].g, colors[1].b);
 
 
 
 
 
-    int i = 0;
-    int j;
-    while (map[i])
-    {
-        j = 0;
-        while (map[i][j])
-        {
-            map[i][j] -= 48;
-            printf("%c\n", map[i][j] + 48);
-            j++;
-        }
-        //printf("%s\n", map[i]);
-        i++;
-    }
+    // int i = 0;
+    // int j;
+    // while (map[i])
+    // {
+    //     j = 0;
+    //     while (map[i][j])
+    //     {
+    //         map[i][j] -= 48;
+    //         //printf("%c\n", map[i][j] + 48);
+    //         j++;
+    //     }
+    //     //printf("%s\n", map[i]);
+    //     i++;
+    // }
     //exit(2);
 
     //TODO set god->color_ceiling & god->color_floor

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/22 14:24:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/20 17:17:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	move_horizontal(t_god *god, int dir)
 // or is there some mlx magic we can use
 void	position_manager(t_god *god)
 {
-    printf("x: %f, y: %f\n", god->player_x, god->player_y);
+    //printf("x: %f, y: %f\n", god->player_x, god->player_y);
 	if (god->key_w && !god->key_s)
 		move_vertical(god, FORWARD);
 	if (god->key_s && !god->key_w)
