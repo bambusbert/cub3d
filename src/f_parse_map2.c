@@ -28,7 +28,7 @@ bool f_flood_that_shi(char *s, int start, int ll, t_db *db, t_read_map *m)
     else if (s[start] == WALL_CHAR || s[start] == 'x')
         return (true);
     s[start] = 'x';
-    
+
     ret = f_flood_that_shi(s, start - 1, ll, db, m);
     if (ret == false)
         return (false);
@@ -101,9 +101,9 @@ bool f_allocate_test_map(t_read_map *m)
 // void print_map(t_db *db, t_read_map *m)
 // {
 
-    
+
 //     int s = 0;
-//     int h = 0;    
+//     int h = 0;
 //     // print 1 ori im buffer
 //     while (m->buffer[s])
 //     {
@@ -138,7 +138,7 @@ bool f_allocate_test_map(t_read_map *m)
 //     // }
 //     // print 3 so ist es in db
 //     // printf("\n%s\n\n\n", db_get(db, "MAP"));
-    
+
 //     // printf("\n%s\n\n\n\n", suwi);
-    
+
 // }

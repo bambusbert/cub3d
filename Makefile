@@ -11,6 +11,7 @@ RED = \033[0;31m
 # Compiler and flags
 CC = cc
 #CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
+#-fsanitize=leak,address,undefined
 CFLAGS = -g
 INCLUDES = -I./inc
 
