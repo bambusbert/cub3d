@@ -1,5 +1,7 @@
 #include "../inc/f_parsing.h"
 
+enum e_direction f_define_player_direction(char c);
+
 void f_find_and_define_player(t_god *god, char **m, int i, int j)
 {
     while (m[i])
@@ -31,12 +33,12 @@ enum e_direction f_define_player_direction(char c)
         return (SOUTH);
     else if (c == 'W')
         return (WEST);
+    return NULL;
 }
 
-bool f_from_stefan(t_db *db, char **map, t_color *colors)
+bool f_from_stefan2(t_db *db, char **map, t_color *colors)
 {
     t_god *god;
-    
 
     god = ft_calloc(1, sizeof(t_god));
 	if (!god)
@@ -52,16 +54,17 @@ bool f_from_stefan(t_db *db, char **map, t_color *colors)
 
     f_find_and_define_player(god, map, 0, 0);
 
-    return (true);
-    /// hier noch colors dann -48 loeschen oder in function
+    //return (true);
+    ///TODO hier noch colors dann -48 loeschen oder in function
     printf("%c %i,%i,%i\n", colors[0].key, colors[0].r, colors[0].g, colors[0].b);
     printf("%c %i,%i,%i\n\n", colors[1].key, colors[1].r, colors[1].g, colors[1].b);
 
 
-    
-    
+
+
 
     int i = 0;
+    int j;
     while (map[i])
     {
         j = 0;

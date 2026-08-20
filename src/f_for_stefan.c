@@ -19,7 +19,7 @@ bool for_fortnite_and_stefan(t_db *db, t_color *colors)
     for_stefan = f_for_stefan((char *)s, 0, x, y);
     if (!for_stefan)
       return (false);
-    ret = f_from_stefan(db, for_stefan, colors);
+    ret = f_from_stefan2(db, for_stefan, colors);
     //main2(1, "hallo");
    for_stefan = free_stefan(for_stefan);
     return(ret);
@@ -65,7 +65,7 @@ char **f_for_stefan(char *s,int k, int x, int y)
             j++;
             k++;
         }
-        i++; 
+        i++;
     }
     return (for_stefan);
 }
