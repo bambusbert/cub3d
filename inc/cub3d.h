@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/20 17:32:04 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/20 17:46:23 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <unistd.h>
 
 # define WALL_CHAR '1'
-//# define PLAYER_CHAR 2
+# define PLAYER_CHAR '2'
 # define MAX_DIST_TO_WALL 0.2
 
 # define SPRITE_WALL_N "./sprites/wall_n.xpm"

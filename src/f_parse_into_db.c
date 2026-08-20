@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_into_db.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 13:23:03 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/19 18:47:29 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/20 17:45:50 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool f_parse_into_db(t_db *db, char *file)
         line = f_skip_ws(line);
         if (*line == '\0')
             break;
-        if (*line == '1' || *line == '0')
+        if (*line == WALL_CHAR || *line == '0')
             return(db_set(db, "MAP", mapstart));
         if (*line != '\n')
         {

@@ -21,12 +21,11 @@ int f_find_player(const char *s)
 
 bool f_flood_that_shi(char *s, int start, int ll, t_db *db, t_read_map *m)
 {
-    //print_map(db, m);
     bool ret;
     ret = true;
     if (s[start] == 32)
         return (false);
-    else if (s[start] == '1' || s[start] == 'x')
+    else if (s[start] == WALL_CHAR || s[start] == 'x')
         return (true);
     s[start] = 'x';
     
@@ -58,7 +57,6 @@ bool f_test_map(t_db *db, t_read_map *m)
         return(printf("Error\nNo Player."), free(m->buffer), false);
     if (f_flood_that_shi(m->buffer, m->pp, m->xmax + 2, db, m) == false)
         return(printf("Error\nMap wrong."), free(m->buffer), false);
-    //print_map(db, m); // todo loeschen
     free(m->buffer);
     return (true);
 }
@@ -100,47 +98,47 @@ bool f_allocate_test_map(t_read_map *m)
 }
 
 
-void print_map(t_db *db, t_read_map *m)
-{
+// void print_map(t_db *db, t_read_map *m)
+// {
 
     
-    int s = 0;
-    int h = 0;    
-    // print 1 ori im buffer
-    while (m->buffer[s])
-    {
-        while (h < m->xmax + 2)
-        {
-            printf("%c", m->buffer[s]);
-            h++;
-            s++;
-        }
-        h = 0;
-        printf("\n");
-    }
-    const char *suwi = db_get(db, "TESTMAP");
-    if (suwi[0] == 32)
-        printf("\n");
-    // printf("\n");
-    // printf("\n");
-    // printf("\n");
-    // s = 0;
-    // h = 0;
-    // //print 2 aus db
-    // while (suwi[s])
-    // {
-    //     while (h < m->xmax + 2)
-    //     {
-    //         printf("%c", suwi[s]);
-    //         h++;
-    //         s++;
-    //     }
-    //     h = 0;
-    //     printf("\n");
-    // }
-    // print 3 so ist es in db
-    // printf("\n%s\n\n\n", db_get(db, "MAP"));
+//     int s = 0;
+//     int h = 0;    
+//     // print 1 ori im buffer
+//     while (m->buffer[s])
+//     {
+//         while (h < m->xmax + 2)
+//         {
+//             printf("%c", m->buffer[s]);
+//             h++;
+//             s++;
+//         }
+//         h = 0;
+//         printf("\n");
+//     }
+//     const char *suwi = db_get(db, "TESTMAP");
+//     if (suwi[0] == 32)
+//         printf("\n");
+//     // printf("\n");
+//     // printf("\n");
+//     // printf("\n");
+//     // s = 0;
+//     // h = 0;
+//     // //print 2 aus db
+//     // while (suwi[s])
+//     // {
+//     //     while (h < m->xmax + 2)
+//     //     {
+//     //         printf("%c", suwi[s]);
+//     //         h++;
+//     //         s++;
+//     //     }
+//     //     h = 0;
+//     //     printf("\n");
+//     // }
+//     // print 3 so ist es in db
+//     // printf("\n%s\n\n\n", db_get(db, "MAP"));
     
-    // printf("\n%s\n\n\n\n", suwi);
+//     // printf("\n%s\n\n\n\n", suwi);
     
-}
+// }

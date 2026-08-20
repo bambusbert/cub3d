@@ -27,6 +27,7 @@ int main (int ac, char *av[])
         return(freeturn(file, &db1, 1));
     free(file);
     for_fortnite_and_stefan(&db1, fc);
+    
     return (freeturn(file, &db1, 0));
 }
 

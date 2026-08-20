@@ -1,8 +1,19 @@
 #include "../inc/f_parsing.h"
 
-enum e_direction f_define_player_direction(char c);
+static enum e_direction f_define_player_direction(char c)
+{
+    if (c == 'N')
+        return (NORTH);
+    else if (c == 'E')
+        return (EAST);
+    else if (c == 'S')
+        return (SOUTH);
+    else if (c == 'W')
+        return (WEST);
+    return (enum e_direction) 600;
+}
 
-void f_find_and_define_player(t_god *god, char **m, int i, int j)
+static void f_find_and_define_player(t_god *god, char **m, int i, int j)
 {
     while (m[i])
     {
@@ -12,7 +23,7 @@ void f_find_and_define_player(t_god *god, char **m, int i, int j)
             if (m[i][j] == 'N' || m[i][j] == 'E' || m[i][j] == 'S' || m[i][j] == 'W')
             {
                 god->player_start_direction = f_define_player_direction(m[i][j]);
-                m[i][j] = '2';
+                m[i][j] = PLAYER_CHAR;
                 god->player_x = (float) j + 0.5;
                 god->player_y = (float) i + 0.5;
                 return ;
@@ -23,18 +34,6 @@ void f_find_and_define_player(t_god *god, char **m, int i, int j)
     }
 }
 
-enum e_direction f_define_player_direction(char c)
-{
-    if (c == 'N')
-        return (NORTH);
-    else if (c == 'E')
-        return (EAST);
-    else if (c == 'S')
-        return (SOUTH);
-    else if (c == 'W')
-        return (WEST);
-    return NULL;
-}
 
 static void set_colors(t_god *god, t_color *colors)
 {
@@ -46,7 +45,7 @@ static void set_colors(t_god *god, t_color *colors)
     god->color_ceiling = color_temp;
 }
 
-bool f_from_stefan(t_db *db, char **map, t_color *colors)
+bool start_graphical_stuff(t_db *db, char **map, t_color *colors)
 {
     t_god *god;
 

@@ -14,11 +14,11 @@ uint32_t f_catch_num(char *s)
     while (s[i])
     {
         if (!ft_isdigit(s[i]))
-            return (printf("Error\nNot a number."), 600);
+            return (printf("Error\nNot a number.\n"), 600);
         i++;
     }
     if (is_overflow(s) == false)
-        return (printf("Error\nNumber out of range."),600);
+        return (printf("Error\nNumber out of range.\n"),600);
     ret = f_atoll(s);
     return (ret);
 }
