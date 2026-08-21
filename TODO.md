@@ -9,7 +9,7 @@
 
 VETSATESTA
 - nl_between_info.cub geht ned
-- arthurs big map segfaults
+- arthurs big map segfaults (very likely because of stack overflow in recursive flood fill)
 -
 
 
@@ -18,6 +18,6 @@ other testers
 cub3D_map_tester
 cub3d-tester
 
-mem sanituyer, leak sanitiyer, undef b sanitizer, adress sanitizer flags, memory sanitizer
+mem sanituyer, leak sanitiyer, undef b sanitizer, adress sanitizer flags
 long ass number in map
 stack overflow recursion
