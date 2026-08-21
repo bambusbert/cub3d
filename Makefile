@@ -47,7 +47,6 @@ SRC =	src/main.c \
 		src/check_input.c \
 		src/cleanup.c \
 		src/input_handling.c \
-		src/debug.c \
 		src/init_main.c \
 		src/init_textures.c \
 		src/helper.c \
@@ -57,7 +56,8 @@ SRC =	src/main.c \
 		src/dda.c \
 		src/dda_init.c \
 		src/time.c \
-		src/bonus.c
+		src/bonus.c \
+		#src/debug.c
 
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
