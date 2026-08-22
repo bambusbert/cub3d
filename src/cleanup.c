@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/19 17:00:12 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/22 11:58:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	free_god_struct(t_god *god)
 
 void	destroy_images(t_god *god)
 {
-	if (god->img)
-		mlx_destroy_image(god->mlx, god->img);
-	if (god->sprite_wall_E->img)
-		mlx_destroy_image(god->mlx, god->sprite_wall_E->img);
-	if (god->sprite_wall_W->img)
-		mlx_destroy_image(god->mlx, god->sprite_wall_W->img);
-	if (god->sprite_wall_N->img)
-		mlx_destroy_image(god->mlx, god->sprite_wall_N->img);
-	if (god->sprite_wall_S->img)
-		mlx_destroy_image(god->mlx, god->sprite_wall_S->img);
+	if (god->god_tex->img)
+		mlx_destroy_image(god->mlx, god->god_tex->img);
+	if (god->sprite_wall_e->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_e->img);
+	if (god->sprite_wall_w->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_w->img);
+	if (god->sprite_wall_n->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_n->img);
+	if (god->sprite_wall_s->img)
+		mlx_destroy_image(god->mlx, god->sprite_wall_s->img);
 }
 
 static void	perform_cleanup(t_god *god)
@@ -54,18 +54,18 @@ static void	perform_cleanup(t_god *god)
 		return ;
 	free_db(god->db);
 	destroy_images(god);
-	free(god->sprite_wall_E);
-	free(god->sprite_wall_W);
-	free(god->sprite_wall_S);
-	free(god->sprite_wall_N);
+	free(god->sprite_wall_e);
+	free(god->sprite_wall_w);
+	free(god->sprite_wall_s);
+	free(god->sprite_wall_n);
 	if (god->mlx)
 	{
-		//mlx_do_key_autorepeaton(god->mlx);
 		if (god->mlx_win)
 			mlx_destroy_window(god->mlx, god->mlx_win);
 		mlx_destroy_display(god->mlx);
 		free(god->mlx);
 	}
+	free(god->god_tex);
 	free_god_struct(god);
 }
 

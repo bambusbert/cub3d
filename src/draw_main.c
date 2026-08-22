@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/19 18:30:29 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 11:58:41 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void	draw_2d_map(t_god *god)
 	}
 }
 
-//TODO move tex_x_int outside this function (it does not
-//change within a slice)
-void	print_single_texel(t_god *god, t_ipoint p, t_fpoint texp, t_texture *tex)
+void	print_single_texel(t_god *god, t_ipoint p, t_fpoint texp,
+		t_texture *tex)
 {
 	char	*color;
 	int		tex_x_int;
@@ -48,27 +47,27 @@ void	print_single_texel(t_god *god, t_ipoint p, t_fpoint texp, t_texture *tex)
 		tex_x_int = 0;
 	if (tex_y_int < 0)
 		tex_y_int = 0;
-	color = tex->img_addr + (tex_y_int * tex->img_ll + tex_x_int
-			* (tex->img_bpp / 8));
+	color = tex->img_addr + (tex_y_int * tex->img_ll + tex_x_int * (tex->img_bpp
+				/ 8));
 	my_mlx_pixel_put(god, p.x, p.y, *(unsigned int *)color);
 }
 
 static t_texture	*set_tex(t_god *god, t_dda *dda)
 {
 	if (dda->which_wall_hit == NORTH)
-		return (god->sprite_wall_N);
+		return (god->sprite_wall_n);
 	else if (dda->which_wall_hit == EAST)
-		return (god->sprite_wall_E);
+		return (god->sprite_wall_e);
 	else if (dda->which_wall_hit == SOUTH)
-		return (god->sprite_wall_S);
+		return (god->sprite_wall_s);
 	else if (dda->which_wall_hit == WEST)
-		return (god->sprite_wall_W);
-	return (god->sprite_wall_N);
+		return (god->sprite_wall_w);
+	return (god->sprite_wall_n);
 }
 
 // If the wall goes off the top of the screen,
 // we must start reading the texture further down.
-//tex_x and tex_y are relative (between 0 and 1)
+// tex_x and tex_y are relative (between 0 and 1)
 void	draw_wall_texture_slice(t_god *god, int x, t_dda *dda)
 {
 	float		step;
@@ -89,8 +88,8 @@ void	draw_wall_texture_slice(t_god *god, int x, t_dda *dda)
 	tex_y = (dda->wall_start - unclamped_wall_start) * step;
 	while (dda->wall_start <= dda->wall_end)
 	{
-		print_single_texel(god, (t_ipoint){x, dda->wall_start}, (t_fpoint){tex_x,
-			tex_y}, tex);
+		print_single_texel(god, (t_ipoint){x, dda->wall_start},
+			(t_fpoint){tex_x, tex_y}, tex);
 		tex_y += step;
 		dda->wall_start++;
 	}
@@ -113,10 +112,9 @@ void	draw_vertical(t_god *god, t_dda *dda, int x)
 		dda->wall_start = 0;
 	if (dda->wall_end >= WSIZE_Y || dda->wall_end < 0)
 		dda->wall_end = WSIZE_Y - 1;
-	//TODO change to actual god->color_ceiling and floor color
 	ft_draw_line(god, (t_ipoint){x, 0}, (t_ipoint){x, dda->wall_start - 1},
 		god->color_ceiling);
 	draw_wall_texture_slice(god, x, dda);
-	ft_draw_line(god, (t_ipoint){x, dda->wall_end + 1}, (t_ipoint){x,
-		WSIZE_Y}, god->color_floor);
+	ft_draw_line(god, (t_ipoint){x, dda->wall_end + 1}, (t_ipoint){x, WSIZE_Y},
+		god->color_floor);
 }

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/20 17:17:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 11:51:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ static void	move_vertical(t_god *god, int dir)
 	float	dx;
 	float	dy;
 
-	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle) * dir;
-	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle) * dir;
+	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle)
+		* dir;
+	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle)
+		* dir;
 	if (!move_possible(god, dx, dy))
 		return ;
 	god->player_x += dx;
@@ -66,8 +68,10 @@ static void	move_horizontal(t_god *god, int dir)
 	float	dx;
 	float	dy;
 
-	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle + (PI / 2)) * dir;
-	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle + (PI / 2)) * dir;
+	dx = MOVE_TICK * god->time_since_last_frame_sec * cos(god->player_angle
+			+ (PI / 2)) * dir;
+	dy = MOVE_TICK * god->time_since_last_frame_sec * sin(god->player_angle
+			+ (PI / 2)) * dir;
 	if (!move_possible(god, dx, dy))
 		return ;
 	god->player_x += dx;
@@ -79,7 +83,6 @@ static void	move_horizontal(t_god *god, int dir)
 // or is there some mlx magic we can use
 void	position_manager(t_god *god)
 {
-    //printf("x: %f, y: %f\n", god->player_x, god->player_y);
 	if (god->key_w && !god->key_s)
 		move_vertical(god, FORWARD);
 	if (god->key_s && !god->key_w)

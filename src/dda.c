@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:18:12 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/22 12:11:09 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 11:48:46 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,10 @@ void	dda_loop(t_god *god, t_dda *dda)
 			dda->map_y += dda->step_y;
 			dda->horizontal_wall_hit = false;
 		}
-		//actually i dont need that bc a valid map always is surrounded by walls
-		//for now we leave it in
-		//TODO remove when merged
 		if (dda->map_x < 0 || dda->map_x >= (int)god->cols || dda->map_y < 0
 			|| dda->map_y >= (int)god->rows)
 		{
-			dda->wall_hit = true;	//why
+			dda->wall_hit = true;
 			break ;
 		}
 		if (god->map[dda->map_y][dda->map_x] == WALL_CHAR)
@@ -96,23 +93,23 @@ void	dda_loop(t_god *god, t_dda *dda)
 	}
 }
 
-//we have to subtract one portion that we overshot in dda_loop
+// we have to subtract one portion that we overshot in dda_loop
 //(if we are in a wall we went 1 too far)
-//dPerp = dEuclidian * cos(ray_angle - player_angle)
+// dPerp = dEuclidian * cos(ray_angle - player_angle)
 //(fisheye correction)
 void	calc_distances(float angle_diff, t_dda *dda)
 {
 	if (dda->horizontal_wall_hit)
 	{
-		// if (dda->ray_dir_x == 0)
-		// 	dda->ray_dir_x = 0.0000001;
+		if (dda->ray_dir_x == 0)
+			dda->ray_dir_x = 0.0000001;
 		dda->beam_dist = dda->next_x - dda->delta_x;
 		dda->wall_dist = dda->beam_dist * cos(angle_diff);
 	}
 	else
 	{
-		// if (dda->ray_dir_y == 0)
-		// 	dda->ray_dir_y = 0.0000001;
+		if (dda->ray_dir_y == 0)
+			dda->ray_dir_y = 0.0000001;
 		dda->beam_dist = dda->next_y - dda->delta_y;
 		dda->wall_dist = dda->beam_dist * cos(angle_diff);
 	}

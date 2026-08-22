@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 14:47:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/17 17:33:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 11:48:54 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	my_mlx_pixel_put(t_god *god, int x, int y, int color)
 
 	if (x < 0 || x >= WSIZE_X || y < 0 || y >= WSIZE_Y)
 		return ;
-	dst = god->img_addr + (y * god->img_ll + x
-			* (god->img_bpp / 8));
+	dst = god->god_tex->img_addr + (y * god->god_tex->img_ll + x
+			* (god->god_tex->img_bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -72,7 +72,9 @@ void	draw_square(t_god *god, int row, int col)
 		cur_y = -1;
 		while (++cur_y < (int)god->pixels_per_y)
 		{
-			my_mlx_pixel_put(god, cur_x / MINIMAP_FACTOR + start_x / MINIMAP_FACTOR, cur_y / MINIMAP_FACTOR + start_y / MINIMAP_FACTOR, ~god->color_ceiling);
+			my_mlx_pixel_put(god, cur_x / MINIMAP_FACTOR + start_x
+				/ MINIMAP_FACTOR, cur_y / MINIMAP_FACTOR + start_y
+				/ MINIMAP_FACTOR, ~god->color_ceiling);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/19 16:58:58 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/22 11:48:31 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	rotation_manager(t_god *god)
 
 void	render(t_god *god)
 {
-	ft_bzero(god->img_addr, WSIZE_Y * god->img_ll);
+	ft_bzero(god->god_tex->img_addr, WSIZE_Y * god->god_tex->img_ll);
 	dda_wrapper(god);
 	draw_2d_map(god);
 	draw_minimap_beams(god);
-	mlx_put_image_to_window(god->mlx, god->mlx_win, god->img, 0, 0);
+	mlx_put_image_to_window(god->mlx, god->mlx_win, god->god_tex->img, 0, 0);
 }
 
 int	game_loop(t_god *god)
@@ -49,17 +49,18 @@ void	init_mlx_stuff(t_god *god)
 	god->mlx_win = mlx_new_window(god->mlx, WSIZE_X, WSIZE_Y, "cub3d");
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
-	mlx_hook(god->mlx_win, CLOSING_EV, NO_EV_MASK, (int (*)(void))close_window, god);
-	mlx_hook(god->mlx_win, KEYDOWN_EV, KEY_PRESS_MASK, (int (*)(void))key_press, god);
-	mlx_hook(god->mlx_win, KEYUP_EV, KEY_RELEASE_MASK, (int (*)(void))key_up, god);
+	mlx_hook(god->mlx_win, CLOSING_EV, NO_EV_MASK, (int (*)(void))close_window,
+		god);
+	mlx_hook(god->mlx_win, KEYDOWN_EV, KEY_PRESS_MASK, (int (*)(void))key_press,
+		god);
+	mlx_hook(god->mlx_win, KEYUP_EV, KEY_RELEASE_MASK, (int (*)(void))key_up,
+		god);
 	mlx_hook(god->mlx_win, MOUSE_EV, POINTER_MOTION_MASK,
-		(int (*)(void))mouse_move_function, god); //TODO bonus
+		(int (*)(void))mouse_move_function, god);
 	init_god(god);
-	//mlx_do_key_autorepeatoff(god->mlx);
 	render(god);
 	god->time_last_frame_usec = return_usecs_since_1970();
 	mlx_loop_hook(god->mlx, (int (*)(void))game_loop, god);
-	//mlx_mouse_hide(god->mlx, god->mlx_win);
 	mlx_loop(god->mlx);
 }
 

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/20 17:46:23 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 11:59:12 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CUB3D_H
 
 # include "../f_db/f_db.h"
-
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
@@ -72,13 +71,14 @@
 # define MOUSE_EV 6
 # define CLOSING_EV 17
 # define NO_EV_MASK 0
-# define KEY_PRESS_MASK 1L << 0
-# define KEY_RELEASE_MASK 1L << 1
-# define POINTER_MOTION_MASK 1L << 6
+# define KEY_PRESS_MASK 0x00000001      // 1L << 0
+# define KEY_RELEASE_MASK 0x00000002    // 1L << 1
+# define POINTER_MOTION_MASK 0x00000040 // 1L << 6
 
 // BONUS
 # define MINIMAP_FACTOR 5
 # define MINIMAP_BEAM_L 150
+
 enum				e_direction
 {
 	NORTH,
@@ -116,27 +116,19 @@ typedef struct s_god
 	void			*mlx_win;
 	long long		time_last_frame_usec;
 	float			time_since_last_frame_sec;
-	// img stuff
-	//TODO change that to be a t_texture
-	void			*img;
-	char			*img_addr;
-	int				img_bpp;
-	int				img_ll;
-	int				img_endian;
-
-	char **map;
-	unsigned int rows;
-	unsigned int cols;
+	t_texture		*god_tex;
+	char			**map;
+	unsigned int	rows;
+	unsigned int	cols;
 	unsigned int	pixels_per_x;
 	unsigned int	pixels_per_y;
-
-	t_texture		*sprite_wall_S;
-	t_texture		*sprite_wall_E;
-	t_texture		*sprite_wall_N;
-	t_texture		*sprite_wall_W;
-	float player_x;
-	float player_y;
-	int player_start_direction;
+	t_texture		*sprite_wall_s;
+	t_texture		*sprite_wall_e;
+	t_texture		*sprite_wall_n;
+	t_texture		*sprite_wall_w;
+	float			player_x;
+	float			player_y;
+	int				player_start_direction;
 	float			player_angle;
 	float			player_angle_min;
 	float			player_angle_max;
@@ -146,13 +138,13 @@ typedef struct s_god
 	bool			key_d;
 	bool			key_left;
 	bool			key_right;
-	const char 			*pathwalln;
-	const char 			*pathwalle;
-	const char 			*pathwalls;
-	const char 			*pathwallw;
+	const char		*path_wall_n;
+	const char		*path_wall_e;
+	const char		*path_wall_s;
+	const char		*path_wall_w;
 	int				color_ceiling;
 	int				color_floor;
-	t_db 			*db;
+	t_db			*db;
 }					t_god;
 
 typedef struct s_dda
@@ -172,7 +164,7 @@ typedef struct s_dda
 	bool			wall_hit;
 	bool			horizontal_wall_hit;
 	int				which_wall_hit;
-	float			wall_dist; // WINDOW_SIZE_Y / distance is line height
+	float			wall_dist;
 	float			beam_dist;
 	float			hit_x;
 	float			hit_y;
@@ -181,16 +173,8 @@ typedef struct s_dda
 	int				wall_len;
 }					t_dda;
 
-// debug.c - das kommt alles weg oder in bonus
-// void				print_keys(t_god *god);
-// char				**create_sample_map(t_god *god);
-// void				debug_init_player(t_god *god);
-// int					return_wall_color(int which_wall_hit);
-// void				fps_counter(t_god *god);
-// int					mouse_function(void *param);
-
 // bonus.c
-int	mouse_move_function(int x, int y, void *param); // TODO das in bonus
+int					mouse_move_function(int x, int y, void *param);
 void				draw_minimap_beams(t_god *god);
 
 // cub3d.c
@@ -218,8 +202,7 @@ void				draw_vertical(t_god *god, t_dda *dda, int x);
 // draw_helper.c
 void				draw_square(t_god *god, int row, int col);
 void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
-void				ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2,
-						int color);
+void				ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2, int c);
 
 // movement.c
 void				position_manager(t_god *god);
@@ -248,5 +231,14 @@ void				close_window(t_god *god);
 void				error_exit(char *msg, t_god *god);
 
 // unsorted
-bool	main2(int argc, char **argv);
+bool				main2(int argc, char **argv);
+
+// debug.c - das kommt alles weg oder in bonus
+// void				print_keys(t_god *god);
+// char				**create_sample_map(t_god *god);
+// void				debug_init_player(t_god *god);
+// int					return_wall_color(int which_wall_hit);
+// void				fps_counter(t_god *god);
+// int					mouse_function(void *param);
+
 #endif
