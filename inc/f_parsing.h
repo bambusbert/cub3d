@@ -41,6 +41,9 @@ bool f_parse_map(t_db *db);
 // f_parse_map2.c
 bool f_test_map(t_db *db, t_read_map *m);
 
+// flood_fill_scan.c
+bool	f_flood_fill_scan(char *grid, int size, int len, int start_i);
+
 // f_for_stefan.c
 bool start_game(t_db *db, t_color *colors);
 

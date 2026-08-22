@@ -38,6 +38,7 @@ SRC =	src/main.c \
         src/f_parse_map2.c \
         src/game_start.c \
         src/game_setup.c \
+        src/f_flood_fill_scan.c \
         ./f_file_reader/f_read_file.c \
         ./f_db/f_db_hash.c  \
         ./f_db/f_db_init.c  \

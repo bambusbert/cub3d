@@ -19,27 +19,40 @@ int f_find_player(const char *s)
     return (-1);
 }
 
-bool f_flood_that_shi(char *s, int start, int ll, t_db *db, t_read_map *m)
+bool f_allocate_test_map(t_read_map *m);
+void f_fill_test_map(t_read_map *m);
+int f_find_player(const char *s);
+
+void print_map(t_db *db, t_read_map *m); //todo loeschen
+
+
+int f_find_player(const char *s)
 {
-    bool ret;
-    ret = true;
+    int i = 0;
+    while (s[i])
+    {
+        if (s[i] == 'N' || s[i] == 'E' || s[i] == 'S' || s[i] == 'W')
+            return (i);
+        i++;
+    }
+    return (-1);
+}
+
+bool f_flood_that_shi(char *s, int start, int ll)
+{
     if (s[start] == 32)
         return (false);
-    else if (s[start] == WALL_CHAR || s[start] == 'x')
+    else if (s[start] == '1' || s[start] == 'x')
         return (true);
     s[start] = 'x';
-
-    ret = f_flood_that_shi(s, start - 1, ll, db, m);
-    if (ret == false)
+    
+    if (f_flood_that_shi(s, start - 1, ll) == false)
         return (false);
-    ret = f_flood_that_shi(s, start + 1, ll, db, m);
-    if (ret == false)
+    if (f_flood_that_shi(s, start + 1, ll) == false)
         return (false);
-    ret = f_flood_that_shi(s, start - ll, ll, db, m);
-    if (ret == false)
+    if (f_flood_that_shi(s, start - ll, ll) == false)
         return (false);
-    ret = f_flood_that_shi(s, start + ll, ll, db, m);
-    if (ret == false)
+    if (f_flood_that_shi(s, start + ll, ll) == false)
         return (false);
     return (true);
 }
@@ -47,6 +60,8 @@ bool f_flood_that_shi(char *s, int start, int ll, t_db *db, t_read_map *m)
 
 bool f_test_map(t_db *db, t_read_map *m)
 {
+    size_t size;
+    
     if (f_allocate_test_map(m) == false)
         return (false);
     f_fill_test_map(m);
@@ -54,9 +69,21 @@ bool f_test_map(t_db *db, t_read_map *m)
        return(free(m->buffer), false);
     m->pp = f_find_player(m->buffer);
     if (m->pp == -1)
-        return(ft_putstr_fd("Error\nNo Player.\n", 2), free(m->buffer), false);
-    if (f_flood_that_shi(m->buffer, m->pp, m->xmax + 2, db, m) == false)
-        return(ft_putstr_fd("Error\nMap wrong.\n", 2), free(m->buffer), false);
+        return(free(m->buffer), false);
+    size = ft_strlen(m->buffer);
+    if (size > 80000)
+    {
+        write(1, "1\n", 2);
+        if (f_flood_fill_scan(m->buffer, size, m->xmax + 2, m->pp) == false)
+            return(free(m->buffer), false);
+    }
+    else
+    {
+        write(1, "2\n", 2);
+        if (f_flood_that_shi(m->buffer, m->pp, m->xmax + 2) == false)
+            return(free(m->buffer), false);
+    }
+    //print_map(db, m); // todo loeschen
     free(m->buffer);
     return (true);
 }
