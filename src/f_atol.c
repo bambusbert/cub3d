@@ -15,9 +15,9 @@ uint32_t f_catch_num(char *s) // TODOOOOOO spazies nach number
         i++;
     while (ft_isdigit(s[i]))
         i++;
-    while (s[i])
+    while (s[i] != '\0')
     {
-        if (s[i] != ' ' || s[i] != '\t')
+        if (!ft_isdigit(s[i]) && s[i] != ' ' && s[i] != '\t')
             return (ft_putstr_fd("Error\nNot a Number.\n", 2),600);
         i++;
     }
