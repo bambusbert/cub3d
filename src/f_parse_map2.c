@@ -52,7 +52,7 @@ bool f_test_map(t_db *db, t_read_map *m)
     if (m->pp == -1)
         return(free(m->buffer), false);
     size = ft_strlen(m->buffer);
-    if (size > 80000)
+    if (size > 67676)
     {
         write(1, "1\n", 2);
         if (f_flood_fill_scan(m->buffer, size, m->xmax + 2, m->pp) == false)
