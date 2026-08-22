@@ -16,6 +16,7 @@ int f_find_player(const char *s)
             return (i);
         i++;
     }
+    ft_putstr_fd("Error\nNo Player.\n", 2);
     return (-1);
 }
 
