@@ -1,4 +1,4 @@
-#include "f_parsing.h"
+#include "../inc/f_parsing.h"
 #include <limits.h>
 #include <stdint.h>
 
@@ -11,12 +11,14 @@ uint32_t f_catch_num(char *s) // TODOOOOOO spazies nach number
     int i;
 
     i = 0;
-	while (s[i] == ' ')
-		i++;
+    while (s[i] == ' ' || s[i] == '\t')
+        i++;
+    while (ft_isdigit(s[i]))
+        i++;
     while (s[i])
     {
-        if (!ft_isdigit(s[i]))
-            return (ft_putstr_fd("Error\nNot a number.\n", 2), 600);
+        if (s[i] != ' ' || s[i] != '\t')
+            return (ft_putstr_fd("Error\nNot a Number.\n", 2),600);
         i++;
     }
     if (is_overflow(s) == false)

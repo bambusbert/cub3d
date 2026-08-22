@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_parsing.h"
+#include "../inc/f_parsing.h"
 
 bool f_extract_colors(t_db *db, t_color *colors);
 bool f_border_control(t_color *colors);
