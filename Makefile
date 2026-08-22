@@ -36,8 +36,8 @@ SRC =	src/main.c \
         src/f_is_allowed.c \
         src/f_parse_map.c \
         src/f_parse_map2.c \
-        src/f_for_stefan.c \
-        src/f_from_stefan.c \
+        src/game_start.c \
+        src/game_setup.c \
         ./f_file_reader/f_read_file.c \
         ./f_db/f_db_hash.c  \
         ./f_db/f_db_init.c  \

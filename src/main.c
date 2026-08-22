@@ -6,15 +6,16 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:51:40 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:51:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 12:40:28 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "f_parsing.h"
 
-int		freeturn(char *file, t_db *db, int ret);
-bool	for_fortnite_and_stefan(t_db *db, t_color *colors);
+int		cleanup_and_return(char *file, t_db *db, int ret);
+bool	start_game(t_db *db, t_color *colors);
 
+// TODO hier gibt es noch funcheck issues
 int	main(int ac, char *av[])
 {
 	char	*file;
@@ -29,21 +30,23 @@ int	main(int ac, char *av[])
 	if (db_init(&db1, 1, 1) == false)
 		return (1);
 	if (f_parse_into_db(&db1, file) == false)
-		return (freeturn(file, &db1, 1));
+		return (cleanup_and_return(file, &db1, 1));
 	if (db1.hmap_size != 7)
-		return (ft_putstr_fd("Error\nToo many keys.\n", 2), freeturn(file, &db1,
-				1));
+		return (ft_putstr_fd("Error\nToo many keys.\n", 2),
+			cleanup_and_return(file, &db1, 1));
 	f_init_colors(fc);
 	if (f_parse_colors(&db1, fc) == false)
-		return (freeturn(file, &db1, 1));
+		return (cleanup_and_return(file, &db1, 1));
 	if (f_parse_map(&db1) == false)
-		return (freeturn(file, &db1, 1));
+		return (cleanup_and_return(file, &db1, 1));
 	free(file);
-	for_fortnite_and_stefan(&db1, fc);
-	return (freeturn(file, &db1, 0));
+	file = NULL;
+		// hat stefan geändert weil ansonsten potentiell double free on error (war funcheck error)
+	start_game(&db1, fc);
+	return (cleanup_and_return(file, &db1, 0));
 }
 
-int	freeturn(char *file, t_db *db, int ret)
+int	cleanup_and_return(char *file, t_db *db, int ret)
 {
 	if (file != NULL)
 		free(file);

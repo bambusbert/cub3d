@@ -42,7 +42,7 @@ bool f_parse_map(t_db *db);
 bool f_test_map(t_db *db, t_read_map *m);
 
 // f_for_stefan.c
-bool for_fortnite_and_stefan(t_db *db, t_color *colors);
+bool start_game(t_db *db, t_color *colors);
 
 // f_from_stefan.c
 bool start_graphical_stuff(t_db *db, char **map, t_color *colors);

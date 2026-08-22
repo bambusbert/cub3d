@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_for_stefan.c                                     :+:      :+:    :+:   */
+/*   game_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:49:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:49:47 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 12:38:24 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	**free_2d_arr(char **stefan);
 char	**create_2d_arr(char *s, int k, int x, int y);
-void	set_stefan(char *dest, char *src);
+void	normalize_map_cell(char *dest, char *src);
 
-bool	for_fortnite_and_stefan(t_db *db, t_color *colors)
+bool	start_game(t_db *db, t_color *colors)
 {
 	const char	*s;
-	char		**for_stefan;
+	char		**map;
 	int			x;
 	int			y;
 	bool		ret;
@@ -28,25 +28,25 @@ bool	for_fortnite_and_stefan(t_db *db, t_color *colors)
 	s = db_get(db, "TESTMAP");
 	x = f_atoll((char *)db_get(db, "x"));
 	y = f_atoll((char *)db_get(db, "y"));
-	for_stefan = create_2d_arr((char *)s, 0, x, y);
-	if (!for_stefan)
+	map = create_2d_arr((char *)s, 0, x, y);
+	if (!map)
 		return (false);
-	ret = start_graphical_stuff(db, for_stefan, colors);
-	for_stefan = free_2d_arr(for_stefan);
+	ret = start_graphical_stuff(db, map, colors);
+	map = free_2d_arr(map);
 	return (ret);
 }
 
-char	**free_2d_arr(char **stefan)
+char	**free_2d_arr(char **map)
 {
 	int	i;
 
 	i = 0;
-	while (stefan[i])
+	while (map[i])
 	{
-		free(stefan[i]);
+		free(map[i]);
 		i++;
 	}
-	free(stefan);
+	free(map);
 	return (NULL);
 }
 
@@ -68,7 +68,7 @@ char	**create_2d_arr(char *s, int k, int x, int y)
 		j = 0;
 		while (j < x)
 		{
-			set_stefan(&map[i][j], &s[k]);
+			normalize_map_cell(&map[i][j], &s[k]);
 			j++;
 			k++;
 		}
@@ -77,7 +77,7 @@ char	**create_2d_arr(char *s, int k, int x, int y)
 	return (map);
 }
 
-void	set_stefan(char *dest, char *src)
+void	normalize_map_cell(char *dest, char *src)
 {
 	if (*src == ' ')
 		*dest = WALL_CHAR;

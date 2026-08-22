@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:58:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/22 12:13:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,17 @@ void	free_god_struct(t_god *god)
 
 void	destroy_images(t_god *god)
 {
-	if (god->god_tex->img)
+	if (!god)
+		return ;
+	if (god->god_tex && god->god_tex->img && god->mlx)
 		mlx_destroy_image(god->mlx, god->god_tex->img);
-	if (god->sprite_wall_e->img)
+	if (god->sprite_wall_e && god->sprite_wall_e->img && god->mlx)
 		mlx_destroy_image(god->mlx, god->sprite_wall_e->img);
-	if (god->sprite_wall_w->img)
+	if (god->sprite_wall_w && god->sprite_wall_w->img && god->mlx)
 		mlx_destroy_image(god->mlx, god->sprite_wall_w->img);
-	if (god->sprite_wall_n->img)
+	if (god->sprite_wall_n && god->sprite_wall_n->img && god->mlx)
 		mlx_destroy_image(god->mlx, god->sprite_wall_n->img);
-	if (god->sprite_wall_s->img)
+	if (god->sprite_wall_s && god->sprite_wall_s->img && god->mlx)
 		mlx_destroy_image(god->mlx, god->sprite_wall_s->img);
 }
 
