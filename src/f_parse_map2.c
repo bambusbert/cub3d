@@ -19,25 +19,6 @@ int f_find_player(const char *s)
     return (-1);
 }
 
-bool f_allocate_test_map(t_read_map *m);
-void f_fill_test_map(t_read_map *m);
-int f_find_player(const char *s);
-
-void print_map(t_db *db, t_read_map *m); //todo loeschen
-
-
-int f_find_player(const char *s)
-{
-    int i = 0;
-    while (s[i])
-    {
-        if (s[i] == 'N' || s[i] == 'E' || s[i] == 'S' || s[i] == 'W')
-            return (i);
-        i++;
-    }
-    return (-1);
-}
-
 bool f_flood_that_shi(char *s, int start, int ll)
 {
     if (s[start] == 32)
