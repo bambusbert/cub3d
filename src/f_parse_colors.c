@@ -14,7 +14,7 @@
 
 bool f_extract_colors(t_db *db, t_color *colors);
 bool f_border_control(t_color *colors);
-char **f_free_rgb(char **rgb);
+char **f_free_rgb(char **rgb, int error_code);
 
 bool f_init_colors(t_color *colors)
 {
@@ -67,18 +67,18 @@ bool f_extract_colors(t_db *db, t_color *colors)
             return (false);
         rgb = ft_split(val, ',');
         if (!rgb)
-            return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
+            return (false);
         if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3] != NULL)
-            return (ft_putstr_fd("Error\nColors wrong.\n", 2), f_free_rgb(rgb), false);
+            return (f_free_rgb(rgb, 1), false);
         colors[i].r = f_catch_num(rgb[0]);
         colors[i].g = f_catch_num(rgb[1]);
         colors[i].b = f_catch_num(rgb[2]);
-        rgb = f_free_rgb(rgb);
+        rgb = f_free_rgb(rgb, 0);
     }
     return (true);
 }
 
-char **f_free_rgb(char **rgb)
+char **f_free_rgb(char **rgb, int error_code)
 {
     int i;
     
@@ -91,5 +91,7 @@ char **f_free_rgb(char **rgb)
         i++;
     }
     free (rgb);
+    if (error_code != 0)
+        ft_putstr_fd("Error\nWrong color format\n", 2);
     return (NULL);
 }
