@@ -46,7 +46,7 @@ bool	db_insert_index(t_db *db, uint32_t key_offset, uint32_t val_offset,
 	is_new = true;
 	while (db->slots.val_lenght[slot] != 0)
 	{
-		if (strcmp(&db->data_arena[db->slots.key[slot]], key) == 0)
+		if (ft_strcmp(&db->data_arena[db->slots.key[slot]], key) == 0)
 		{
 			is_new = false;
 			break ;
