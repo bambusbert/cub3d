@@ -89,4 +89,7 @@ int					ft_printf(const char *fmt, ...);
 // gnl stuff
 char				*get_next_line(int fd);
 
+// strcmp
+int                 ft_strcmp(const char *s1, const char *s2);
+
 #endif
