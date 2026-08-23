@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_parsing.h"
+#include "../inc/f_parsing.h"
 
 int		cleanup_and_return(char *file, t_db *db, int ret);
 bool	start_game(t_db *db, t_color *colors);
@@ -28,7 +28,7 @@ int	main(int ac, char *av[])
 	if (f_read_file(&file, av[1]) == false)
 		return (1);
 	if (db_init(&db1, 1, 1) == false)
-		return (1);
+	    return (cleanup_and_return(file, &db1, 1));
 	if (f_parse_into_db(&db1, file) == false)
 		return (cleanup_and_return(file, &db1, 1));
 	if (db1.hmap_size != 7)
