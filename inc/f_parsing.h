@@ -27,6 +27,7 @@ bool					f_parse_into_db(t_db *db, char *file);
 // f_parse_colors.c
 bool f_parse_colors(t_db *db, t_color *colors);
 bool f_init_colors(t_color *colors);
+bool f_comma_after_comma(t_db *db);
 
 // f_atol.c
 uint32_t f_catch_num(char *s);

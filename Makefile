@@ -32,6 +32,7 @@ SRC =	src/main.c \
         src/f_commandline_input.c \
 		src/f_parse_into_db.c \
 		src/f_parse_colors.c \
+		src/f_parse_colors2.c \
         src/f_atol.c \
         src/f_is_allowed.c \
         src/f_parse_map.c \

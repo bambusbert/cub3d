@@ -26,6 +26,11 @@ bool f_init_colors(t_color *colors)
 bool f_parse_colors(t_db *db, t_color *colors)
 {
     f_init_colors(colors);
+    if (f_comma_after_comma(db) == false)
+    {
+        ft_putstr_fd("Error\nWrong color format\n", 2);
+        return (false);
+    }
     if (f_extract_colors(db, colors) == false)
         return (false);
     return (f_border_control(colors));
