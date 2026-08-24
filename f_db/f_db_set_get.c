@@ -68,7 +68,7 @@ const char	*db_get(t_db *db, const char *key)
 	slot = f_db_hash0(key) & (db->hmap_cap - 1);
 	while (db->slots.val_lenght[slot] != 0)
 	{
-		if (strcmp(&db->data_arena[db->slots.key[slot]], key) == 0)
+		if (ft_strcmp(&db->data_arena[db->slots.key[slot]], key) == 0)
 			return (&db->data_arena[db->slots.val_start[slot]]);
 		slot = (slot + 1) & (db->hmap_cap - 1);
 	}
