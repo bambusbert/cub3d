@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 14:47:55 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:48:54 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/24 12:40:03 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2, int color)
 
 	delta.x = (p2.x - p1.x);
 	delta.y = p2.y - p1.y;
-	if (abs((int)delta.x) >= abs((int)delta.y))
-		step = abs((int)delta.x);
+	if (fabs((double)delta.x) >= fabs((double)delta.y))
+		step = fabs((double)delta.x);
 	else
-		step = abs((int)delta.y);
+		step = fabs((double)delta.y);
 	delta.x = delta.x / step;
 	delta.y = delta.y / step;
 	p.x = p1.x;

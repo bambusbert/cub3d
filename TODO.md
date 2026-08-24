@@ -1,4 +1,3 @@
-- check if i need aurorepeaton / -off
 - forbidden functions (bash -c "$(curl -fsSL https://raw.githubusercontent.com/beistvan/mandatory_cub3d_forbidden_functions_checker/main/mandatory_cub3d_forbidden_functions_checker.sh)")
   abs
   memcpy - static const variable calls memcpy implicitly
@@ -9,8 +8,6 @@
 
 VETSATESTA
 - nl_between_info.cub geht ned
-- arthurs big map segfaults (very likely because of stack overflow in recursive flood fill)
--
 
 
 other testers
