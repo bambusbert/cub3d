@@ -2,7 +2,7 @@
 
 # cub3D
 
-My first RayCaster with miniLibX — a Wolfenstein 3D-inspired ray-casting engine built from scratch in C.
+This project is a Wolfenstein 3D-inspired ray-casting engine built from scratch in C using minilibx.
 
 ## Description
 
@@ -10,25 +10,23 @@ cub3D renders a real-time, first-person 3D view of a 2D maze using ray-casting, 
 
 The core of the project is:
 - A **parser** that reads a `.cub` file, validates its syntax, and stores the scene elements (textures, colors, map) in a small custom hashmap/arena-backed key-value store (`f_db`) before turning the grid into a playable map.
-- A **ray-caster** using Digital Differential Analysis (DDA) to cast one ray per screen column, find the nearest wall, and pick the correct texture based on which face (N/S/E/W) was hit.
+- A **ray-caster** using Digital Differential Analysis (DDA) to cast one ray per screen column, find the nearest wall, and pick the correct texture based on which face (N/S/E/W) was hit. The hight of the wall per ray cast is inversely proportional to the length of the ray (after fisheye correction has been applied)
 - An **event-driven game loop** built on miniLibX hooks for keyboard/mouse input, per-frame movement, and rendering.
 
 ### Features
 
 Mandatory part:
-- Parses and validates `.cub` scene files (textures, floor/ceiling colors, and the map itself), rejecting malformed input with `Error\n` on stderr.
+- Parses and validates `.cub` scene files (textures, floor/ceiling colors, and the map itself), rejecting malformed input with `Error\n` and a dedicated error message on stderr.
 - Real-time 3D rendering of the maze from a first-person perspective.
 - Per-wall-side textures (North/South/East/West) loaded from the paths given in the scene file.
-- Configurable floor and ceiling colors.
+- Configurable floor and ceiling colors via their RGB colors.
 - Smooth keyboard-driven movement and looking around.
 - Clean shutdown on `ESC` or when the window is closed.
 
 Bonus part implemented:
-- 🧱 Wall collisions — the player can no longer walk through walls.
-- 🗺️ A 2D minimap with a field-of-view cone, rendered live in a corner of the window.
-- 🖱️ Mouse-look — rotate the camera by moving the mouse.
-
-Bonus part not implemented: doors, animated sprites.
+- Wall collisions.
+- A 2D minimap with a field-of-view cone, rendered live in a corner of the window.
+- Mouse-look — rotate the camera by moving the mouse.
 
 ## Controls
 
@@ -46,15 +44,15 @@ A valid map has to respect these rules:
     - 1 represents a wall
     - 0 represents an empty space
     - N/E/S/W represent the player, the letter indicates the direction the player looks initially
-    - there has to be exactly one player
-    - the player has to be fully surrounded by walls
-    - spaces will be interpreted as empty fields during parsing. if that results in a valid map they are converted to walls
-    - maps must not have newlines inside (TODO check)
+- there has to be exactly one player
+- the player has to be fully surrounded by walls
+- spaces will be interpreted as empty fields during parsing. if that results in a valid map they are converted to walls
+- maps must not have newlines inside
 
 
 The playable map is considered the area in which the player can walk onto. The playable map can be a part of the actual map, it can also be the full map.
 
-A simple valid map is (from the subject PDF):
+A simple valid map is:
 ```
 111111
 100101
@@ -63,7 +61,7 @@ A simple valid map is (from the subject PDF):
 111111
 ```
 
-another valid map - playable map is fully surrounded by walls:
+another valid map (playable map is fully surrounded by walls)
 ```
 111011
 100101
@@ -74,13 +72,13 @@ another valid map - playable map is fully surrounded by walls:
 
 another valid map:
 ```
-    11
+    1
    101
   1001
  100N1
 111111
 ```
-We chose that approach because the reason for the map needing to be surrounded by walls is so that no ray cast travels out of bounds, which would result in a segfault. We ensure that this is not going to happen by forcing the player to be surrounded by walls. Additionally we are fencing the full map off by an additional layer of 1s (wall character).
+We chose that approach because the reason for the map needing to be surrounded by walls is so that no ray cast travels out of bounds, which would result in a segfault. We ensure that this is not going to happen by forcing the player to be surrounded by walls (playable map). Additionally we are fencing the full map off by an additional layer of 1s (wall character).
 
 ## The `.cub` scene format
 
@@ -157,9 +155,13 @@ dotcubs/       sample .cub scene files
 ## Resources
 
 - [Lodev's Raycasting tutorial](https://lodev.org/cgtutor/raycasting.html) — the classic reference for grid-based ray-casting and the DDA algorithm used here.
-- [MiniLibX documentation / 42Paris minilibx-linux](https://github.com/42Paris/minilibx-linux) — the graphics library used to open the window, draw pixels and handle events.
+- [MiniLibX documentation / 42Paris minilibx-linux](https://harm-smits.github.io/42docs/libs/minilibx) — the graphics library used to open the window, draw pixels and handle events.
 - [Digital Differential Analyzer (Wikipedia)](https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)) — background on the line-stepping algorithm used to cast rays.
 - The original [Wolfenstein 3D](http://users.atw.hu/wolf3d/) as the project's reference game.
-- [`Cub3D_tester` by VestaManuyko](https://github.com/VestaManuyko/Cub3D_tester) — the external test suite used to validate the parser against valid/invalid maps.
+- [Make Your Own Raycaster Part 1 by 3DSage](https://www.youtube.com/watch?v=gYRrGTC7GtA)
+- [Make Your Own Raycaster Part 2 by 3DSage](https://www.youtube.com/watch?v=PC1RaETIx3Y)
+- [DDA Raycasting algorithm by kitrofimov](https://www.youtube.com/watch?v=IDmWuSrEkow)
+
+- [`Cub3D_tester` by VestaManuyko](https://github.com/VestaManuyko/Cub3D_tester) — the external test suite used to validate the parser against valid/invalid maps. Our interpretation of what is to be considered a valid map differs in some cases though.
 
 **AI usage:** The first version of this README was drafted with the help of Claude and was heavily edited afterwards. No AI was used to write actual code.
