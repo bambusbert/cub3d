@@ -1,7 +1,6 @@
 TODO:
 
 - gleiches problem bei invalid::blank_line_in_map
-- printf weg (2)
 - nl_between_info.cub geht ned (weil spaces nach sprite: "SO         ./sprites/wall_s.xpm   ")
 
 - funcheck error
