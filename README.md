@@ -36,14 +36,14 @@ Bonus part implemented:
 | `←` / `→` | Turn (look) left / right |
 | Mouse | Turn (look) left / right |
 | `ESC` | Close the window and quit |
-| Red cross (window frame) | Close the window and quit |
+| cross (window frame) | Close the window and quit |
 
 ## What is considered a valid map?
 A valid map has to respect these rules:
 - consists ONLY of these characters: 1, 0, N, E, S, W, Space
     - 1 represents a wall
     - 0 represents an empty space
-    - N/E/S/W represent the player, the letter indicates the direction the player looks initially
+    - N/E/S/W represents the player, the letter indicates the direction the player looks initially
 - there has to be exactly one player
 - the player has to be fully surrounded by walls
 - spaces will be interpreted as empty fields during parsing. if that results in a valid map they are converted to walls
