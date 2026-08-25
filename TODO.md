@@ -1,11 +1,5 @@
 TODO:
 
-- bei map_unclosed_on_bottom.cub gibt es keine error msg (printed "2")
-111111
-100101
-101001
-1100N1
-111011
 - gleiches problem bei invalid::blank_line_in_map
 - printf weg (2)
 - nl_between_info.cub geht ned (weil spaces nach sprite: "SO         ./sprites/wall_s.xpm   ")

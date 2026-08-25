@@ -55,17 +55,14 @@ bool f_test_map(t_db *db, t_read_map *m)
     size = ft_strlen(m->buffer);
     if (size > 67676)
     {
-        write(1, "1\n", 2);
         if (f_flood_fill_scan(m->buffer, size, m->xmax + 2, m->pp) == false)
             return(free(m->buffer), false);
     }
     else
     {
-        write(1, "2\n", 2);
         if (f_flood_that_shi(m->buffer, m->pp, m->xmax + 2) == false)
             return(free(m->buffer), false);
     }
-    //print_map(db, m); // todo loeschen
     free(m->buffer);
     return (true);
 }
