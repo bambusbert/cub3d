@@ -40,6 +40,47 @@ Bonus part not implemented: doors, animated sprites.
 | `ESC` | Close the window and quit |
 | Red cross (window frame) | Close the window and quit |
 
+## What is considered a valid map?
+A valid map has to respect these rules:
+- consists ONLY of these characters: 1, 0, N, E, S, W, Space
+    - 1 represents a wall
+    - 0 represents an empty space
+    - N/E/S/W represent the player, the letter indicates the direction the player looks initially
+    - there has to be exactly one player
+    - the player has to be fully surrounded by walls
+    - TODO spaces (Spaces will be interpreted as XXX)
+
+The playable map is considered the area in which the player can walk onto.
+
+A simple valid map is (from the subject PDF):
+```
+111111
+100101
+101001
+1100N1
+111111
+```
+
+another valid map - playable map is fully surrounded by walls:
+```
+111011
+100101
+101001
+1100N1
+111111
+```
+
+another valid map:
+```
+    11
+   101
+  1001
+ 100N1
+111111
+```
+
+Obviously, the map has to fit into the memory to be considered valid.
+
 ## The `.cub` scene format
 
 The program takes a single argument: the path to a scene description file ending in `.cub`.
