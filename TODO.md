@@ -1,6 +1,5 @@
 TODO:
 
-- remove unneccesary main.c and Makefiles
 - bei map_unclosed_on_bottom.cub gibt es keine error msg (printed "2")
 111111
 100101

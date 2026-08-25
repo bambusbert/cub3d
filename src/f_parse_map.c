@@ -17,7 +17,7 @@ bool f_parse_map(t_db *db)
         return (false);
     f_measure_map(&m);
     if (f_test_map(db, &m) == false)
-        return (false);
+        return (ft_putstr_fd("Error\nMap invalid.\n", 2),false);
     x = ft_itoa(m.xmax + 2);
     if (!x)
         return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
