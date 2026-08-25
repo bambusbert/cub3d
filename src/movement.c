@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 16:55:48 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:51:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/24 14:40:49 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,19 @@ void	update_player_angle(t_god *god, int direction)
 
 static int	move_possible(t_god *god, float dx, float dy)
 {
-	float	new_x;
-	float	new_y;
-	int		x_change_dir;
-	int		y_change_dir;
+    float	x;
+    float	y;
+    float	radius;
 
-	x_change_dir = 1;
-	y_change_dir = 1;
-	new_x = god->player_x + dx;
-	new_y = god->player_y + dy;
-	if (new_x < god->player_x)
-		x_change_dir = -1;
-	if (new_y < god->player_y)
-		y_change_dir = -1;
-	new_x += x_change_dir * MAX_DIST_TO_WALL;
-	new_y += y_change_dir * MAX_DIST_TO_WALL;
-	if (god->map[(int)new_y][(int)new_x] == WALL_CHAR)
-		return (0);
-	return (1);
+    radius = MAX_DIST_TO_WALL;
+    x = god->player_x + dx;
+    y = god->player_y + dy;
+    if (god->map[(int)(y - radius)][(int)(x - radius)] == WALL_CHAR
+        || god->map[(int)(y - radius)][(int)(x + radius)] == WALL_CHAR
+        || god->map[(int)(y + radius)][(int)(x - radius)] == WALL_CHAR
+        || god->map[(int)(y + radius)][(int)(x + radius)] == WALL_CHAR)
+        return (0);
+    return (1);
 }
 
 static void	move_vertical(t_god *god, int dir)

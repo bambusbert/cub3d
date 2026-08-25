@@ -6,13 +6,12 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:46:53 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:58:41 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/24 14:42:37 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// atm only possible to draw recangular maps.
 void	draw_2d_map(t_god *god)
 {
 	int	i;

@@ -1,20 +1,19 @@
-- forbidden functions (bash -c "$(curl -fsSL https://raw.githubusercontent.com/beistvan/mandatory_cub3d_forbidden_functions_checker/main/mandatory_cub3d_forbidden_functions_checker.sh)")
-  abs
-  memcpy - static const variable calls memcpy implicitly
-  strcmp
+TODO:
 
-
-
-
-VETSATESTA
-- nl_between_info.cub geht ned
-
+- remove unneccesary main.c and Makefiles
+- bei map_unclosed_on_bottom.cub gibt es keine error msg
+- gleiches problem bei invalid::blank_line_in_map
+- printf weg (2)
+- nl_between_info.cub geht ned (weil spaces nach sprite: "SO         ./sprites/wall_s.xpm   ")
 
 other testers
 42_cub_tester
 cub3D_map_tester
 cub3d-tester
 
-mem sanituyer, leak sanitiyer, undef b sanitizer, adress sanitizer flags
+mem sanituzer, leak sanitizer, undef b sanitizer, adress sanitizer flags
 long ass number in map
 stack overflow recursion
+
+
+- forbidden functions (bash -c "$(curl -fsSL https://raw.githubusercontent.com/beistvan/mandatory_cub3d_forbidden_functions_checker/main/mandatory_cub3d_forbidden_functions_checker.sh)")
