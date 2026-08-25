@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_db_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 00:43:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/07/29 15:30:43 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/25 14:53:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ bool	allocate_slots(t_db *db, uint32_t cap)
 
 	total_hashmap_size = ((sizeof(uint32_t) * 3)) * cap;
 	total_block = ft_calloc(total_hashmap_size, 1);
+	// free(total_block);
+	// total_block = NULL; 
 	if (!total_block)
 		return (false);
 	ptr = (uint8_t *)total_block;
