@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_db_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/19 00:43:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/25 14:53:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:19:08 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static bool	arena_init(t_db *db, uint32_t initial_arena_size);
 
 bool	db_init(t_db *db, uint32_t initial_slots, uint32_t initial_arena_size)
 {
+	ft_bzero(db, sizeof(*db));
 	if (hashmap_init(db, initial_slots) == false)
+	{
 		return (false);
+	}
 	if (arena_init(db, initial_arena_size) == false)
 	{
 		free_db(db);
@@ -58,8 +61,6 @@ bool	allocate_slots(t_db *db, uint32_t cap)
 
 	total_hashmap_size = ((sizeof(uint32_t) * 3)) * cap;
 	total_block = ft_calloc(total_hashmap_size, 1);
-	// free(total_block);
-	// total_block = NULL; 
 	if (!total_block)
 		return (false);
 	ptr = (uint8_t *)total_block;
@@ -76,7 +77,7 @@ void	free_db(t_db *db)
 {
 	if (!db)
 		return ;
-	if (db->slots.key)
+	if (db->slots.key != NULL)
 	{
 		free((void *)db->slots.key);
 		db->slots.key = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:51:40 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 12:40:28 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:18:23 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char *av[])
 	if (f_read_file(&file, av[1]) == false)
 		return (1);
 	if (db_init(&db1, 1, 1) == false)
-	    return (cleanup_and_return(file, &db1, 1));
+	    return (ft_putstr_fd("Error\nAllocation.\n", 2), cleanup_and_return(file, &db1, 1));
 	if (f_parse_into_db(&db1, file) == false)
 		return (cleanup_and_return(file, &db1, 1));
 	if (db1.hmap_size != 7)
