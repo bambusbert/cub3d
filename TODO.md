@@ -2,7 +2,9 @@ TODO:
 
 - gleiches problem bei invalid::blank_line_in_map
 - nl_between_info.cub geht ned (weil spaces nach sprite: "SO         ./sprites/wall_s.xpm   ")
-
+- spaces after sprite lines
+- valid and invalid maps in dotcubs folder
+- strtrim für spaces after texture path
 
 
 other testers

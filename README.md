@@ -48,9 +48,11 @@ A valid map has to respect these rules:
     - N/E/S/W represent the player, the letter indicates the direction the player looks initially
     - there has to be exactly one player
     - the player has to be fully surrounded by walls
-    - TODO spaces (Spaces will be interpreted as XXX)
+    - spaces will be interpreted as empty fields during parsing. if that results in a valid map they are converted to walls
+    - maps must not have newlines inside (TODO check)
 
-The playable map is considered the area in which the player can walk onto.
+
+The playable map is considered the area in which the player can walk onto. The playable map can be a part of the actual map, it can also be the full map.
 
 A simple valid map is (from the subject PDF):
 ```
@@ -78,12 +80,11 @@ another valid map:
  100N1
 111111
 ```
-
-Obviously, the map has to fit into the memory to be considered valid.
+We chose that approach because the reason for the map needing to be surrounded by walls is so that no ray cast travels out of bounds, which would result in a segfault. We ensure that this is not going to happen by forcing the player to be surrounded by walls. Additionally we are fencing the full map off by an additional layer of 1s (wall character).
 
 ## The `.cub` scene format
 
-The program takes a single argument: the path to a scene description file ending in `.cub`.
+The program takes a single argument: the path to a scene description file ending in `.cub`. This is an example of a valid `.cub` file. The `.cub` file must not be hidden.
 
 ```
 NO ./sprites/wall_n.xpm
@@ -100,11 +101,13 @@ C 225,30,0
 111111
 ```
 
-- `NO` / `SO` / `WE` / `EA` — paths to the North/South/West/East wall textures.
-- `F` / `C` — floor / ceiling color as `R,G,B` (0–255).
-- The map is made of `0` (empty space), `1` (wall) and `N`/`S`/`E`/`W` (the player's starting position and facing direction), must be the last element in the file, and must be fully closed off by walls.
+- `NO` / `SO` / `WE` / `EA` — paths to the North/South/West/East wall textures. The texture files (sprites) can be hidden.
+- `F` / `C` — floor / ceiling color as `R,G,B` (0–255). There must be no additional characters in these lines - spaces are ok.
+- The map is made of `0` (empty space), `1` (wall) and `N`/`S`/`E`/`W` (the player's starting position and facing direction), spaces are a valid part of the map. The map must be the last element in the file. More information about the map can be found in chapter `What is considered a valid map?`.
 
-Sample maps are available in [`dotcubs/`](./dotcubs).
+Sample maps (valid and invalid) are available in [`dotcubs/`](./dotcubs).
+
+The validation of the map happens recursively if the map fits in the stack for efficiency reasons. If the map does not fit in the stack the validation happens in a non-recursive way. Otherwise we would produce a stack overflow, which would result in a segfault.
 
 ## Instructions
 
@@ -117,7 +120,7 @@ Sample maps are available in [`dotcubs/`](./dotcubs).
 
 ```bash
 make        # builds the mandatory part -> ./cub3D
-make bonus  # builds the bonus part
+make bonus  # builds the bonus part. It does exactly the same as make. It is required by the subject to have a bonus rule.
 make clean  # removes object files
 make fclean # removes object files and the binary
 make re     # fclean + all
@@ -142,11 +145,11 @@ If the map or any referenced texture is invalid, the program prints `Error` foll
 ## Project structure
 
 ```
-src/           game loop, parsing glue, rendering, movement, input, bonus features
+src/           game loop, rendering, movement, input, bonus features
 inc/           cub3d.h / f_parsing.h — shared types, constants and prototypes
 f_db/          small hashmap/arena key-value store used to hold parsed scene elements
 f_file_reader/ file-reading helper used by the parser
-libft/         our 42 libft, built as a static library and linked into the project
+libft/         42 libft, built as a library and linked into the project
 sprites/       default wall textures used by the sample maps
 dotcubs/       sample .cub scene files
 ```
@@ -159,4 +162,4 @@ dotcubs/       sample .cub scene files
 - The original [Wolfenstein 3D](http://users.atw.hu/wolf3d/) as the project's reference game.
 - [`Cub3D_tester` by VestaManuyko](https://github.com/VestaManuyko/Cub3D_tester) — the external test suite used to validate the parser against valid/invalid maps.
 
-**AI usage:** This README was drafted with the help of Claude (Anthropic), based on a reading of the project's subject PDF and source code. No AI was used to write actual code.
+**AI usage:** The first version of this README was drafted with the help of Claude and was heavily edited afterwards. No AI was used to write actual code.

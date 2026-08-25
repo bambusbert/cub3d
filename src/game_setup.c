@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_from_stefan.c                                    :+:      :+:    :+:   */
+/*   game_setup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:49:52 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:50:20 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:41:52 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ bool	start_graphical_stuff(t_db *db, char **map, t_color *colors)
 {
 	t_god	*god;
 
+	//TODO FRIDO PENIS
 	god = ft_calloc(1, sizeof(t_god));
 	if (!god)
 		return (ft_putstr_fd("Error\ngod struct malloc fail\n", 2), false);
