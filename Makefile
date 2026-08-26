@@ -45,7 +45,6 @@ SRC =	src/main.c \
         ./f_db/f_db_resize.c  \
         ./f_db/f_db_set_get.c \
 		src/cub3d.c \
-		src/check_input.c \
 		src/cleanup.c \
 		src/input_handling.c \
 		src/init_main.c \

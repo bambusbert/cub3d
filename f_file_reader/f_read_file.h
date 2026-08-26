@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_read_file.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:38:49 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:18:28 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 15:09:58 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdint.h>
-# include <stdio.h>
-# include <sys/stat.h>
 # include <sys/types.h>
-# include <unistd.h>
 # include <unistd.h>
 
 // struct prototypes

@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 15:08:20 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/26 14:05:56 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 15:14:33 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	draw_minimap_beam(t_god *god, float angle)
 	end_pixel_y = start_pixel_y + sin(angle) * MINIMAP_BEAM_L;
 	ft_draw_line(god, (t_ipoint){start_pixel_x / MINIMAP_FACTOR, start_pixel_y
 		/ MINIMAP_FACTOR}, (t_ipoint){end_pixel_x / MINIMAP_FACTOR, end_pixel_y
-		/ MINIMAP_FACTOR}, COLOR_WHITE);
+		/ MINIMAP_FACTOR}, ~god->color_ceiling);
 }
 
 // possible TODO 2 additional angles between

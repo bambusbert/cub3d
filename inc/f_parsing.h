@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parsing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:22:49 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:36:10 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 15:07:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 
 # define LIMIT_UP 255
 
-# define _GNU_SOURCE
-# include "../f_db/f_db.h"
 # include "../f_file_reader/f_read_file.h"
 # include "../inc/cub3d.h"
 # include "../libft/libft.h"
-# include <stdbool.h>
 # include <stdint.h>
-# include <stdio.h>
 
 // struct prototypes
 
@@ -58,14 +54,14 @@ bool						f_test_map(t_db *db, t_read_map *m);
 bool						f_flood_fill_scan(char *grid, int size, int len,
 								int start_i);
 
-// f_for_stefan.c
+// game_start.c
 bool						start_game(t_db *db, t_color *colors);
 
-// f_from_stefan.c
+// game_setup.c
 bool						start_graphical_stuff(t_db *db, char **map,
 								t_color *colors);
 
-// HAT STEFAN EINGEFÜGT
+// cub3d.c
 void						init_mlx_stuff(t_god *god);
 
 // structs

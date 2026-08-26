@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   f_db.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:38:49 by fsitter           #+#    #+#             */
-/*   Updated: 2026/07/29 15:41:35 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 14:55:21 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef F_DB_H
 # define F_DB_H
 
-// 1024
 # define MIN_ARENA_SIZE 1024
-// 16
 # define MIN_ARENA_SLOTS 16
 
 # include "../libft/libft.h"
 # include <stdbool.h>
 # include <stdint.h>
-# include <stdio.h>
-# include <unistd.h>
 
 // struct prototypes
 typedef struct s_hashmap	t_hashmap;
@@ -32,7 +28,7 @@ typedef struct s_db			t_db;
 
 // f_db_hash.c
 uint32_t					f_db_hash0(const char *key);
-uint32_t					f_db_hash1(const char *key);
+// uint32_t					f_db_hash1(const char *key);
 
 // f_db_init.c
 bool						db_init(t_db *db, uint32_t initial_slots,
@@ -69,11 +65,10 @@ typedef struct s_db
 	uint32_t				hmap_size;
 }							t_db;
 
-// TODO umrechnungen
-typedef union u_ret
-{
-	char					*raw;
-	int						as_int;
-}							t_return;
+// typedef union u_ret
+// {
+// 	char					*raw;
+// 	int						as_int;
+// }							t_return;
 
 #endif

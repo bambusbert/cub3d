@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/26 14:13:42 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 15:15:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define CUB3D_H
 
 # include "../f_db/f_db.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
 # include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
@@ -26,11 +26,6 @@
 # define WALL_CHAR '1'
 # define PLAYER_CHAR '2'
 # define MAX_DIST_TO_WALL 0.2
-
-# define SPRITE_WALL_N "./sprites/wall_n.xpm"
-# define SPRITE_WALL_S "./sprites/wall_s.xpm"
-# define SPRITE_WALL_W "./sprites/wall_w.xpm"
-# define SPRITE_WALL_E "./sprites/wall_e.xpm"
 
 # define PI 3.14159265358979323846
 # define LEFT -1
@@ -53,18 +48,6 @@
 # define KEY_D 100
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
-
-# define COLOR_ORANGE 551515151
-# define COLOR_BLUE 0x0000FF
-# define COLOR_RED 0xFF0000
-# define COLOR_YELLOW 0xFFFF00
-# define COLOR_WHITE 0xFFFFFF
-# define COLOR_PIGGYPINK 0xFF77BA
-# define COLOR_GREY 0x555555
-# define COLOR_ERROR 0xDC3545
-
-# define COLOR_CEILING COLOR_GREY
-# define COLOR_FLOOR COLOR_PIGGYPINK
 
 # define KEYDOWN_EV 2
 # define KEYUP_EV 3
@@ -180,9 +163,6 @@ void				draw_minimap_beams(t_god *god);
 // cub3d.c
 void				render(t_god *god);
 
-// check_input.c
-void				check_input(int argc, char **argv);
-
 // init.c
 void				init_god(t_god *god);
 
@@ -208,14 +188,6 @@ void				ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2, int c);
 void				position_manager(t_god *god);
 void				update_player_angle(t_god *god, int direction);
 
-// libft
-void				ft_bzero(void *s, size_t n);
-void				*ft_calloc(size_t nmemb, size_t size);
-size_t				ft_putstr_fd(char *s, int fd);
-size_t				ft_strlen(const char *str);
-char				*ft_strrchr(const char *s, int c);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
-
 // dda_init.c
 void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
 
@@ -227,11 +199,8 @@ long long			return_usecs_since_1970(void);
 void				update_time_since_last_frame(t_god *god);
 
 // cleanup.c
-int				close_window(t_god *god);
+int					close_window(t_god *god);
 void				error_exit(char *msg, t_god *god);
-
-// unsorted
-bool				main2(int argc, char **argv);
 
 // debug.c - das kommt alles weg oder in bonus
 // void				print_keys(t_god *god);

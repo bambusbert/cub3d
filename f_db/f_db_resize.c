@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_db_resize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:16:50 by fsitter           #+#    #+#             */
-/*   Updated: 2026/07/29 15:16:51 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 15:06:11 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "f_db.h"
-#include <bits/types/struct_itimerspec.h>
-#include <stdint.h>
 
 bool	db_resize_slots(t_db *db);
 bool	db_resize_arena(t_db *db);
