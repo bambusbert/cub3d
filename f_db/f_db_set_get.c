@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:35:40 by fsitter           #+#    #+#             */
-/*   Updated: 2026/07/29 15:35:41 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 12:21:43 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ bool	db_set(t_db *db, const char *key, const char *value)
 	db->arena_head += needed_bytes;
 	return (true);
 }
-
-#include <string.h>
 
 bool	db_insert_index(t_db *db, uint32_t key_offset, uint32_t val_offset,
 		uint32_t val_len)
