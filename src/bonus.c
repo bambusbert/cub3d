@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 15:08:20 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 11:47:18 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 14:05:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	mouse_move_function(int x, int y, void *param)
 	static int	count = 0;
 	t_god		*god;
 
+	(void)y;
 	if (count++ < 13)
 		return (0);
 	god = (t_god *)param;

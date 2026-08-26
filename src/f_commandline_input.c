@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_commandline_input.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:44:02 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:09:53 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 13:45:16 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static bool	f_test_ending(const char *s)
 
 	i = ft_strlen(s);
 	if (i < 5)
+		return (false);
+	if (s[i - 5] == '/')
 		return (false);
 	if (s[i - 4] != '.')
 		return (false);

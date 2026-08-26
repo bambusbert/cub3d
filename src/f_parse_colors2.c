@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_colors2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 15:12:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:49:39 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 13:59:08 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/f_parsing.h"
+
+static bool	is_hidden(char *s);
 
 bool	f_comma_after_comma(t_db *db)
 {
@@ -57,9 +59,32 @@ bool	f_trimmer(t_db *db)
 		trimmed = ft_strtrim(ori, " ");
 		if (!trimmed)
 			return (false);
-		db_set(db, "SO", trimmed);
+		if (is_hidden(trimmed) == false)
+			return (ft_putstr_fd("Error\nHidden xpm.\n", 2), free(trimmed),
+				false);
+		db_set(db, link[i], trimmed);
 		free(trimmed);
 		i++;
 	}
+	return (true);
+}
+
+static bool	is_hidden(char *s)
+{
+	size_t	i;
+
+	i = ft_strlen(s);
+	if (i < 5)
+		return (false);
+	if (s[i - 5] == '/')
+		return (false);
+	if (s[i - 4] != '.')
+		return (false);
+	if (s[i - 3] != 'x')
+		return (false);
+	if (s[i - 2] != 'p')
+		return (false);
+	if (s[i - 1] != 'm')
+		return (false);
 	return (true);
 }
