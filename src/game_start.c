@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:49:46 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 12:38:24 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 14:15:34 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@ bool	start_game(t_db *db, t_color *colors)
 	char		**map;
 	int			x;
 	int			y;
-	bool		ret;
 
-	ret = true;
 	s = db_get(db, "TESTMAP");
 	x = f_atoll((char *)db_get(db, "x"));
 	y = f_atoll((char *)db_get(db, "y"));
 	map = create_2d_arr((char *)s, 0, x, y);
 	if (!map)
 		return (false);
-	ret = start_graphical_stuff(db, map, colors);
+	start_graphical_stuff(db, map, colors);
 	map = free_2d_arr(map);
-	return (ret);
+	return (true);
 }
 
 char	**free_2d_arr(char **map)

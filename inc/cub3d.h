@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/26 14:05:47 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 14:13:42 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ long long			return_usecs_since_1970(void);
 void				update_time_since_last_frame(t_god *god);
 
 // cleanup.c
-void				close_window(t_god *god);
+int				close_window(t_god *god);
 void				error_exit(char *msg, t_god *god);
 
 // unsorted

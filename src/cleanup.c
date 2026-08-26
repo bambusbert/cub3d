@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 15:03:23 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/22 12:13:36 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 14:13:36 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ static void	perform_cleanup(t_god *god)
 	free_god_struct(god);
 }
 
-void	close_window(t_god *god)
+int	close_window(t_god *god)
 {
 	perform_cleanup(god);
 	exit(0);
+	return (0);
 }
 
 void	error_exit(char *msg, t_god *god)
