@@ -1,22 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_is_allowed.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/26 12:12:00 by fsitter           #+#    #+#             */
+/*   Updated: 2026/08/26 12:12:01 by fsitter          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "f_parsing.h"
 
-// bool is_allowed(char c)
-// {
-//     return (c == 'N'|| c == 'O'|| c == 'S' || c == 'W' || c == '0' || c == '1' || c == 32 || c == '\n');
-// }
-
-
-bool is_allowed(char c, t_read_map *m)
+bool	is_allowed(char c, t_read_map *m)
 {
-    if (c == 'N')
-        m->n++;
-    else if (c == 'E')
-        m->o++;
-    else if (c == 'S')
-        m->s++;
-    else if (c == 'W')
-        m->w++;
-    return (c == 'N'|| c == 'E'|| c == 'S' || c == 'W' || c == '0' || c == '1' || c == 32 || c == '\n');
+	if (c == 'N')
+		m->n++;
+	else if (c == 'E')
+		m->o++;
+	else if (c == 'S')
+		m->s++;
+	else if (c == 'W')
+		m->w++;
+	return (c == 'N' || c == 'E' || c == 'S' || c == 'W' || c == '0' || c == '1'
+		|| c == 32 || c == '\n');
 }
-
-// lass uns das hier anpassen 
