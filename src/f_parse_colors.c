@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 15:12:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:12:33 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 12:46:00 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ bool	f_init_colors(t_color *colors)
 
 bool	f_parse_colors(t_db *db, t_color *colors)
 {
+	if (f_trimmer(db) == false)
+		return (false);
 	f_init_colors(colors);
 	if (f_comma_after_comma(db) == false)
 	{

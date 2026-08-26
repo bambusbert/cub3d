@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:22:49 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:22:54 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 12:36:10 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ bool						f_parse_into_db(t_db *db, char *file);
 bool						f_parse_colors(t_db *db, t_color *colors);
 bool						f_init_colors(t_color *colors);
 bool						f_comma_after_comma(t_db *db);
+bool						f_trimmer(t_db *db);
 
 // f_atol.c
 uint32_t					f_catch_num(char *s);

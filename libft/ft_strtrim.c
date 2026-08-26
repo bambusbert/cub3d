@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:20:37 by slambert          #+#    #+#             */
-/*   Updated: 2025/10/09 11:32:45 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 12:42:50 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	end;
 
 	if (!s1 || !set)
-		return (ft_calloc(1, 1));
+		return (NULL);
 	start = 0;
 	while (s1[start] && should_be_removed(s1[start], set))
 		start++;
@@ -52,3 +52,19 @@ int	main(void)
 	p = ft_strtrim(s1, set);
 	printf("%s\n", p);
 } */
+
+// char	*ft_strtrim(char const *s1, char const *set)
+// {
+// 	size_t	start;
+// 	size_t	end;
+
+// 	if (!s1 || !set)
+// 		return (ft_calloc(1, 1));
+// 	start = 0;
+// 	while (s1[start] && should_be_removed(s1[start], set))
+// 		start++;
+// 	end = ft_strlen(s1);
+// 	while (end > start && should_be_removed(s1[end - 1], set))
+// 		end--;
+// 	return (ft_substr(s1, start, end - start));
+// }
