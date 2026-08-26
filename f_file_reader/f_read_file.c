@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_read_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:44:43 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/20 18:20:39 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 12:18:57 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "f_read_file.h"
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
 
 static int	f_open_file(const char *filename);
 static char	*f_read_from_file(int fd);
@@ -82,6 +78,7 @@ static bool	f_init_r(t_read *r)
 		return (false);
 	return (true);
 }
+
 static char	*f_resize(t_read *r)
 {
 	size_t	size;
