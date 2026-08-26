@@ -11,12 +11,8 @@ NO ./sprites/wall_w.xpm
 
 EA ./sprites/wall_e.xpm
 
-C                                   0,0,0          
-
-
-
-
-F 220,100,0          
+C 0,100,0          
+F 0,1 00,0             
 
     1
    101

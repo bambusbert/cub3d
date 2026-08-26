@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_atol.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:09:25 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:09:26 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/26 13:36:56 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ uint32_t	f_catch_num(char *s)
 		i++;
 	while (s[i] != '\0')
 	{
-		if (!ft_isdigit(s[i]) && s[i] != ' ' && s[i] != '\t')
+		if (s[i] != ' ' && s[i] != '\t')
 			return (ft_putstr_fd("Error\nNot a Number.\n", 2), 600);
 		i++;
 	}
