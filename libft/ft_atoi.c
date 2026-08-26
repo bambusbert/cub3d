@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:16:08 by slambert          #+#    #+#             */
-/*   Updated: 2026/07/19 14:48:22 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 12:24:42 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int			sign_handler(const char *nptr);
 
 int	ft_atoi(const char *nptr)
 {
-	int			i;
+	int		i;
 	long	num;
-	int			minus;
+	int		minus;
 
 	if (!nptr)
 		return (0);
@@ -75,7 +75,7 @@ static const char	*shift_whitespace(const char *nptr)
 		i++;
 	return (&nptr[i]);
 }
-/* 
+/*
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
