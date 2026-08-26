@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_commandline_input.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:44:02 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/20 17:57:04 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/26 12:09:53 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ static bool	f_test_ending(const char *s);
 bool	f_test_input(int ac, const char *s)
 {
 	if (ac != 2)
-		return (ft_putstr_fd("Error\nWrong number of arguments.\n",2), false);
+		return (ft_putstr_fd("Error\nWrong number of arguments.\n", 2), false);
 	if (f_test_ending(s) == false)
-		return (ft_putstr_fd("Error\nWrong fileextension or hidden file.\n", 2), false);
+		return (ft_putstr_fd("Error\nWrong fileextension or hidden file.\n", 2),
+			false);
 	return (true);
 }
 
