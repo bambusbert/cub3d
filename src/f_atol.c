@@ -1,30 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_atol.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/26 12:09:25 by fsitter           #+#    #+#             */
+/*   Updated: 2026/08/26 12:09:26 by fsitter          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/f_parsing.h"
-#include <limits.h>
-#include <stdint.h>
 
-int	check_digit(long long *num, int neg, long long limit, char c);
-bool	is_overflow(char *arg);
+int			check_digit(long long *num, int neg, long long limit, char c);
+bool		is_overflow(char *arg);
 
-uint32_t f_catch_num(char *s) // TODOOOOOO spazies nach number
+uint32_t	f_catch_num(char *s)
 {
-    int ret;
-    int i;
+	int	ret;
+	int	i;
 
-    i = 0;
-    while (s[i] == ' ' || s[i] == '\t')
-        i++;
-    while (ft_isdigit(s[i]))
-        i++;
-    while (s[i] != '\0')
-    {
-        if (!ft_isdigit(s[i]) && s[i] != ' ' && s[i] != '\t')
-            return (ft_putstr_fd("Error\nNot a Number.\n", 2),600);
-        i++;
-    }
-    if (is_overflow(s) == false)
-        return (ft_putstr_fd("Error\nNumber out of range.\n", 2),600);
-    ret = f_atoll(s);
-    return (ret);
+	i = 0;
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	while (ft_isdigit(s[i]))
+		i++;
+	while (s[i] != '\0')
+	{
+		if (!ft_isdigit(s[i]) && s[i] != ' ' && s[i] != '\t')
+			return (ft_putstr_fd("Error\nNot a Number.\n", 2), 600);
+		i++;
+	}
+	if (is_overflow(s) == false)
+		return (ft_putstr_fd("Error\nNumber out of range.\n", 2), 600);
+	ret = f_atoll(s);
+	return (ret);
 }
 
 int	check_digit(long long *num, int neg, long long limit, char c)
@@ -79,7 +89,7 @@ long long	f_atoll(char *arg)
 	while (arg[i] == ' ' || arg[i] == '\t')
 		i++;
 	if (arg[i] == '+' || arg[i] == '-')
-		neg = (arg[i++] == '-'); // lassen oder nicht???
+		neg = (arg[i++] == '-');
 	while (ft_isdigit(arg[i]))
 	{
 		if (neg)
