@@ -1,112 +1,121 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_parse_map2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/26 12:16:51 by fsitter           #+#    #+#             */
+/*   Updated: 2026/08/26 12:17:14 by fsitter          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/f_parsing.h"
 
-bool f_allocate_test_map(t_read_map *m);
-void f_fill_test_map(t_read_map *m);
-int f_find_player(const char *s);
+bool	f_allocate_test_map(t_read_map *m);
+void	f_fill_test_map(t_read_map *m);
+int		f_find_player(const char *s);
 
-void print_map(t_db *db, t_read_map *m); //todo loeschen
-
-
-int f_find_player(const char *s)
+int	f_find_player(const char *s)
 {
-    int i = 0;
-    while (s[i])
-    {
-        if (s[i] == 'N' || s[i] == 'E' || s[i] == 'S' || s[i] == 'W')
-            return (i);
-        i++;
-    }
-    ft_putstr_fd("Error\nNo Player.\n", 2);
-    return (-1);
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == 'N' || s[i] == 'E' || s[i] == 'S' || s[i] == 'W')
+			return (i);
+		i++;
+	}
+	ft_putstr_fd("Error\nNo Player.\n", 2);
+	return (-1);
 }
 
-bool f_flood_that_shi(char *s, int start, int ll)
+bool	f_flood_that_shi(char *s, int start, int ll)
 {
-    if (s[start] == 32)
-        return (false);
-    else if (s[start] == '1' || s[start] == 'x')
-        return (true);
-    s[start] = 'x';
-    
-    if (f_flood_that_shi(s, start - 1, ll) == false)
-        return (false);
-    if (f_flood_that_shi(s, start + 1, ll) == false)
-        return (false);
-    if (f_flood_that_shi(s, start - ll, ll) == false)
-        return (false);
-    if (f_flood_that_shi(s, start + ll, ll) == false)
-        return (false);
-    return (true);
+	if (s[start] == 32)
+		return (false);
+	else if (s[start] == '1' || s[start] == 'x')
+		return (true);
+	s[start] = 'x';
+	if (f_flood_that_shi(s, start - 1, ll) == false)
+		return (false);
+	if (f_flood_that_shi(s, start + 1, ll) == false)
+		return (false);
+	if (f_flood_that_shi(s, start - ll, ll) == false)
+		return (false);
+	if (f_flood_that_shi(s, start + ll, ll) == false)
+		return (false);
+	return (true);
 }
 
-
-bool f_test_map(t_db *db, t_read_map *m)
+bool	f_test_map(t_db *db, t_read_map *m)
 {
-    size_t size;
-    
-    if (f_allocate_test_map(m) == false)
-        return (false);
-    f_fill_test_map(m);
-    if (db_set(db, "TESTMAP", m->buffer) == false)
-       return(free(m->buffer), false);
-    m->pp = f_find_player(m->buffer);
-    if (m->pp == -1)
-        return(free(m->buffer), false);
-    size = ft_strlen(m->buffer);
-    if (size > 67676)
-    {
-        if (f_flood_fill_scan(m->buffer, size, m->xmax + 2, m->pp) == false)
-            return(free(m->buffer), false);
-    }
-    else
-    {
-        if (f_flood_that_shi(m->buffer, m->pp, m->xmax + 2) == false)
-            return(free(m->buffer), false);
-    }
-    free(m->buffer);
-    return (true);
+	size_t	size;
+
+	if (f_allocate_test_map(m) == false)
+		return (false);
+	f_fill_test_map(m);
+	if (db_set(db, "TESTMAP", m->buffer) == false)
+		return (free(m->buffer), false);
+	m->pp = f_find_player(m->buffer);
+	if (m->pp == -1)
+		return (free(m->buffer), false);
+	size = ft_strlen(m->buffer);
+	if (size > 67676)
+	{
+		if (f_flood_fill_scan(m->buffer, size, m->xmax + 2, m->pp) == false)
+			return (free(m->buffer), false);
+	}
+	else
+	{
+		if (f_flood_that_shi(m->buffer, m->pp, m->xmax + 2) == false)
+			return (free(m->buffer), false);
+	}
+	free(m->buffer);
+	return (true);
 }
 
-void f_fill_test_map(t_read_map *m)
+void	f_fill_test_map(t_read_map *m)
 {
-    while (m->map[m->i])
-    {
-        if (m->map[m->i] == '\n')
-        {
-            m->i++;
-            while (m->k < m->xmax + 2)
-            {
-                m->j++;
-                m->k++;
-            }
-            m->k = 0;
-        }
-        else
-        {
-            m->buffer[m->j] = m->map[m->i];
-            m->i++;
-            m->j++;
-            m->k++;
-        }
-    }
+	while (m->map[m->i])
+	{
+		if (m->map[m->i] == '\n')
+		{
+			m->i++;
+			while (m->k < m->xmax + 2)
+			{
+				m->j++;
+				m->k++;
+			}
+			m->k = 0;
+		}
+		else
+		{
+			m->buffer[m->j] = m->map[m->i];
+			m->i++;
+			m->j++;
+			m->k++;
+		}
+	}
 }
 
-bool f_allocate_test_map(t_read_map *m)
+bool	f_allocate_test_map(t_read_map *m)
 {
-    m->mapsize = (m->xmax + 2) * (m->y + 2);
-    m->buffer = ft_calloc(sizeof(char) ,(m->mapsize + 1));
-    if (!m->buffer)
-        return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
-    ft_memset(m->buffer, ' ', m->mapsize);
-    m->i = 0;
-    m->j = 1 + m->xmax + 2;
-    return (true);
+	m->mapsize = (m->xmax + 2) * (m->y + 2);
+	m->buffer = ft_calloc(sizeof(char), (m->mapsize + 1));
+	if (!m->buffer)
+		return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
+	ft_memset(m->buffer, ' ', m->mapsize);
+	m->i = 0;
+	m->j = 1 + m->xmax + 2;
+	return (true);
 }
 
+// void print_map(t_db *db, t_read_map *m); //TODO loeschen
 
 // void print_map(t_db *db, t_read_map *m)
 // {
-
 
 //     int s = 0;
 //     int h = 0;
