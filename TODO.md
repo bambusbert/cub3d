@@ -3,7 +3,6 @@ TODO:
 
 x) includes pruefen
 x) durchgehen gemeinsam
-x) leerer path == error vl loest sich das mit trimm...
 
 - gleiches problem bei invalid::blank_line_in_map
 - nl_between_info.cub geht ned (weil spaces nach sprite: "SO         ./sprites/wall_s.xpm   ")
