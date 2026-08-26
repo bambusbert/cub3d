@@ -1,5 +1,9 @@
 TODO:
 
+
+x) includes pruefen
+x) durchgehen gemeinsam
+
 - gleiches problem bei invalid::blank_line_in_map
 - nl_between_info.cub geht ned (weil spaces nach sprite: "SO         ./sprites/wall_s.xpm   ")
 - spaces after sprite lines
