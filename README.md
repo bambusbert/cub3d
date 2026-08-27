@@ -45,9 +45,9 @@ A valid map has to respect these rules:
     - 0 represents an empty space
     - N/E/S/W represents the player, the letter indicates the direction the player looks initially
 - there has to be exactly one player
-- the player has to be fully surrounded by walls
+- the map around the player has to be fully surrounded by walls
 - spaces will be interpreted as empty fields during parsing. if that results in a valid map they are converted to walls
-- maps must not have newlines inside
+- maps must not have empty (new) lines between other parts of the map (they will not be skipped)
 
 
 The playable map is considered the area in which the player can walk onto. The playable map can be a part of the actual map, it can also be the full map.
@@ -78,7 +78,7 @@ another valid map:
  100N1
 111111
 ```
-We chose that approach because the reason for the map needing to be surrounded by walls is so that no ray cast travels out of bounds, which would result in a segfault. We ensure that this is not going to happen by forcing the player to be surrounded by walls (playable map). Additionally we are fencing the full map off by an additional layer of 1s (wall character).
+We chose that approach because the reason for the map needing to be surrounded by walls is so 1)  that no ray cast travels and 2) no player walks out of bounds, which would result in a segfault. We ensure that this is not going to happen by forcing the player to be surrounded by walls (playable map). Additionally we are fencing the full map off by an additional layer of 1s (wall character) once the map is validated.
 
 ## The `.cub` scene format
 
@@ -99,8 +99,8 @@ C 225,30,0
 111111
 ```
 
-- `NO` / `SO` / `WE` / `EA` — paths to the North/South/West/East wall textures. The texture files (sprites) can be hidden.
-- `F` / `C` — floor / ceiling color as `R,G,B` (0–255). There must be no additional characters in these lines - spaces are ok.
+- `NO` / `SO` / `WE` / `EA` — paths to the North/South/West/East wall textures. The texture files (sprites) can not be hidden.
+- `F` / `C` — floor / ceiling color as `R,G,B` (0–255). There must be no additional characters in these lines - but spaces.
 - The map is made of `0` (empty space), `1` (wall) and `N`/`S`/`E`/`W` (the player's starting position and facing direction), spaces are a valid part of the map. The map must be the last element in the file. More information about the map can be found in chapter `What is considered a valid map?`.
 
 Sample maps (valid and invalid) are available in [`dotcubs/`](./dotcubs).
@@ -145,8 +145,8 @@ If the map or any referenced texture is invalid, the program prints `Error` foll
 ```
 src/           game loop, rendering, movement, input, bonus features
 inc/           cub3d.h / f_parsing.h — shared types, constants and prototypes
-f_db/          small hashmap/arena key-value store used to hold parsed scene elements
-f_file_reader/ file-reading helper used by the parser
+f_db/          a single allocation append only in memory database with an index hashmap (no pointers) to set and retrive data
+f_file_reader/ a max efficency file-reading tool used by the parser
 libft/         42 libft, built as a library and linked into the project
 sprites/       default wall textures used by the sample maps
 dotcubs/       sample .cub scene files
@@ -164,4 +164,4 @@ dotcubs/       sample .cub scene files
 
 - [`Cub3D_tester` by VestaManuyko](https://github.com/VestaManuyko/Cub3D_tester) — the external test suite used to validate the parser against valid/invalid maps. Our interpretation of what is to be considered a valid map differs in some cases though.
 
-**AI usage:** The first version of this README was drafted with the help of Claude and was heavily edited afterwards. No AI was used to write actual code.
+**AI usage:** The first version of this README was drafted with the help of Claude and was heavily edited afterwards. AI was used as a sparring partner to discuss Ideas. No AI was used to write code.

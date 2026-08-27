@@ -6,7 +6,7 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:49:52 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/26 14:02:46 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/27 13:06:14 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ bool	start_graphical_stuff(t_db *db, char **map, t_color *colors)
 	god->map = map;
 	god->cols = (unsigned int)ft_atoi(db_get(db, "x"));
 	god->rows = (unsigned int)ft_atoi(db_get(db, "y"));
-	god->path_wall_n = db_get(db, "NO");
-	god->path_wall_e = db_get(db, "SO");
-	god->path_wall_s = db_get(db, "WE");
+	god->path_wall_n = db_get(db, "SO");
+	god->path_wall_e = db_get(db, "WE");
+	god->path_wall_s = db_get(db, "NO");
 	god->path_wall_w = db_get(db, "EA");
 	f_find_and_define_player(god, map, 0, 0);
 	set_colors(god, colors);

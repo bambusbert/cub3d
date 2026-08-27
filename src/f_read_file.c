@@ -6,11 +6,11 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:44:43 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 15:35:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/27 10:30:44 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_read_file.h"
+#include "../inc/f_read_file.h"
 
 static int	f_open_file(const char *filename);
 static char	*f_read_from_file(int fd);

@@ -6,14 +6,14 @@
 /*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/26 15:15:08 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/27 10:31:19 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../f_db/f_db.h"
+# include "./f_db.h"
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
@@ -27,7 +27,7 @@
 # define PLAYER_CHAR '2'
 # define MAX_DIST_TO_WALL 0.2
 
-# define PI 3.14159265358979323846
+# define PI 3.1415926535897932384
 # define LEFT -1
 # define RIGHT 1
 # define FORWARD 1

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 15:08:20 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/26 15:14:33 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/27 11:12:43 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	draw_minimap_beam(t_god *god, float angle)
 		/ MINIMAP_FACTOR}, ~god->color_ceiling);
 }
 
-// possible TODO 2 additional angles between
 void	draw_minimap_beams(t_god *god)
 {
 	draw_minimap_beam(god, god->player_angle_min);

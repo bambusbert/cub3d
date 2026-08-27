@@ -10,8 +10,7 @@ RED = \033[0;31m
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -g
-#-fsanitize=leak,address,undefined, memory
+CFLAGS = -Wall -Wextra -Werror -MMD -MP
 INCLUDES = -I./inc
 
 # libft
@@ -39,11 +38,11 @@ SRC =	src/main.c \
         src/game_start.c \
         src/game_setup.c \
         src/f_flood_fill_scan.c \
-        ./f_file_reader/f_read_file.c \
-        ./f_db/f_db_hash.c  \
-        ./f_db/f_db_init.c  \
-        ./f_db/f_db_resize.c  \
-        ./f_db/f_db_set_get.c \
+        src/f_read_file.c \
+        src/f_db_hash.c  \
+        src/f_db_init.c  \
+        src/f_db_resize.c  \
+        src/f_db_set_get.c \
 		src/cub3d.c \
 		src/cleanup.c \
 		src/input_handling.c \
@@ -56,17 +55,18 @@ SRC =	src/main.c \
 		src/dda.c \
 		src/dda_init.c \
 		src/time.c \
-		src/bonus.c \
-		#src/debug.c
+		src/bonus.c
 
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
-HEAD = inc/cub3d.h
+HEAD =	inc/cub3d.h \
+		inc/f_db.h \
+		inc/f_parsing.h \
+		inc/f_read_file.h
 
 # Rules
 all: $(NAME)
 
-#TODO libft dependency
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 12:46:16 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/26 14:13:46 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/27 11:13:02 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_mlx_stuff(t_god *god)
 	if (!god->mlx)
 		error_exit("Error\nMLX init failed\n", god);
 	init_textures(god);
-	god->mlx_win = mlx_new_window(god->mlx, WSIZE_X, WSIZE_Y, "cub3d");
+	god->mlx_win = mlx_new_window(god->mlx, WSIZE_X, WSIZE_Y, "cub3D");
 	if (!god->mlx_win)
 		error_exit("Error\nmlx_new_window failed\n", god);
 	mlx_hook(god->mlx_win, CLOSING_EV, NO_EV_MASK, close_window,
@@ -63,19 +63,3 @@ void	init_mlx_stuff(t_god *god)
 	mlx_loop_hook(god->mlx, game_loop, god);
 	mlx_loop(god->mlx);
 }
-
-// bool	main2(int argc, char **argv)
-// {
-// 	t_god	*god;
-
-// 	(void)argc;
-// 	(void)argv;
-// 	// check_input (argc, argv);
-// 	god = ft_calloc(1, sizeof(t_god));
-// 	if (!god)
-// 		return (printf("Error\ngod struct malloc fail\n"), false);
-// 	// FRIDO ENTRY POINT - parsing
-// 	god->map = create_sample_map(god);
-// 	init_mlx_stuff(god);
-// 	return (true);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parsing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:22:49 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 15:07:11 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/27 11:19:43 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define LIMIT_UP 255
 
-# include "../f_file_reader/f_read_file.h"
-# include "../inc/cub3d.h"
+# include "./f_read_file.h"
+# include "./cub3d.h"
 # include "../libft/libft.h"
 # include <stdint.h>
 
@@ -82,7 +82,6 @@ typedef struct s_read_map
 	int						j;
 	int						k;
 	int						mapsize;
-	int						fd;
 	int						xmax;
 	char					*buffer;
 	const char				*map;

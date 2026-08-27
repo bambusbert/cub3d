@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_colors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 15:12:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:46:00 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/27 01:12:48 by slambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ bool	f_parse_colors(t_db *db, t_color *colors)
 	if (f_trimmer(db) == false)
 		return (false);
 	f_init_colors(colors);
+	if (f_extract_colors(db, colors) == false)
+	{
+		ft_putstr_fd("Error\nNo Color value or Split.\n", 2);
+		return (false);
+	}
 	if (f_comma_after_comma(db) == false)
 	{
 		ft_putstr_fd("Error\nWrong color format\n", 2);
 		return (false);
 	}
-	if (f_extract_colors(db, colors) == false)
-		return (false);
 	return (f_border_control(colors));
 }
 

@@ -6,11 +6,11 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/05 13:23:03 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:13:45 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/27 11:14:32 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_parsing.h"
+#include "../inc/f_parsing.h"
 
 char	*f_next_line(char *old_line);
 bool	f_extract_key_value(t_db *db, char *line, char **key, char **value);

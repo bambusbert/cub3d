@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:15:15 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:15:27 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/27 11:35:09 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ bool	f_parse_map(t_db *db)
 {
 	t_read_map	m;
 	char		*x;
-	char		*y;
 
 	f_init_rm(db, &m);
 	if (f_map_to_file(&m) == false)
@@ -35,12 +34,12 @@ bool	f_parse_map(t_db *db)
 	if (db_set(db, "x", x) == false)
 		return (false);
 	free(x);
-	y = ft_itoa(m.y + 2);
-	if (!y)
+	x = ft_itoa(m.y + 2);
+	if (!x)
 		return (ft_putstr_fd("Error\nAllocation.\n", 2), false);
-	if (db_set(db, "y", y) == false)
+	if (db_set(db, "y", x) == false)
 		return (false);
-	free(y);
+	free(x);
 	return (true);
 }
 
@@ -60,8 +59,7 @@ bool	f_map_to_file(t_read_map *m)
 	while (m->map[m->i])
 	{
 		if (!is_allowed(m->map[m->i], m))
-			return (ft_putstr_fd("Error\nWrong Sign.\n", 2), close(m->fd),
-				false);
+			return (ft_putstr_fd("Error\nWrong Sign.\n", 2), false);
 		m->i++;
 	}
 	if (m->n + m->o + m->s + m->w > 1)
@@ -69,7 +67,6 @@ bool	f_map_to_file(t_read_map *m)
 		ret = false;
 		ft_putstr_fd("Error\ntoo many players\n", 2);
 	}
-	close(m->fd);
 	return (ret);
 }
 

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_commandline_input.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 15:44:02 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 14:45:21 by slambert         ###   ########.fr       */
+/*   Updated: 2026/08/27 11:13:47 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_parsing.h"
+#include "../inc/f_parsing.h"
 
 static bool	f_test_ending(const char *s);
 

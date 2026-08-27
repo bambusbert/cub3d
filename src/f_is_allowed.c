@@ -6,11 +6,11 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:12:00 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:12:01 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/27 11:14:16 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_parsing.h"
+#include "../inc/f_parsing.h"
 
 bool	is_allowed(char c, t_read_map *m)
 {

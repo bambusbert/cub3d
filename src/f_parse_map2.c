@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:16:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 12:17:14 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/08/27 10:18:15 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	f_find_player(const char *s)
 			return (i);
 		i++;
 	}
-	ft_putstr_fd("Error\nNo Player.\n", 2);
 	return (-1);
 }
 
@@ -51,8 +50,6 @@ bool	f_flood_that_shi(char *s, int start, int ll)
 
 bool	f_test_map(t_db *db, t_read_map *m)
 {
-	size_t	size;
-
 	if (f_allocate_test_map(m) == false)
 		return (false);
 	f_fill_test_map(m);
@@ -61,10 +58,10 @@ bool	f_test_map(t_db *db, t_read_map *m)
 	m->pp = f_find_player(m->buffer);
 	if (m->pp == -1)
 		return (free(m->buffer), false);
-	size = ft_strlen(m->buffer);
-	if (size > 67676)
+	if (m->mapsize > 67676)
 	{
-		if (f_flood_fill_scan(m->buffer, size, m->xmax + 2, m->pp) == false)
+		if (f_flood_fill_scan(m->buffer, m->mapsize, m->xmax + 2,
+				m->pp) == false)
 			return (free(m->buffer), false);
 	}
 	else
