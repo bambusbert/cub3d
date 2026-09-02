@@ -1,7 +1,7 @@
-SO ./sprites/lame_wall_s.xpm
-WE ./sprites/lame_wall_w.xpm
-NO ./sprites/lame_wall_n.xpm
-EA ./sprites/lame_wall_e.xpm
+SO ./sprites/wall_s.xpm
+WE ./sprites/wall_w.xpm
+NO ./sprites/wall_n.xpm
+EA ./sprites/wall_e.xpm
 
 C 255,67,0
 F 67,67,67
