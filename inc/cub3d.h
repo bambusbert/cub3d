@@ -1,0 +1,213 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 12:46:01 by slambert          #+#    #+#             */
+/*   Updated: 2026/08/27 10:31:19 by slambert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# include "./f_db.h"
+# include "../libft/libft.h"
+# include <fcntl.h>
+# include <math.h>
+# include <mlx.h>
+# include <stdbool.h>
+# include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
+
+# define WALL_CHAR '1'
+# define PLAYER_CHAR '2'
+# define MAX_DIST_TO_WALL 0.2
+
+# define PI 3.1415926535897932384
+# define LEFT -1
+# define RIGHT 1
+# define FORWARD 1
+# define BACK -1
+# define ANGLE_OFFSET 0.5 // defines FOV / 2
+# define SENSITIVITY 4
+# define MOVE_TICK 8
+
+# define WSIZE_X 800
+# define WSIZE_Y 600
+# define XCOORD 1
+# define YCOORD 2
+
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+
+# define KEYDOWN_EV 2
+# define KEYUP_EV 3
+# define MOUSE_EV 6
+# define CLOSING_EV 17
+# define NO_EV_MASK 0
+# define KEY_PRESS_MASK 0x00000001      // 1L << 0
+# define KEY_RELEASE_MASK 0x00000002    // 1L << 1
+# define POINTER_MOTION_MASK 0x00000040 // 1L << 6
+
+// BONUS
+# define MINIMAP_FACTOR 5
+# define MINIMAP_BEAM_L 150
+
+enum				e_direction
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+};
+
+typedef struct s_ipoint
+{
+	int				x;
+	int				y;
+}					t_ipoint;
+
+typedef struct s_fpoint
+{
+	float			x;
+	float			y;
+}					t_fpoint;
+
+typedef struct s_texture
+{
+	void			*img;
+	char			*img_addr;
+	int				width;
+	int				height;
+	int				img_bpp;
+	int				img_ll;
+	int				img_endian;
+}					t_texture;
+
+typedef struct s_god
+{
+	void			*mlx;
+	void			*mlx_win;
+	long long		time_last_frame_usec;
+	float			time_since_last_frame_sec;
+	t_texture		*god_tex;
+	char			**map;
+	unsigned int	rows;
+	unsigned int	cols;
+	unsigned int	pixels_per_x;
+	unsigned int	pixels_per_y;
+	t_texture		*sprite_wall_s;
+	t_texture		*sprite_wall_e;
+	t_texture		*sprite_wall_n;
+	t_texture		*sprite_wall_w;
+	float			player_x;
+	float			player_y;
+	int				player_start_direction;
+	float			player_angle;
+	float			player_angle_min;
+	float			player_angle_max;
+	bool			key_w;
+	bool			key_a;
+	bool			key_s;
+	bool			key_d;
+	bool			key_left;
+	bool			key_right;
+	const char		*path_wall_n;
+	const char		*path_wall_e;
+	const char		*path_wall_s;
+	const char		*path_wall_w;
+	int				color_ceiling;
+	int				color_floor;
+	t_db			*db;
+}					t_god;
+
+typedef struct s_dda
+{
+	int				player_x_int;
+	int				player_y_int;
+	float			delta_x;
+	float			delta_y;
+	int				step_x;
+	int				step_y;
+	float			next_x;
+	float			next_y;
+	float			ray_dir_x;
+	float			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	bool			wall_hit;
+	bool			horizontal_wall_hit;
+	int				which_wall_hit;
+	float			wall_dist;
+	float			beam_dist;
+	float			hit_x;
+	float			hit_y;
+	int				wall_start;
+	int				wall_end;
+	int				wall_len;
+}					t_dda;
+
+// bonus.c
+int					mouse_move_function(int x, int y, void *param);
+void				draw_minimap_beams(t_god *god);
+
+// cub3d.c
+void				render(t_god *god);
+
+// init.c
+void				init_god(t_god *god);
+
+// input_handling.c
+int					key_press(int keycode, void *param);
+int					key_up(int keycode, void *param);
+
+// helper.c
+void				dda_single_ray(t_god *god, t_dda *dda, float angle, int x);
+void				normalize_angle(float *angle);
+
+// draw_main.c
+void				dda_wrapper(t_god *god);
+void				draw_2d_map(t_god *god);
+void				draw_vertical(t_god *god, t_dda *dda, int x);
+
+// draw_helper.c
+void				draw_square(t_god *god, int row, int col);
+void				my_mlx_pixel_put(t_god *god, int x, int y, int color);
+void				ft_draw_line(t_god *god, t_ipoint p1, t_ipoint p2, int c);
+
+// movement.c
+void				position_manager(t_god *god);
+void				update_player_angle(t_god *god, int direction);
+
+// dda_init.c
+void				init_dda_struct(t_dda *dda, t_god *god, float beam_angle);
+
+// init_textures.c
+void				init_textures(t_god *god);
+
+// time.c
+long long			return_usecs_since_1970(void);
+void				update_time_since_last_frame(t_god *god);
+
+// cleanup.c
+int					close_window(t_god *god);
+void				error_exit(char *msg, t_god *god);
+
+// debug.c - das kommt alles weg oder in bonus
+// void				print_keys(t_god *god);
+// char				**create_sample_map(t_god *god);
+// void				debug_init_player(t_god *god);
+// int					return_wall_color(int which_wall_hit);
+// void				fps_counter(t_god *god);
+// int					mouse_function(void *param);
+
+#endif

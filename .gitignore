@@ -6,6 +6,8 @@
 
 # Allow directories
 !*/
+Cub3D_tester/
+Cub3D_tester/**
 
 
 # Allowed files
@@ -13,4 +15,7 @@
 !*.h
 !*.json
 !*.cub
+!*.xpm
 !Makefile
+!TODO.md
+!README.md

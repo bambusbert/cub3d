@@ -1,0 +1,95 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_parsing.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/26 12:22:49 by fsitter           #+#    #+#             */
+/*   Updated: 2026/08/27 11:19:43 by fsitter          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef F_PARSING_H
+# define F_PARSING_H
+
+# define LIMIT_UP 255
+
+# include "./f_read_file.h"
+# include "./cub3d.h"
+# include "../libft/libft.h"
+# include <stdint.h>
+
+// struct prototypes
+
+typedef struct s_color		t_color;
+typedef struct s_read_map	t_read_map;
+
+// f_commandline_input.c
+bool						f_test_input(int ac, const char *s);
+
+// f_parse_into_db.c
+bool						f_parse_into_db(t_db *db, char *file);
+
+// f_parse_colors.c
+bool						f_parse_colors(t_db *db, t_color *colors);
+bool						f_init_colors(t_color *colors);
+bool						f_comma_after_comma(t_db *db);
+bool						f_trimmer(t_db *db);
+
+// f_atol.c
+uint32_t					f_catch_num(char *s);
+long long					f_atoll(char *arg);
+
+// f_is_allowed.c
+bool						is_allowed(char c, t_read_map *m);
+
+// f_parse_map.c
+bool						f_parse_map(t_db *db);
+
+// f_parse_map2.c
+bool						f_test_map(t_db *db, t_read_map *m);
+
+// flood_fill_scan.c
+bool						f_flood_fill_scan(char *grid, int size, int len,
+								int start_i);
+
+// game_start.c
+bool						start_game(t_db *db, t_color *colors);
+
+// game_setup.c
+bool						start_graphical_stuff(t_db *db, char **map,
+								t_color *colors);
+
+// cub3d.c
+void						init_mlx_stuff(t_god *god);
+
+// structs
+
+typedef struct s_color
+{
+	char					key;
+	uint32_t				r;
+	uint32_t				g;
+	uint32_t				b;
+}							t_color;
+
+typedef struct s_read_map
+{
+	int						x;
+	int						y;
+	int						i;
+	int						j;
+	int						k;
+	int						mapsize;
+	int						xmax;
+	char					*buffer;
+	const char				*map;
+	int						n;
+	int						o;
+	int						s;
+	int						w;
+	int						pp;
+}							t_read_map;
+
+#endif
