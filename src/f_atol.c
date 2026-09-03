@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:09:25 by fsitter           #+#    #+#             */
-/*   Updated: 2026/09/03 12:31:52 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/09/03 12:42:08 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ bool	is_overflow(char *arg)
 	if (arg[i] == '+' || arg[i] == '-')
 		neg = (arg[i++] == '-');
 	if (neg)
-		return (false); // return (ft_putstr_fd("Error\nNegative Number.\n", 2), false);
+		return (false);
 	else
 		limit = LIMIT_UP;
 	while (ft_isdigit(arg[i]))
 	{
 		if (check_digit(&num, neg, limit, arg[i]))
-			return (false); // return (ft_putstr_fd("Error\nNumber too big.\n",2), false);
+			return (false);
 		i++;
 	}
 	return (true);
