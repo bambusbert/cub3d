@@ -3,7 +3,7 @@ WE ./sprites/wall_w.xpm
 NO ./sprites/wall_n.xpm
 EA ./sprites/wall_e.xpm
 
-C 255,67,0
+C 251,67,0
 F 67,67,67
 
 111111111111111

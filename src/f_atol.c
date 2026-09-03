@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_atol.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:09:25 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 13:38:52 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/03 12:31:52 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ uint32_t	f_catch_num(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] == ' ' || s[i] == '\t')
+	while (s[i] == ' ' || s[i] == '\t' || s[i] == '-')
 		i++;
 	while (ft_isdigit(s[i]))
 		i++;
@@ -65,13 +65,13 @@ bool	is_overflow(char *arg)
 	if (arg[i] == '+' || arg[i] == '-')
 		neg = (arg[i++] == '-');
 	if (neg)
-		return (ft_putstr_fd("Error\nNegative Number.\n", 2), false);
+		return (false); // return (ft_putstr_fd("Error\nNegative Number.\n", 2), false);
 	else
 		limit = LIMIT_UP;
 	while (ft_isdigit(arg[i]))
 	{
 		if (check_digit(&num, neg, limit, arg[i]))
-			return (ft_putstr_fd("Error\nNumber too big.\n", 2), false);
+			return (false); // return (ft_putstr_fd("Error\nNumber too big.\n",2), false);
 		i++;
 	}
 	return (true);

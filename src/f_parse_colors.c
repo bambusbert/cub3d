@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_colors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 15:12:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/27 01:12:48 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/03 12:35:13 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	f_parse_colors(t_db *db, t_color *colors)
 	f_init_colors(colors);
 	if (f_extract_colors(db, colors) == false)
 	{
-		ft_putstr_fd("Error\nNo Color value or Split.\n", 2);
+		ft_putstr_fd("Error\nNo or wrong Color value or Split.\n", 2);
 		return (false);
 	}
 	if (f_comma_after_comma(db) == false)
@@ -78,7 +78,7 @@ bool	f_extract_colors(t_db *db, t_color *colors)
 		if (!rgb)
 			return (false);
 		if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3] != NULL)
-			return (f_free_rgb(rgb, 1), false);
+			return (f_free_rgb(rgb, 0), false);
 		colors[i].r = f_catch_num(rgb[0]);
 		colors[i].g = f_catch_num(rgb[1]);
 		colors[i].b = f_catch_num(rgb[2]);

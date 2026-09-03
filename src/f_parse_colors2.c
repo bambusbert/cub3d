@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_parse_colors2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 15:12:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/08/26 13:59:08 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/03 12:25:12 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ bool	f_trimmer(t_db *db)
 		if (!trimmed)
 			return (false);
 		if (is_hidden(trimmed) == false)
-			return (ft_putstr_fd("Error\nHidden xpm.\n", 2), free(trimmed),
-				false);
+			return (ft_putstr_fd("Error\nWrong Path or hidden.\n", 2),
+				free(trimmed), false);
 		db_set(db, link[i], trimmed);
 		free(trimmed);
 		i++;

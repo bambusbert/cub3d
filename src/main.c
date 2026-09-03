@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slambert <slambert@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:51:40 by slambert          #+#    #+#             */
-/*   Updated: 2026/08/25 16:55:16 by slambert         ###   ########.fr       */
+/*   Updated: 2026/09/03 12:23:50 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char *av[])
 	if (f_parse_into_db(&db1, f) == false)
 		return (f_exit(f, &db1, 1));
 	if (db1.hmap_size != 7)
-		return (ft_putstr_fd("Error\nToo many keys.\n", 2), f_exit(f, &db1, 1));
+		return (ft_putstr_fd("Error\nKeys Wrong Nr.\n", 2), f_exit(f, &db1, 1));
 	f_init_colors(fc);
 	if (f_parse_colors(&db1, fc) == false)
 		return (f_exit(f, &db1, 1));
