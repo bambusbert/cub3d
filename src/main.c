@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 11:51:40 by slambert          #+#    #+#             */
-/*   Updated: 2026/09/03 12:41:45 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/09/03 12:45:54 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,4 @@ int	f_exit(char *file, t_db *db, int ret)
 	return (ret);
 }
 
-//TODO it was a pleasure.
+// TODO it was a pleasure
