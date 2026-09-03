@@ -6,7 +6,7 @@
 /*   By: fsitter <fsitter@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/07 15:12:51 by fsitter           #+#    #+#             */
-/*   Updated: 2026/09/03 12:35:13 by fsitter          ###   ########.fr       */
+/*   Updated: 2026/09/03 12:37:17 by fsitter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	f_parse_colors(t_db *db, t_color *colors)
 	f_init_colors(colors);
 	if (f_extract_colors(db, colors) == false)
 	{
-		ft_putstr_fd("Error\nNo or wrong Color value or Split.\n", 2);
+		ft_putstr_fd("Error\nNo or wrong Color format/value or Split.\n", 2);
 		return (false);
 	}
 	if (f_comma_after_comma(db) == false)
